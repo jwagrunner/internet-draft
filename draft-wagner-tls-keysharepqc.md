@@ -19,7 +19,8 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: New key share extension for Classic McEliece algorithms
+title: "New key share extension for Classic McEliece algorithms"
+abbrev: "key share"
 category: standard
 
 docname: draft-wagner-tls-keysharepqc-latest
@@ -46,11 +47,6 @@ author:
     fullname: Jonathan Wagner
     organization: UNC Charlotte
     email: jwagne31@charlotte.edu
-
-    fullname: Yongge Wang
-    organization: UNC Charlotte
-    email: yongge.wang@charlotte.edu
--
 
 normative:
 
