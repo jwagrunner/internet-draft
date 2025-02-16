@@ -31,16 +31,15 @@ author:
 normative:
 
 informative:
- GCTLS:
-   target: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
-   title: Google Chrome's new post-quantum cryptography may break TLS connections
-   author:
-    -
+  GCTLS:
+    target: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
+    title: Google Chrome's new post-quantum cryptography may break TLS connections
+    author:
       ins: S. Gatlan
       name: Sergiu Gatlan
-   date: 2024
-   seriesinfo: 
-     Web: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
+    date: 2024
+    seriesinfo: 
+      Web: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
 
 
 --- abstract
