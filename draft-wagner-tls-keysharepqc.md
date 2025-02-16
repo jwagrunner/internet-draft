@@ -33,7 +33,7 @@ normative:
 informative:
   GCTLS:
     target: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
-    title: Google Chrome's new post-quantum cryptography may break TLS connections
+    title: "Google Chrome's new post-quantum cryptography may break TLS connections"
     author:
       ins: S. Gatlan
       name: Sergiu Gatlan
@@ -64,8 +64,7 @@ A new structure is introduced of KeyShareEntryPQC along with modifications of ex
 
 # Security Considerations
 
-Larger ClientHello messages can cause TLS connections to be dropped and for TLS handshakes to be broken, as evidenced by the inclusion of post-quantum cryptography in applications of Google Chrome 124 and Microsoft Edge 124, specifically the use of Kyber768 for key agreement. See {{?GCTLS}}. 
-
+Larger ClientHello messages can cause TLS connections to be dropped and for TLS handshakes to be broken, as evidenced by the inclusion of post-quantum cryptography in applications of Google Chrome 124 and Microsoft Edge 124, specifically the use of Kyber768 for key agreement. See {{GCTLS}}. 
 
 # IANA Considerations
 
