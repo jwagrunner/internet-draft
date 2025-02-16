@@ -19,9 +19,9 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "New key share extension for Classic McEliece algorithms"
-abbrev: "key share"
-category: standard
+title: New key share extension for Classic McEliece algorithms
+abbrev: keyshare
+category: info
 
 docname: draft-wagner-tls-keysharepqc-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
