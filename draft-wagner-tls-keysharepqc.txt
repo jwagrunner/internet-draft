@@ -71,10 +71,11 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-   2.  Conventions and Definitions
-   3.  Security Considerations
-   4.  IANA Considerations
-   5.  Normative References
+   2.  Summary of Changes from RFC 8446
+   3.  Conventions and Definitions
+   4.  Security Considerations
+   5.  IANA Considerations
+   6.  Normative References
    Acknowledgments
    Author's Address
 
@@ -95,7 +96,22 @@ Table of Contents
    be used in TLS key exchanges, but also presenting it as an
    alternative option in place of classical algorithms.
 
-2.  Conventions and Definitions
+2.  Summary of Changes from RFC 8446
+
+   A new structure is introduced of KeyShareEntryPQC along with
+   modifications of existing structures including KeyShareEntry,
+   NamedGroup, Extension, ExtensionType, KeyShareClientHello, and
+   KeyShareServerHello.  Adding a new ExtensionType of key_share_pqc
+   allows for the addition of this new structure of KeyShareEntryPQC,
+   which is based on the existing KeyShareEntry, but key_exchange has
+   been expanded and select statements are added to both structures
+   which depend on the NamedGroup.group being called in a TLS connection
+   for key exchange.  This new KeyShareEntryPQC will now also appear in
+   existing structures of KeyShareClientHello and KeyShareServerHello.
+   Thus the extension_data is expanded in the existing Extension
+   structure.
+
+3.  Conventions and Definitions
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -103,15 +119,15 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-3.  Security Considerations
+4.  Security Considerations
 
    TODO Security
 
-4.  IANA Considerations
+5.  IANA Considerations
 
    This document has no IANA actions.
 
-5.  Normative References
+6.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
