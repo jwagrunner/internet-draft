@@ -9,18 +9,18 @@ number:
 date:
 consensus: true
 v: 3
-area: AREA
-workgroup: TLS Working Group
+area: ""
+workgroup: "Transport Layer Security"
 keyword:
  - key share
  - Classic McEliece
 venue:
-  group: TLS
-  type: Working Group
-  mail: tls@ietf.org
-  arch: https://wiki.ietf.org/group/tls
-  github: https://github.com/tlswg
-  latest: https://datatracker.ietf.org/wg/tls/documents/
+  group: "Transport Layer Security"
+  type: ""
+  mail: "tls@ietf.org"
+  arch: "https://mailarchive.ietf.org/arch/browse/tls/"
+  github: "jwagrunner/internet-draft"
+  latest: "https://jwagrunner.github.io/internet-draft/draft-wagner-tls-keysharepqc.html"
 
 author:
  -
