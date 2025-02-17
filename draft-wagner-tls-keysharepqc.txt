@@ -135,7 +135,10 @@ Table of Contents
 
    The new key share proposed in this document key_share_pqc, along with
    its value of 63, needs to be updated in the registry specified for
-   TLS ExtensionType Values.  See [TLSE].
+   TLS ExtensionType Values.  See [TLSE].  The registry for TLS
+   Supported Groups will need to have the proper values assigned to the
+   Classic McEliece family with the entries of 42-51 and the RLCE
+   algorithm group with 52-54.  See [TLSP].
 
 6.  References
 
@@ -154,6 +157,11 @@ Table of Contents
               Security (TLS) Extensions", 2024,
               <https://www.iana.org/assignments/tls-extensiontype-
               values/tls-extensiontype-values.xhtml>.
+
+   [TLSP]     Internet Assigned Numbers Authority, "Transport Layer
+              Security (TLS) Parameters", 2025,
+              <https://www.iana.org/assignments/tls-parameters/tls-
+              parameters.xhtml>.
 
 6.2.  Informative References
 
