@@ -1,5 +1,5 @@
 ---
-title: New Key Share Extension for Classic McEliece algorithms
+title: New Key Share Extension for Classic McEliece Algorithms
 abbrev: keyshare
 category: info
 
@@ -75,13 +75,13 @@ RFC 8446 is modified to where another key share extension is introduced to accom
 
 Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece and the Random Linear Code-based Encryption (RLCE) algorithm group, cannot be easily implemented in TLS applications due to the current key share limitations of 65535 bytes. Therefore, this document proposes a new key share that has a higher limit and can be in use for ClientHello and ServerHello messages. A capability is also added to where if a large post-quantum algorithm is requested, the normal key extension will not be constructed or in use. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed and this new key share extension will not be constructed. Thus enabling the use of large public key post-quantum algorithms to be used in TLS key exchanges, but also presenting it as an alternative option in place of classical algorithms.
 
-# Summary of Changes from RFC 8446
-
-A new structure is introduced of KeyShareEntryPQC along with modifications of existing structures including KeyShareEntry, NamedGroup, Extension, ExtensionType, KeyShareClientHello, and KeyShareServerHello. Adding a new ExtensionType of key_share_pqc allows for the addition of this new structure of KeyShareEntryPQC, which is based on the existing KeyShareEntry, but key_exchange has been expanded and select statements are added to both structures which depend on the NamedGroup.group being called in a TLS connection for key exchange. This new KeyShareEntryPQC will now also appear in existing structures of KeyShareClientHello and KeyShareServerHello. Thus the extension_data is expanded in the existing Extension structure.
-
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
+
+# Summary of Changes from RFC 8446
+
+A new structure is introduced of KeyShareEntryPQC along with modifications of existing structures including KeyShareEntry, NamedGroup, Extension, ExtensionType, KeyShareClientHello, and KeyShareServerHello. Adding a new ExtensionType of key_share_pqc allows for the addition of this new structure of KeyShareEntryPQC, which is based on the existing KeyShareEntry, but key_exchange has been expanded and select statements are added to both structures which depend on the NamedGroup.group being called in a TLS connection for key exchange. This new KeyShareEntryPQC will now also appear in existing structures of KeyShareClientHello and KeyShareServerHello. Thus the extension_data is expanded in the existing Extension structure.
 
 
 # Security Considerations
@@ -94,8 +94,3 @@ The new key share proposed in this document key_share_pqc, along with its value 
 
 
 --- back
-
-# Acknowledgments
-{:numbered="false"}
-
-TODO acknowledge.
