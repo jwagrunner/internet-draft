@@ -27,15 +27,6 @@ author:
     fullname: Jonathan Wagner
     organization: UNC Charlotte
     email: jwagne31@charlotte.edu
-
-normative:
-  TLSE:
-    target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
-    title: "Transport Layer Security (TLS) Extensions"
-    author:
-      org: Internet Assigned Numbers Authority
-    date: 2024
-
 informative: 
   GCTLS:
     target: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
@@ -50,6 +41,13 @@ informative:
     author:
       ins: S. Kaminsky
       name: Stan Kaminsky
+    date: 2024
+normative:
+  TLSE:
+    target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
+    title: "Transport Layer Security (TLS) Extensions"
+    author:
+      org: Internet Assigned Numbers Authority
     date: 2024
 
 --- abstract
