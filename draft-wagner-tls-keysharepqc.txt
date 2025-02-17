@@ -135,7 +135,7 @@ Table of Contents
 
    The new key share proposed in this document key_share_pqc, along with
    its value of 63, needs to be updated in the registry specified for
-   TLS ExtensionType Values.
+   TLS ExtensionType Values.  See [TLSE].
 
 6.  References
 
@@ -149,6 +149,11 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [TLSE]     Internet Assigned Numbers Authority, "Transport Layer
+              Security (TLS) Extensions", 2024,
+              <https://www.iana.org/assignments/tls-extensiontype-
+              values/tls-extensiontype-values.xhtml>.
 
 6.2.  Informative References
 
