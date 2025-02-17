@@ -38,9 +38,6 @@ informative:
       ins: S. Gatlan
       name: Sergiu Gatlan
     date: 2024
-    seriesinfo: 
-      Web: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
-
 
 --- abstract
 
