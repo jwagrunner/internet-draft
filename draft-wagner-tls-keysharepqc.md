@@ -34,7 +34,8 @@ normative:
     title: "Transport Layer Security (TLS) Extensions"
     author:
       org: Internet Assigned Numbers Authority
-    date: 2024-12  
+    date: 2024
+
 informative: 
   GCTLS:
     target: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
