@@ -23,11 +23,12 @@ venue:
   latest: "https://jwagrunner.github.io/internet-draft/draft-wagner-tls-keysharepqc.html"
 
 author:
- -
+  -
     ins: J. Wagner
     name: Jonathan Wagner
     org: UNC Charlotte
     email: jwagne31@charlotte.edu
+  -
     ins: Y. Wang
     name: Yongge Wang
     org: UNC Charlotte
