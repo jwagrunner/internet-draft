@@ -45,7 +45,7 @@ informative:
       ins: S. Kaminsky
       name: Stan Kaminsky
     date: 2024
-    
+
 --- abstract
 
 RFC 8446 is modified to where another key share extension is introduced to accomodate large public keys for post-quantum algorithms including Classic McEliece. A capability is added to where this new key share or the normal key share is in use, depending on the algorithm chosen in a TLS key exchange along with its public key size.
