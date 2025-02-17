@@ -28,7 +28,6 @@ author:
     name: Jonathan Wagner
     org: UNC Charlotte
     email: jwagne31@charlotte.edu
--
     ins: Y. Wang
     name: Yongge Wang
     org: UNC Charlotte
