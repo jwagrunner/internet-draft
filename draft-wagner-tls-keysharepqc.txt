@@ -8,7 +8,7 @@ Intended status: Informational                             UNC Charlotte
 Expires: 21 August 2025                                 17 February 2025
 
 
-        New Key Share Extension for Classic McEliece algorithms
+        New Key Share Extension for Classic McEliece Algorithms
                   draft-wagner-tls-keysharepqc-latest
 
 Abstract
@@ -71,14 +71,13 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-   2.  Summary of Changes from RFC 8446
-   3.  Conventions and Definitions
+   2.  Conventions and Definitions
+   3.  Summary of Changes from RFC 8446
    4.  Security Considerations
    5.  IANA Considerations
    6.  References
      6.1.  Normative References
      6.2.  Informative References
-   Acknowledgments
    Authors' Addresses
 
 1.  Introduction
@@ -98,7 +97,15 @@ Table of Contents
    be used in TLS key exchanges, but also presenting it as an
    alternative option in place of classical algorithms.
 
-2.  Summary of Changes from RFC 8446
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+3.  Summary of Changes from RFC 8446
 
    A new structure is introduced of KeyShareEntryPQC along with
    modifications of existing structures including KeyShareEntry,
@@ -112,14 +119,6 @@ Table of Contents
    existing structures of KeyShareClientHello and KeyShareServerHello.
    Thus the extension_data is expanded in the existing Extension
    structure.
-
-3.  Conventions and Definitions
-
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-   "OPTIONAL" in this document are to be interpreted as described in
-   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
-   capitals, as shown here.
 
 4.  Security Considerations
 
@@ -175,10 +174,6 @@ Table of Contents
               being used in 2024", 2024,
               <https://www.kaspersky.com/blog/postquantum-cryptography-
               2024-implementation-issues/52095/>.
-
-Acknowledgments
-
-   TODO acknowledge.
 
 Authors' Addresses
 
