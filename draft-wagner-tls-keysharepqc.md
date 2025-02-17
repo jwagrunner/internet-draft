@@ -27,6 +27,7 @@ author:
     fullname: Jonathan Wagner
     organization: UNC Charlotte
     email: jwagne31@charlotte.edu
+
 informative: 
   GCTLS:
     target: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
@@ -42,6 +43,7 @@ informative:
       ins: S. Kaminsky
       name: Stan Kaminsky
     date: 2024
+    
 normative:
   TLSE:
     target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
