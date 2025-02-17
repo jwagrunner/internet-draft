@@ -29,6 +29,12 @@ author:
     email: jwagne31@charlotte.edu
 
 normative:
+  TLSE:
+    target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
+    title: "Transport Layer Security (TLS) Extensions"
+    author:
+      org: Internet Assigned Numbers Authority
+    date: 2024
 
 informative:
   GCTLS:
@@ -72,7 +78,7 @@ Larger ClientHello messages can cause TLS connections to be dropped and for TLS 
 
 # IANA Considerations
 
-The new key share proposed in this document key_share_pqc, along with its value of 63, needs to be updated in the registry specified for TLS ExtensionType Values.
+The new key share proposed in this document key_share_pqc, along with its value of 63, needs to be updated in the registry specified for TLS ExtensionType Values. See [TLSE].
 
 
 --- back
