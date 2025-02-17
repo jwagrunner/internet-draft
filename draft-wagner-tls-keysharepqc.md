@@ -30,11 +30,11 @@ author:
 
 normative:
   TLSE:
+    target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
+    title: "Transport Layer Security (TLS) Extensions"
     author:
       org: Internet Assigned Numbers Authority
-    title: Transport Layer Security (TLS) Extensions
-    date: 2024-12
-    target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
+    date: 2024-12  
 informative: 
   GCTLS:
     target: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
