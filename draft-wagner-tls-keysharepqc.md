@@ -35,8 +35,7 @@ normative:
     title: Transport Layer Security (TLS) Extensions
     date: 2024-12
     target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
-    
-informative:
+informative: 
   GCTLS:
     target: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
     title: "Google Chrome's new post-quantum cryptography may break TLS connections"
