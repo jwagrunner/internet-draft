@@ -127,7 +127,9 @@ Table of Contents
    and for TLS handshakes to be broken, as evidenced by the inclusion of
    post-quantum cryptography in applications of Google Chrome 124 and
    Microsoft Edge 124, specifically the use of Kyber768 for key
-   agreement.  See [GCTLS].
+   agreement.  See [GCTLS].  A possible workaround includes updating web
+   servers if receiving an error with TLS/SSL if Kyber is utlized
+   through Chrome or Firefox.  See [KASPPQC].
 
 5.  IANA Considerations
 
@@ -153,6 +155,11 @@ Table of Contents
               <https://www.bleepingcomputer.com/news/security/google-
               chromes-new-post-quantum-cryptography-may-break-tls-
               connections/>.
+
+   [KASPPQC]  Kaminsky, S., "Where and how post-quantum cryptography is
+              being used in 2024", 2024,
+              <https://www.kaspersky.com/blog/postquantum-cryptography-
+              2024-implementation-issues/52095/>.
 
 Acknowledgments
 
