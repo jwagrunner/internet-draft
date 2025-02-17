@@ -29,12 +29,6 @@ author:
     email: jwagne31@charlotte.edu
 
 normative:
-  TLSE:
-    target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
-    title: "Transport Layer Security (TLS) Extensions"
-    author:
-      org: Internet Assigned Numbers Authority
-    date: 2024
 
 informative: 
   GCTLS:
@@ -50,6 +44,12 @@ informative:
     author:
       ins: S. Kaminsky
       name: Stan Kaminsky
+    date: 2024
+  TLSE:
+    target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
+    title: "Transport Layer Security (TLS) Extensions"
+    author:
+      org: Internet Assigned Numbers Authority
     date: 2024
     
 --- abstract
