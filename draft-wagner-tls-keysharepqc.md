@@ -43,7 +43,6 @@ informative:
       ins: S. Kaminsky
       name: Stan Kaminsky
     date: 2024
-    
 normative:
   TLSE:
     target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
