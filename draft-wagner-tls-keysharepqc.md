@@ -39,9 +39,9 @@ normative:
     target: https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml
     title: "Transport Layer Security (TLS) Parameters"
     author:
-      org: Internet Assigned Numbers Authority    
+      org: Internet Assigned Numbers Authority
     date: 2025
-    
+
 informative:
   GCTLS:
     target: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
