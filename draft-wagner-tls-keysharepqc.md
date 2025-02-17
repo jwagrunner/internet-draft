@@ -38,6 +38,13 @@ informative:
       ins: S. Gatlan
       name: Sergiu Gatlan
     date: 2024
+  KASPPQC:
+    target: https://www.kaspersky.com/blog/postquantum-cryptography-2024-implementation-issues/52095/
+    title: "Where and how post-quantum cryptography is being used in 2024"
+    author:
+      ins: S. Kaminsky
+      name: Stan Kaminsky
+    date: 2024
 
 --- abstract
 
@@ -61,7 +68,7 @@ A new structure is introduced of KeyShareEntryPQC along with modifications of ex
 
 # Security Considerations
 
-Larger ClientHello messages can cause TLS connections to be dropped and for TLS handshakes to be broken, as evidenced by the inclusion of post-quantum cryptography in applications of Google Chrome 124 and Microsoft Edge 124, specifically the use of Kyber768 for key agreement. See [GCTLS].
+Larger ClientHello messages can cause TLS connections to be dropped and for TLS handshakes to be broken, as evidenced by the inclusion of post-quantum cryptography in applications of Google Chrome 124 and Microsoft Edge 124, specifically the use of Kyber768 for key agreement. See [GCTLS]. A possible workaround includes updating web servers if receiving an error with TLS/SSL if Kyber is utlized through Chrome or Firefox. See [KASPPQC].
 
 # IANA Considerations
 
