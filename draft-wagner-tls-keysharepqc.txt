@@ -4,8 +4,8 @@
 
 Transport Layer Security                                       J. Wagner
 Internet-Draft                                             UNC Charlotte
-Intended status: Informational                          16 February 2025
-Expires: 20 August 2025
+Intended status: Informational                          17 February 2025
+Expires: 21 August 2025
 
 
         New key share extension for Classic McEliece algorithms
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 August 2025.
+   This Internet-Draft will expire on 21 August 2025.
 
 Copyright Notice
 
@@ -75,7 +75,9 @@ Table of Contents
    3.  Conventions and Definitions
    4.  Security Considerations
    5.  IANA Considerations
-   6.  Normative References
+   6.  References
+     6.1.  Normative References
+     6.2.  Informative References
    Acknowledgments
    Author's Address
 
@@ -121,13 +123,19 @@ Table of Contents
 
 4.  Security Considerations
 
-   TODO Security
+   Larger ClientHello messages can cause TLS connections to be dropped
+   and for TLS handshakes to be broken, as evidenced by the inclusion of
+   post-quantum cryptography in applications of Google Chrome 124 and
+   Microsoft Edge 124, specifically the use of Kyber768 for key
+   agreement.  See [GCTLS].
 
 5.  IANA Considerations
 
    This document has no IANA actions.
 
-6.  Normative References
+6.  References
+
+6.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -137,6 +145,14 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+6.2.  Informative References
+
+   [GCTLS]    Gatlan, S., "Google Chrome's new post-quantum cryptography
+              may break TLS connections", 2024,
+              <https://www.bleepingcomputer.com/news/security/google-
+              chromes-new-post-quantum-cryptography-may-break-tls-
+              connections/>.
 
 Acknowledgments
 
