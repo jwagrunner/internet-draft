@@ -1,5 +1,5 @@
 ---
-title: New key share extension for Classic McEliece algorithms
+title: New Key Share Extension for Classic McEliece algorithms
 abbrev: keyshare
 category: info
 
@@ -27,6 +27,10 @@ author:
     fullname: Jonathan Wagner
     organization: UNC Charlotte
     email: jwagne31@charlotte.edu
+-
+    fullname: Yongge Wang
+    organization: UNC Charlotte
+    email: yongge.wang@charlotte.edu
 
 normative:
   TLSE:
