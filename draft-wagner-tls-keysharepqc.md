@@ -35,7 +35,13 @@ normative:
     author:
       org: Internet Assigned Numbers Authority
     date: 2024
-
+  TLSP:
+    target: https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml
+    title: "Transport Layer Security (TLS) Parameters"
+    author:
+      org: Internet Assigned Numbers Authority    
+    date: 2025
+    
 informative:
   GCTLS:
     target: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
@@ -78,7 +84,7 @@ Larger ClientHello messages can cause TLS connections to be dropped and for TLS 
 
 # IANA Considerations
 
-The new key share proposed in this document key_share_pqc, along with its value of 63, needs to be updated in the registry specified for TLS ExtensionType Values. See [TLSE].
+The new key share proposed in this document key_share_pqc, along with its value of 63, needs to be updated in the registry specified for TLS ExtensionType Values. See [TLSE]. The registry for TLS Supported Groups will need to have the proper values assigned to the Classic McEliece family with the entries of 42-51 and the RLCE algorithm group with 52-54. See [TLSP].
 
 
 --- back
