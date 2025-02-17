@@ -24,12 +24,14 @@ venue:
 
 author:
  -
-    fullname: Jonathan Wagner
-    organization: UNC Charlotte
+    ins: J. Wagner
+    name: Jonathan Wagner
+    org: UNC Charlotte
     email: jwagne31@charlotte.edu
 -
-    fullname: Yongge Wang
-    organization: UNC Charlotte
+    ins: Y. Wang
+    name: Yongge Wang
+    org: UNC Charlotte
     email: yongge.wang@charlotte.edu
 
 normative:
