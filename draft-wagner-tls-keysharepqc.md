@@ -342,7 +342,7 @@ The values for Classic McEliece and RLCE algorithms are added below in the Named
 
 # TLS Implementation
 
-A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello message, as described above, is implemented for OpenSSL. It can be accessed here: [OpenSSL].
+A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where the Classic McEliece algorithm family and the RLCE algorithm group can be chosen for key exchange when initiating TLS connections. It can be accessed here: [OpenSSL].
 
 # Summary of Changes from RFC 8446
 
