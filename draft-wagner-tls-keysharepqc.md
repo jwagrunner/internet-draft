@@ -47,20 +47,23 @@ normative:
     target: https://datatracker.ietf.org/doc/html/rfc8446
     title: "The Transport Layer Security (TLS) Protocol Version 1.3"
     author:
-      ins: E. Rescorla
-      name: Eric Rescorla
+      -
+        ins: E. Rescorla
+        name: Eric Rescorla
     date: 2018
   TLSE:
     target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
     title: "Transport Layer Security (TLS) Extensions"
     author:
-      org: Internet Assigned Numbers Authority
+      -
+        org: Internet Assigned Numbers Authority
     date: 2024
   TLSP:
     target: https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml
     title: "Transport Layer Security (TLS) Parameters"
     author:
-      org: Internet Assigned Numbers Authority
+      -
+        org: Internet Assigned Numbers Authority
     date: 2025
 
 informative:
@@ -68,15 +71,17 @@ informative:
     target: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
     title: "Google Chrome's new post-quantum cryptography may break TLS connections"
     author:
-      ins: S. Gatlan
-      name: Sergiu Gatlan
+      -
+        ins: S. Gatlan
+        name: Sergiu Gatlan
     date: 2024
   KASPPQC:
     target: https://www.kaspersky.com/blog/postquantum-cryptography-2024-implementation-issues/52095/
     title: "Where and how post-quantum cryptography is being used in 2024"
     author:
-      ins: S. Kaminsky
-      name: Stan Kaminsky
+      -
+        ins: S. Kaminsky
+        name: Stan Kaminsky
     date: 2024
   OpenSSL:
     target: https://github.com/jwagrunner/openssl
