@@ -87,25 +87,33 @@ Large public key algorithms, including the code-based cryptographic algorithm fa
 
 Based on the key share extension from RFC8446 is introduced a new key share extension, key_share_pqc. This is reflected in this document and is represented as KeyShareEntryPQC below, based off of the existing KeyShareEntry from RFC8446. However this is modified along with the existing KeyShareEntry structure to include case statements to test if key exchange algorithm chosen in a TLS connection belongs to either the Classic McEliece family or RLCE algorithm group, and if it is, then KeyShareEntryPQC is constructed and KeyShareEntry is not constructed. If the opposite is true, where the key exchange algorithm does not belong to either group, then KeyShareEntryPQC is not constructed but KeyShareEntry is constructed. Note that the key_exchange field is expanded in KeyShareEntryPQC to accomodate a large public key that is greater than 65535 bytes:
 
-<figure><artwork><![CDATA[
+<figure><artwork>
 
-struct {
-   NamedGroup group;
-   select (NameGroup.group) {
-   case classicmceliece348864 | classicmceliece348864f | classicmceliece460896 | classicmceliece460896f | classicmceliece6688128 | classicmceliece6688128f | classicmceliece6960119 | classicmceliece6960119f | classicmceliece8192128 | classicmceliece8192128f | rlcel1 | rlcel3 | rlcel5 : break;
-   default: opaque key_exchange<1..2^16-1>;
-   }
-} KeyShareEntry;
+   struct {
+      NamedGroup group;
+      select (NameGroup.group) {
+      case classicmceliece348864 | classicmceliece348864f | classicmceliece460896 
+      | classicmceliece460896f | classicmceliece6688128 | classicmceliece6688128f 
+      | classicmceliece6960119 | classicmceliece6960119f | classicmceliece8192128 
+      | classicmceliece8192128f 
+      | rlcel1 | rlcel3 | rlcel5 : break;
+      default: opaque key_exchange<1..2^16-1>;
+      }
+   } KeyShareEntry;
 
-struct {
-   NamedGroup group;
-   select (NamedGroup.group) {
-   case classicmceliece348864 | classicmceliece348864f | classicmceliece460896 | classicmceliece460896f | classicmceliece6688128 | classicmceliece6688128f | classicmceliece6960119 | classicmceliece6960119f | classicmceliece8192128 | classicmceliece8192128f | rlcel1 | rlcel3 | rlcel5 : opaque key_exchange<1..2^24-1>;
-   default: break;
-   }
-} KeyShareEntryPQC
+   struct {
+      NamedGroup group;
+      select (NamedGroup.group) {
+      case classicmceliece348864 | classicmceliece348864f | classicmceliece460896 
+      | classicmceliece460896f | classicmceliece6688128 | classicmceliece6688128f 
+      | classicmceliece6960119 | classicmceliece6960119f | classicmceliece8192128 
+      | classicmceliece8192128f 
+      | rlcel1 | rlcel3 | rlcel5 : opaque key_exchange<1..2^24-1>;
+      default: break;
+      }
+   } KeyShareEntryPQC
 
-]]></artwork></figure>
+</artwork></figure>
 
 # Conventions and Definitions
 
