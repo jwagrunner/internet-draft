@@ -43,6 +43,13 @@ author:
     email: yongge.wang@charlotte.edu
 
 normative:
+  RFC8446:
+    target: https://datatracker.ietf.org/doc/html/rfc8446
+    title: "The Transport Layer Security (TLS) Protocol Version 1.3"
+    author:
+      ins: E. Rescorla
+      name: Eric Rescorla
+   date: 2018
   TLSE:
     target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
     title: "Transport Layer Security (TLS) Extensions"
@@ -89,7 +96,7 @@ Large public key algorithms, including the code-based cryptographic algorithm fa
 
 # New Key Share Extension
 
-Based on the key share extension from RFC8446 is introduced a new key share extension, key_share_pqc. This is reflected in this document and is represented as KeyShareEntryPQC below, based off of the existing KeyShareEntry from RFC8446. However this is modified along with the existing KeyShareEntry structure to include case statements to test if key exchange algorithm chosen in a TLS connection belongs to either the Classic McEliece family or RLCE algorithm group, and if it is, then KeyShareEntryPQC is constructed and KeyShareEntry is not constructed. If the opposite is true, where the key exchange algorithm does not belong to either group, then KeyShareEntryPQC is not constructed but KeyShareEntry is constructed. Note that the key_exchange field is expanded in KeyShareEntryPQC to accomodate a large public key that is greater than 65535 bytes:
+Based on the key share extension from RFC8446 is introduced a new key share extension, key_share_pqc. This is reflected in this document and is represented as KeyShareEntryPQC below, based off of the existing KeyShareEntry from [RFC8446]. However this is modified along with the existing KeyShareEntry structure to include case statements to test if key exchange algorithm chosen in a TLS connection belongs to either the Classic McEliece family or RLCE algorithm group, and if it is, then KeyShareEntryPQC is constructed and KeyShareEntry is not constructed. If the opposite is true, where the key exchange algorithm does not belong to either group, then KeyShareEntryPQC is not constructed but KeyShareEntry is constructed. Note that the key_exchange field is expanded in KeyShareEntryPQC to accomodate a large public key that is greater than 65535 bytes:
 
 <figure><artwork>
 
