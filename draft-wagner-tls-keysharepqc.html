@@ -1198,7 +1198,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece and the Random Linear Code-based Encryption (RLCE) algorithm group, cannot be easily implemented in TLS applications due to the current key share limitations of 65535 bytes. Therefore, this document proposes a new key share that has a higher limit and can be in use for ClientHello and ServerHello messages. A capability is also added to where if a large post-quantum algorithm is requested, the normal key extension will not be constructed or in use. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed and this new key share extension will not be constructed. Thus enabling the use of large public key post-quantum algorithms to be used in TLS key exchanges, but also presenting it as an alternative option in place of classical algorithms.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see <span>[<a href="#CMC" class="cite xref">CMC</a>]</span> and <span>[<a href="#OQSCMC" class="cite xref">OQSCMC</a>]</span>) and the Random Linear Code-based Encryption (RLCE) algorithm group, cannot be easily implemented in TLS applications due to the current key share limitations of 65535 bytes. Therefore, this document proposes a new key share that has a higher limit and can be in use for ClientHello and ServerHello messages. A capability is also added to where if a large post-quantum algorithm is requested, the normal key extension will not be constructed or in use. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed and this new key share extension will not be constructed. Thus enabling the use of large public key post-quantum algorithms to be used in TLS key exchanges, but also presenting it as an alternative option in place of classical algorithms.<a href="#section-1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1431,6 +1431,10 @@ struct {
 <a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="CMC">[CMC]</dt>
+        <dd>
+<span class="refAuthor">, et al Bernstein, D.</span>, <span class="refTitle">"Classic McEliece: Implementation"</span>, <time datetime="2024" class="refDate">2024</time>, <span>&lt;<a href="https://classic.mceliece.org/impl.html">https://classic.mceliece.org/impl.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="GCTLS">[GCTLS]</dt>
         <dd>
 <span class="refAuthor">Gatlan, S.</span>, <span class="refTitle">"Google Chrome's new post-quantum cryptography may break TLS connections"</span>, <time datetime="2024" class="refDate">2024</time>, <span>&lt;<a href="https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/">https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/</a>&gt;</span>. </dd>
@@ -1440,8 +1444,12 @@ struct {
 <span class="refAuthor">Kaminsky, S.</span>, <span class="refTitle">"Where and how post-quantum cryptography is being used in 2024"</span>, <time datetime="2024" class="refDate">2024</time>, <span>&lt;<a href="https://www.kaspersky.com/blog/postquantum-cryptography-2024-implementation-issues/52095/">https://www.kaspersky.com/blog/postquantum-cryptography-2024-implementation-issues/52095/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="OpenSSL">[OpenSSL]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Wagner, J.</span> and <span class="refAuthor">Y. Wang</span>, <span class="refTitle">"openssl"</span>, <time datetime="2025" class="refDate">2025</time>, <span>&lt;<a href="https://github.com/jwagrunner/openssl">https://github.com/jwagrunner/openssl</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="OQSCMC">[OQSCMC]</dt>
+      <dd>
+<span class="refAuthor">Open Quantum Safe</span>, <span class="refTitle">"liboqs / Algorithms / Classic McEliece"</span>, <time datetime="2024" class="refDate">2024</time>, <span>&lt;<a href="https://openquantumsafe.org/liboqs/algorithms/kem/classic_mceliece">https://openquantumsafe.org/liboqs/algorithms/kem/classic_mceliece</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>

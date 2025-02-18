@@ -85,15 +85,15 @@ Table of Contents
 1.  Introduction
 
    Large public key algorithms, including the code-based cryptographic
-   algorithm family Classic McEliece and the Random Linear Code-based
-   Encryption (RLCE) algorithm group, cannot be easily implemented in
-   TLS applications due to the current key share limitations of 65535
-   bytes.  Therefore, this document proposes a new key share that has a
-   higher limit and can be in use for ClientHello and ServerHello
-   messages.  A capability is also added to where if a large post-
-   quantum algorithm is requested, the normal key extension will not be
-   constructed or in use.  However, if a classical algorithm is
-   requested for key exchange, a normal key share extension is
+   algorithm family Classic McEliece (see [CMC] and [OQSCMC]) and the
+   Random Linear Code-based Encryption (RLCE) algorithm group, cannot be
+   easily implemented in TLS applications due to the current key share
+   limitations of 65535 bytes.  Therefore, this document proposes a new
+   key share that has a higher limit and can be in use for ClientHello
+   and ServerHello messages.  A capability is also added to where if a
+   large post-quantum algorithm is requested, the normal key extension
+   will not be constructed or in use.  However, if a classical algorithm
+   is requested for key exchange, a normal key share extension is
    constructed and this new key share extension will not be constructed.
    Thus enabling the use of large public key post-quantum algorithms to
    be used in TLS key exchanges, but also presenting it as an
@@ -336,6 +336,9 @@ Table of Contents
 
 9.2.  Informative References
 
+   [CMC]      , et al Bernstein, D., "Classic McEliece: Implementation",
+              2024, <https://classic.mceliece.org/impl.html>.
+
    [GCTLS]    Gatlan, S., "Google Chrome's new post-quantum cryptography
               may break TLS connections", 2024,
               <https://www.bleepingcomputer.com/news/security/google-
@@ -349,6 +352,11 @@ Table of Contents
 
    [OpenSSL]  Wagner, J. and Y. Wang, "openssl", 2025,
               <https://github.com/jwagrunner/openssl>.
+
+   [OQSCMC]   Open Quantum Safe, "liboqs / Algorithms / Classic
+              McEliece", 2024,
+              <https://openquantumsafe.org/liboqs/algorithms/kem/
+              classic_mceliece>.
 
 Authors' Addresses
 
