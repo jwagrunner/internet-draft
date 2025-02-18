@@ -95,8 +95,11 @@ Based on the key share extension from RFC8446 is introduced a new key share exte
        case classicmceliece348864 | classicmceliece348864f | classicmceliece460896
        | classicmceliece460896f | classicmceliece6688128 | classicmceliece6688128f
        | classicmceliece6960119 | classicmceliece6960119f | classicmceliece8192128
-       | classicmceliece8192128f | rlcel1 | rlcel3 | rlcel5 : break;
-       default: opaque key_exchange<1..2^16-1>;
+       | classicmceliece8192128f
+       | rlcel1 | rlcel3 | rlcel5 :
+             break;
+       default :
+             opaque key_exchange<1..2^16-1>;
        }
     } KeyShareEntry;
 
@@ -106,8 +109,11 @@ Based on the key share extension from RFC8446 is introduced a new key share exte
        case classicmceliece348864 | classicmceliece348864f | classicmceliece460896
        | classicmceliece460896f | classicmceliece6688128 | classicmceliece6688128f
        | classicmceliece6960119 | classicmceliece6960119f | classicmceliece8192128
-       | classicmceliece8192128f | rlcel1 | rlcel3 | rlcel5 : opaque key_exchange<1..2^24-1>;
-       default: break;
+       | classicmceliece8192128f
+       | rlcel1 | rlcel3 | rlcel5 :
+             opaque key_exchange<1..2^24-1>;
+       default :
+             break;
        }
     } KeyShareEntryPQC
 
