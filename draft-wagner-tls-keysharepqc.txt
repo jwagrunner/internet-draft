@@ -5,7 +5,7 @@
 Transport Layer Security                                       J. Wagner
 Internet-Draft                                                   Y. Wang
 Intended status: Informational                             UNC Charlotte
-Expires: 21 August 2025                                 17 February 2025
+Expires: 22 August 2025                                 18 February 2025
 
 
         New Key Share Extension for Classic McEliece Algorithms
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 August 2025.
+   This Internet-Draft will expire on 22 August 2025.
 
 Copyright Notice
 
@@ -114,23 +114,25 @@ Table of Contents
    key_exchange field is expanded in KeyShareEntryPQC to accomodate a
    large public key that is greater than 65535 bytes:
 
-   struct { NamedGroup group; select (NameGroup.group) { case
-   classicmceliece348864 | classicmceliece348864f |
-   classicmceliece460896 | classicmceliece460896f |
-   classicmceliece6688128 | classicmceliece6688128f |
-   classicmceliece6960119 | classicmceliece6960119f |
-   classicmceliece8192128 | classicmceliece8192128f | rlcel1 | rlcel3 |
-   rlcel5 : break; default: opaque key_exchange<1..2^16-1>; } }
-   KeyShareEntry;
+<![CDATA[
 
-   struct { NamedGroup group; select (NamedGroup.group) { case
-   classicmceliece348864 | classicmceliece348864f |
-   classicmceliece460896 | classicmceliece460896f |
-   classicmceliece6688128 | classicmceliece6688128f |
-   classicmceliece6960119 | classicmceliece6960119f |
-   classicmceliece8192128 | classicmceliece8192128f | rlcel1 | rlcel3 |
-   rlcel5 : opaque key_exchange<1..2^24-1>; default: break; } }
-   KeyShareEntryPQC
+struct {
+   NamedGroup group;
+   select (NameGroup.group) {
+   case classicmceliece348864 | classicmceliece348864f | classicmceliece460896 | classicmceliece460896f | classicmceliece6688128 | classicmceliece6688128f | classicmceliece6960119 | classicmceliece6960119f | classicmceliece8192128 | classicmceliece8192128f | rlcel1 | rlcel3 | rlcel5 : break;
+   default: opaque key_exchange<1..2^16-1>;
+   }
+} KeyShareEntry;
+
+struct {
+   NamedGroup group;
+   select (NamedGroup.group) {
+   case classicmceliece348864 | classicmceliece348864f | classicmceliece460896 | classicmceliece460896f | classicmceliece6688128 | classicmceliece6688128f | classicmceliece6960119 | classicmceliece6960119f | classicmceliece8192128 | classicmceliece8192128f | rlcel1 | rlcel3 | rlcel5 : opaque key_exchange<1..2^24-1>;
+   default: break;
+   }
+} KeyShareEntryPQC
+
+]]>
 
 3.  Conventions and Definitions
 
