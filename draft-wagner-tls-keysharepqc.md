@@ -89,7 +89,6 @@ informative:
       -
         ins: J. Wagner
         name: Jonathan Wagner
-      -
         ins: Y. Wang
         name: Yongge Wang
     date: 2025
