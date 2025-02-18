@@ -81,6 +81,9 @@ informative:
       ins: J. Gilcher
       name: Jan Gilcher
      -
+      ins: T. Lange
+      name: Tanja Lange
+     -
       ins: V. Maram
       name: Varun Maram
      -
@@ -89,6 +92,30 @@ informative:
      -
       ins: R. Misoczki
       name: Rafael Misoczki
+     -
+      ins: R. Niederhagen
+      name: Ruben Niederhagen
+     -
+      ins: E. Persichetti
+      name: Edoardo Persichetti
+     -
+      ins: C. Peters
+      name: Christiane Peters
+     -
+      ins: N. Sendrier
+      name: Nicolas Sendrier
+     -
+      ins: J. Szefer
+      name: Jakub Szefer
+     -
+      ins: C. Tjhai
+      name: Cen Jung Tjhai
+     -
+      ins: M. Tomlinson
+      name: Martin Tomlinson
+     -
+      ins: W. Wang
+      name: Wen Wang
     date: 2024
   OQSCMC:
     target: https://openquantumsafe.org/liboqs/algorithms/kem/classic_mceliece
