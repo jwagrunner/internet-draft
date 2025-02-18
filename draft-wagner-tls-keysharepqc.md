@@ -240,7 +240,7 @@ The NIDS for Classic McEliece and RLCE algorithms are added below in the NamedGr
 
 </artwork></figure>
 
-# TLS Implementation 
+# TLS Implementation
 
 A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello message, as described above, is implemented for OpenSSL. It can be accessed here: [OpenSSL].
 
