@@ -309,7 +309,7 @@ struct {
 
 # NamedGroup Addition for Classic McEliece and RLCE
 
-The NIDS for Classic McEliece and RLCE algorithms are added below in the NamedGroup struct that originates from RFC 8446:
+The values for Classic McEliece and RLCE algorithms are added below in the NamedGroup struct that originates from RFC 8446:
 
 <figure><artwork>
 
