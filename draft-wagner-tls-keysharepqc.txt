@@ -268,9 +268,11 @@ Table of Contents
 5.  TLS Implementation
 
    A TLS implementation exists that tests the use of a new key share
-   extension for both the ClientHello and ServerHello message, as
-   described above, is implemented for OpenSSL.  It can be accessed
-   here: [OpenSSL].
+   extension for both the ClientHello and ServerHello messages that is
+   implemented for OpenSSL, and also where the Classic McEliece
+   algorithm family and the RLCE algorithm group can be chosen for key
+   exchange when initiating TLS connections.  It can be accessed here:
+   [OpenSSL].
 
 6.  Summary of Changes from RFC 8446
 
