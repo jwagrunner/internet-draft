@@ -214,13 +214,14 @@ Table of Contents
    Classic McEliece public key, the server must be able to handle this
    circumstance.  One way is to compare the value for the length of
    extensions in a ClientHello message to a macro constant (for example,
-   CLIENT_HELLO_MIN_EXT_LENGTH as defined in link) and if extension
-   length is longer than this constant, the server will change the way
-   it normally handles all of the extensions.  This constant can be
-   defined as a value representing the lowest possible value for a
-   ClientHello message's extension length, if it were to contain a
-   public key that is larger than the 65535 byte limit (for example,
-   defining this constant value to be 188168 bytes which would be the
+   CLIENT_HELLO_MIN_EXT_LENGTH as defined in this introduced TLS
+   implementation in this paper, see [MINEXT]) and if extension length
+   is longer than this constant, the server will change the way it
+   normally handles all of the extensions.  This constant can be defined
+   as a value representing the lowest possible value for a ClientHello
+   message's extension length, if it were to contain a public key that
+   is larger than the 65535 byte limit (for example, defining this
+   constant value to be 188168 bytes (see [CONSTEXT]) which would be the
    extension length (plus three bytes) if the ClientHello message
    contains a RLCE algorithm that has a 188001 public key, where this
    constant could be easily modified and lowered in the TLS
@@ -349,6 +350,10 @@ Table of Contents
               Implementation", 2024,
               <https://classic.mceliece.org/impl.html>.
 
+   [CONSTEXT] Wagner, J., "ssl/statem/statem_srvr.c#L1211", 2024,
+              <https://github.com/jwagrunner/openssl/blob/master/ssl/
+              statem/statem_srvr.c#L1211>.
+
    [GCTLS]    Gatlan, S., "Google Chrome's new post-quantum cryptography
               may break TLS connections", 2024,
               <https://www.bleepingcomputer.com/news/security/google-
@@ -359,6 +364,10 @@ Table of Contents
               being used in 2024", 2024,
               <https://www.kaspersky.com/blog/postquantum-cryptography-
               2024-implementation-issues/52095/>.
+
+   [MINEXT]   Wagner, J., "ssl/statem/statem_srvr.c#L1650", 2024,
+              <https://github.com/jwagrunner/openssl/blob/master/ssl/
+              statem/statem_srvr.c#L1650>.
 
    [NISTPQC]  NIST, "Post-Quantum Cryptography: Round 4 Submissions",
               2025, <https://csrc.nist.gov/projects/post-quantum-
