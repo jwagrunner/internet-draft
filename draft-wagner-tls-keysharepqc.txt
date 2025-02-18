@@ -336,8 +336,9 @@ Table of Contents
 
 9.2.  Informative References
 
-   [CMC]      , et al Bernstein, D., "Classic McEliece: Implementation",
-              2024, <https://classic.mceliece.org/impl.html>.
+   [CMC]      , et al, Bernstein, D., "Classic McEliece:
+              Implementation", 2024,
+              <https://classic.mceliece.org/impl.html>.
 
    [GCTLS]    Gatlan, S., "Google Chrome's new post-quantum cryptography
               may break TLS connections", 2024,
