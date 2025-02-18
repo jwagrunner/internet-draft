@@ -76,7 +76,7 @@ informative:
     title: "liboqs / Algorithms / Classic McEliece"
     author:
       org: Open Quantum Safe
-    date: 2024  
+    date: 2024
   GCTLS:
     target: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
     title: "Google Chrome's new post-quantum cryptography may break TLS connections"
