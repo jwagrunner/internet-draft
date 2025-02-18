@@ -87,6 +87,8 @@ Large public key algorithms, including the code-based cryptographic algorithm fa
 
 Based on the key share extension from RFC8446 is introduced a new key share extension, key_share_pqc. This is reflected in this document and is represented as KeyShareEntryPQC below, based off of the existing KeyShareEntry from RFC8446. However this is modified along with the existing KeyShareEntry structure to include case statements to test if key exchange algorithm chosen in a TLS connection belongs to either the Classic McEliece family or RLCE algorithm group, and if it is, then KeyShareEntryPQC is constructed and KeyShareEntry is not constructed. If the opposite is true, where the key exchange algorithm does not belong to either group, then KeyShareEntryPQC is not constructed but KeyShareEntry is constructed. Note that the key_exchange field is expanded in KeyShareEntryPQC to accomodate a large public key that is greater than 65535 bytes:
 
+<figure><artwork><![CDATA[
+
 struct {
    NamedGroup group;
    select (NameGroup.group) {
@@ -103,6 +105,7 @@ struct {
    }
 } KeyShareEntryPQC
 
+]]></artwork></figure>
 
 # Conventions and Definitions
 
