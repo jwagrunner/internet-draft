@@ -83,12 +83,12 @@ informative:
      -
       ins: V. Maram
       name: Varun Maram
-     - 
+     -
       ins: I. von Maurich
       name: Ingo von Maurich
-     - 
+     -
       ins: R. Misoczki
-      name: Rafael Misoczki      
+      name: Rafael Misoczki
     date: 2024
   OQSCMC:
     target: https://openquantumsafe.org/liboqs/algorithms/kem/classic_mceliece
