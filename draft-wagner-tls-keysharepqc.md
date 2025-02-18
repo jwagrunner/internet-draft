@@ -64,6 +64,19 @@ normative:
     date: 2025
 
 informative:
+  CMC:
+    target: https://classic.mceliece.org/impl.html
+    title: "Classic McEliece: Implementation"
+    author:
+      ins: D., et. al Bernstein
+      author: Daniel J. Bernstein, et. al
+    date: 2024
+  OQSCMC:
+    target: https://openquantumsafe.org/liboqs/algorithms/kem/classic_mceliece
+    title: "liboqs / Algorithms / Classic McEliece"
+    author:
+      org: Open Quantum Safe
+    date: 2024  
   GCTLS:
     target: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
     title: "Google Chrome's new post-quantum cryptography may break TLS connections"
@@ -97,7 +110,7 @@ RFC 8446 is modified to where another key share extension is introduced to accom
 
 # Introduction
 
-Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece and the Random Linear Code-based Encryption (RLCE) algorithm group, cannot be easily implemented in TLS applications due to the current key share limitations of 65535 bytes. Therefore, this document proposes a new key share that has a higher limit and can be in use for ClientHello and ServerHello messages. A capability is also added to where if a large post-quantum algorithm is requested, the normal key extension will not be constructed or in use. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed and this new key share extension will not be constructed. Thus enabling the use of large public key post-quantum algorithms to be used in TLS key exchanges, but also presenting it as an alternative option in place of classical algorithms.
+Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [CMC] and [OQSCMC]) and the Random Linear Code-based Encryption (RLCE) algorithm group, cannot be easily implemented in TLS applications due to the current key share limitations of 65535 bytes. Therefore, this document proposes a new key share that has a higher limit and can be in use for ClientHello and ServerHello messages. A capability is also added to where if a large post-quantum algorithm is requested, the normal key extension will not be constructed or in use. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed and this new key share extension will not be constructed. Thus enabling the use of large public key post-quantum algorithms to be used in TLS key exchanges, but also presenting it as an alternative option in place of classical algorithms.
 
 # Conventions and Definitions
 
