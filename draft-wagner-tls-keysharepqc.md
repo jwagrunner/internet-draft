@@ -157,6 +157,13 @@ informative:
       ins: J. Wagner
       name: Jonathan Wagner
     date: 2024
+  MODCOL:
+    target: https://github.com/jwagrunner/openssl/blob/master/ssl/statem/extensions.c#L652C9-L663C9
+    title: "ssl/statem/extensions.c#L652C9-L663C9"
+    author:
+      ins: J. Wagner
+      name: Jonathan Wagner
+    date: 2024
   GCTLS:
     target: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
     title: "Google Chrome's new post-quantum cryptography may break TLS connections"
@@ -287,9 +294,7 @@ Since there is a new key share extension to accomodate keys larger than the 6553
 
 </artwork></figure>
 
-Since the "extension_data" field will be much larger for a KeyShareClientHello that contains a large public key that is greater than the previously defined 65535 byte limit, an example being a Classic McEliece public key, the server must be able to handle this circumstance. One way is to compare the value for the length of extensions in a ClientHello message to a macro constant (for example,  CLIENT_HELLO_MIN_EXT_LENGTH as defined in this introduced TLS implementation in this paper, see [MINEXT]) and if extension length is longer than this constant, the server will change the way it normally handles all of the extensions. This constant can be defined as a value representing the lowest possible value for a ClientHello message's extension length, if it were to contain a public key that is larger than the 65535 byte limit (for example, defining this constant value to be 188168 bytes  (see [CONSTEXT]) which would be the extension length (plus three bytes) if the ClientHello message contains a RLCE algorithm that has a 188001 public key, where this constant could be easily modified and lowered in the TLS implementation OpenSSL, should there be a public key for a post-quantum algorithm lower than this 188001 byte value, but still higher than 65535 bytes).
-
-The process of how the server collects the extensions from a ClientHello message must also be modified, as the server must be able to process the new key share extension of Type 63 differently than the other extensions, should the server see this inside a ClientHello message.
+Since the "extension_data" field will be much larger for a KeyShareClientHello that contains a large public key that is greater than the previously defined 65535 byte limit, an example being a Classic McEliece public key, the server must be able to handle this circumstance when receiving the ClientHello message. One way is to compare the value for a packet that contains extensions including a large public key from the ClientHello message to a macro constant (for example,  CLIENT_HELLO_MIN_EXT_LENGTH as defined in this introduced TLS implementation in this paper, see [MINEXT] and [CONSTEXT]) and if this packet value is longer than this constant, the server will change the way it normally handles all of the extensions. This constant could be easily modified in the aformentioned TLS OpenSSL implementation. The process of how the server collects the extensions from a ClientHello message must also be modified, as the server must be able to process the new key share extension of Type 63 differently than the other extensions, should the server see this inside a ClientHello message. For example, see [MODCOL].
 
 The ServerHello message is modified as well originating from RFC 8446:
 
