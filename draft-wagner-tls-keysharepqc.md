@@ -68,7 +68,7 @@ informative:
     target: https://classic.mceliece.org/impl.html
     title: "Classic McEliece: Implementation"
     author:
-      ins: D., et. al Bernstein
+      ins: D., et. al, Bernstein
       author: Daniel J. Bernstein, et. al
     date: 2024
   OQSCMC:
