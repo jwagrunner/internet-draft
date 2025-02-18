@@ -129,7 +129,7 @@ This is then applied to the existing KeyShareClientHello structure, when origina
 
     struct {
        KeyShareEntry client_shares<0..2^16-1>;
-       KeyShareEntryPQC client_shares<0..2^24-1>; 
+       KeyShareEntryPQC client_shares<0..2^24-1>;
     } KeyShareClientHello;
 
 </artwork></figure>
@@ -146,6 +146,8 @@ Since the KeyShareClientHello needs to be expanded to accomodate for the KeyShar
 </artwork></figure>
 
 Since there is a new key share extension to accomodate keys larger than the 65535 limit (KeyShareEntryPQC), this is reflected in the existing ExtensionType structure from RFC 8446 where this is the new type that holds a value of 63, key_share_pqc:
+
+<figure><artwork>
 
     enum {
             server_name(0),                             /* RFC 6066 */
@@ -170,9 +172,11 @@ Since there is a new key share extension to accomodate keys larger than the 6553
             post_handshake_auth(49),                    /* RFC 8446 */
             signature_algorithms_cert(50),              /* RFC 8446 */
             key_share(51),                              /* RFC 8446 */
-            key_share_pqc(63), 
+            key_share_pqc(63),
             (65535)
         } ExtensionType;
+
+</artwork></figure>
 
 Since the "extension_data" field will be much larger for a KeyShareClientHello that contains a large public key that is greater than the previously defined 65535 byte limit, an example being a Classic McEliece public key, the server must be able to handle this circumstance. One way is to compare the value for the length of extensions in a ClientHello message to a macro constant (for example,  CLIENT_HELLO_MIN_EXT_LENGTH as defined in link) and if extension length is longer than this constant, the server will change the way it normally handles all of the extensions. This constant can be defined as a value representing the lowest possible value for a ClientHello message's extension length, if it were to contain a public key that is larger than the 65535 byte limit (for example, defining this constant value to be 188168 bytes which would be the extension length (plus three bytes) if the ClientHello message contains a RLCE algorithm that has a 188001 public key, where this constant could be easily modified and lowered in the TLS implementation OpenSSL, should there be a public key for a post-quantum algorithm lower than this 188001 byte value, but still higher than 65535 bytes).
 
@@ -180,14 +184,20 @@ The process of how the server collects the extensions from a ClientHello message
 
 The ServerHello message is modified as well originating from RFC 8446:
 
+<figure><artwork>
+
 struct {
     KeyShareEntry server_share;
     KeyShareEntryPQC server_sharePQC;
 } KeyShareServerHello;
 
+</artwork></figure>
+
 # NamedGroup Addition for Classic McEliece and RLCE
 
 The NIDS for Classic McEliece and RLCE algorithms are added below in the NamedGroup struct that originates from RFC 8446:
+
+<figure><artwork>
 
     enum {
     
@@ -213,6 +223,8 @@ The NIDS for Classic McEliece and RLCE algorithms are added below in the NamedGr
               /* RLCE algorithm group */
               rlcel1(0x024D), rlcel3(0x024E), rlcel5(0x024F)
           } NamedGroup;
+
+</artwork></figure>
 
 # Summary of Changes from RFC 8446
 
