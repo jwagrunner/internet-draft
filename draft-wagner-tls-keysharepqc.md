@@ -78,7 +78,14 @@ informative:
       ins: S. Kaminsky
       name: Stan Kaminsky
     date: 2024
-
+  OpenSSL:
+    target: https://github.com/jwagrunner/openssl
+    author: 
+      ins: J. Wagner
+      name: Jonathan Wagner
+      ins: Y. Wang
+      name: Yongge Wang
+    date: 2025
 --- abstract
 
 RFC 8446 is modified to where another key share extension is introduced to accomodate large public keys for post-quantum algorithms including Classic McEliece. A capability is added to where this new key share or the normal key share is in use, depending on the algorithm chosen in a TLS key exchange along with its public key size.
@@ -232,6 +239,10 @@ The NIDS for Classic McEliece and RLCE algorithms are added below in the NamedGr
           } NamedGroup;
 
 </artwork></figure>
+
+# TLS Implementation 
+
+A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello message, as described above, is implemented for OpenSSL. It can be accessed here: [OpenSSL].
 
 # Summary of Changes from RFC 8446
 
