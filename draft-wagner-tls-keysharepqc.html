@@ -1204,27 +1204,27 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <div class="alignLeft art-text artwork" id="section-2-2">
 <pre>
 
-struct {
-   NamedGroup group;
-   select (NameGroup.group) {
-   case classicmceliece348864 | classicmceliece348864f | classicmceliece460896
-   | classicmceliece460896f | classicmceliece6688128 | classicmceliece6688128f
-   | classicmceliece6960119 | classicmceliece6960119f | classicmceliece8192128
-   | classicmceliece8192128f | rlcel1 | rlcel3 | rlcel5 : break;
-   default: opaque key_exchange&lt;1..2^16-1&gt;;
-   }
-} KeyShareEntry;
+    struct {
+       NamedGroup group;
+       select (NameGroup.group) {
+       case classicmceliece348864 | classicmceliece348864f | classicmceliece460896
+       | classicmceliece460896f | classicmceliece6688128 | classicmceliece6688128f
+       | classicmceliece6960119 | classicmceliece6960119f | classicmceliece8192128
+       | classicmceliece8192128f | rlcel1 | rlcel3 | rlcel5 : break;
+       default: opaque key_exchange&lt;1..2^16-1&gt;;
+       }
+    } KeyShareEntry;
 
-struct {
-   NamedGroup group;
-   select (NamedGroup.group) {
-   case classicmceliece348864 | classicmceliece348864f | classicmceliece460896
-   | classicmceliece460896f | classicmceliece6688128 | classicmceliece6688128f
-   | classicmceliece6960119 | classicmceliece6960119f | classicmceliece8192128
-   | classicmceliece8192128f | rlcel1 | rlcel3 | rlcel5 : opaque key_exchange&lt;1..2^24-1&gt;;
-   default: break;
-   }
-} KeyShareEntryPQC
+    struct {
+       NamedGroup group;
+       select (NamedGroup.group) {
+       case classicmceliece348864 | classicmceliece348864f | classicmceliece460896
+       | classicmceliece460896f | classicmceliece6688128 | classicmceliece6688128f
+       | classicmceliece6960119 | classicmceliece6960119f | classicmceliece8192128
+       | classicmceliece8192128f | rlcel1 | rlcel3 | rlcel5 : opaque key_exchange&lt;1..2^24-1&gt;;
+       default: break;
+       }
+    } KeyShareEntryPQC
 
 </pre><a href="#section-2-2" class="pilcrow">¶</a>
 </div>
