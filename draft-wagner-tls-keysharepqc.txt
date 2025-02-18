@@ -336,8 +336,9 @@ Table of Contents
 
 9.2.  Informative References
 
-   [CMC]      , Bernstein, D., Chou, T., Cid, C., and J. Gilcher,
-              "Classic McEliece: Implementation", 2024,
+   [CMC]      Bernstein, D., Chou, T., Cid, C., Gilcher, J., Maram, V.,
+              von Maurich, I., and R. Misoczki, "Classic McEliece:
+              Implementation", 2024,
               <https://classic.mceliece.org/impl.html>.
 
    [GCTLS]    Gatlan, S., "Google Chrome's new post-quantum cryptography
