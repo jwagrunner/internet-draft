@@ -69,7 +69,7 @@ informative:
     title: "Classic McEliece: Implementation"
     author:
      -
-      ins: D., Bernstein
+      ins: D. Bernstein
       name: Daniel J. Bernstein
      -
       ins: T. Chou
@@ -80,6 +80,15 @@ informative:
      -
       ins: J. Gilcher
       name: Jan Gilcher
+     -
+      ins: V. Maram
+      name: Varun Maram
+     - 
+      ins: I. von Maurich
+      name: Ingo von Maurich
+     - 
+      ins: R. Misoczki
+      name: Rafael Misoczki      
     date: 2024
   OQSCMC:
     target: https://openquantumsafe.org/liboqs/algorithms/kem/classic_mceliece
