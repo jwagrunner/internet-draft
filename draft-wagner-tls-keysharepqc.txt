@@ -227,8 +227,8 @@ Table of Contents
    the server see this inside a ClientHello message.  For example, see
    [MODCOL].
 
-   The ServerHello message is modified as well originating from RFC
-   8446:
+   The ServerHello message is modified as well where the
+   KeyShareServerHello structure originates from RFC 8446:
 
    struct {
        KeyShareEntry server_share;
