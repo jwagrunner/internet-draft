@@ -114,8 +114,6 @@ Table of Contents
    key_exchange field is expanded in KeyShareEntryPQC to accomodate a
    large public key that is greater than 65535 bytes:
 
-<![CDATA[
-
 struct {
    NamedGroup group;
    select (NameGroup.group) {
@@ -131,8 +129,6 @@ struct {
    default: break;
    }
 } KeyShareEntryPQC
-
-]]>
 
 3.  Conventions and Definitions
 
