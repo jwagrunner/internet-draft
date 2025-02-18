@@ -158,7 +158,7 @@ Table of Contents
     } KeyShareEntryPQC
 
    This is then applied to the existing KeyShareClientHello structure,
-   which originates from RFC8446, that now contains an additional field
+   which originates from RFC 8446, that now contains an additional field
    for KeyShareEntryPQC:
 
        struct {
@@ -177,9 +177,9 @@ Table of Contents
        } Extension;
 
    Since there is a new key share extension to accomodate keys larger
-   than the 65535 limit (KeyShareEntryPQC), this is reflected in the
-   existing ExtensionType structure from RFC 8446 where this is the new
-   type that holds a value of 63, key_share_pqc:
+   than the 65535 Byte limit (KeyShareEntryPQC), this is reflected in
+   the existing ExtensionType structure from RFC 8446 where this is the
+   new type that holds a value of 63, key_share_pqc:
 
     enum {
             server_name(0),                             /* RFC 6066 */
