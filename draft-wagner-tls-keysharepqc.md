@@ -68,8 +68,18 @@ informative:
     target: https://classic.mceliece.org/impl.html
     title: "Classic McEliece: Implementation"
     author:
-      ins: D., et. al, Bernstein
-      author: Daniel J. Bernstein, et. al
+     -
+      ins: D., Bernstein
+      name: Daniel J. Bernstein
+     -
+      ins: T. Chou
+      name: Tung Chou
+     -
+      ins: C. Cid
+      name: Carlos Cid
+     -
+      ins: J. Gilcher
+      name: Jan Gilcher 
     date: 2024
   OQSCMC:
     target: https://openquantumsafe.org/liboqs/algorithms/kem/classic_mceliece
