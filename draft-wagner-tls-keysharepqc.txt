@@ -336,8 +336,10 @@ Table of Contents
 
 9.2.  Informative References
 
-   [CMC]      Bernstein, D., Chou, T., Cid, C., Gilcher, J., Maram, V.,
-              von Maurich, I., and R. Misoczki, "Classic McEliece:
+   [CMC]      Bernstein, D., Chou, T., Cid, C., Gilcher, J., Lange, T.,
+              Maram, V., von Maurich, I., Misoczki, R., Niederhagen, R.,
+              Persichetti, E., Peters, C., Sendrier, N., Szefer, J.,
+              Tjhai, C., Tomlinson, M., and W. Wang, "Classic McEliece:
               Implementation", 2024,
               <https://classic.mceliece.org/impl.html>.
 
