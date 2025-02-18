@@ -79,7 +79,7 @@ informative:
       name: Carlos Cid
      -
       ins: J. Gilcher
-      name: Jan Gilcher 
+      name: Jan Gilcher
     date: 2024
   OQSCMC:
     target: https://openquantumsafe.org/liboqs/algorithms/kem/classic_mceliece
