@@ -81,8 +81,10 @@ informative:
   OpenSSL:
     target: https://github.com/jwagrunner/openssl
     author:
+      -
       ins: J. Wagner
       name: Jonathan Wagner
+      -
       ins: Y. Wang
       name: Yongge Wang
     date: 2025
