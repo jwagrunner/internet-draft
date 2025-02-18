@@ -80,10 +80,14 @@ informative:
     date: 2024
   OpenSSL:
     target: https://github.com/jwagrunner/openssl
-    title : ""
+    title : "openssl"
     author:
+     -
       ins: J. Wagner
       name: Jonathan Wagner
+     -
+      ins: Y. Wang
+      name: Yongge Wang
     date: 2025
 --- abstract
 
