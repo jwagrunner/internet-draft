@@ -215,13 +215,13 @@ The NIDS for Classic McEliece and RLCE algorithms are added below in the NamedGr
               (0xFFFF)
 
               /* Classic McEliece family */
-              classicmceliece348864(0x0235), classicmceliece348864f(0x0236), classicmceliece460896(0x0237),
-              classicmceliece460896f(0x0239), classicmceliece6688128(0x0247), classicmceliece6688128f(0x0248),
-              classicmceliece6960119(0x0249), classicmceliece6960119f(0x024A), classicmceliece8192128(0x024B),
-              classicmceliece8192128f(0x024C)
+              classicmceliece348864(0x002A), classicmceliece348864f(0x002B), classicmceliece460896(0x002C),
+              classicmceliece460896f(0x002D), classicmceliece6688128(0x002E), classicmceliece6688128f(0x002F),
+              classicmceliece6960119(0x0030), classicmceliece6960119f(0x0031), classicmceliece8192128(0x0032),
+              classicmceliece8192128f(0x0033)
 
               /* RLCE algorithm group */
-              rlcel1(0x024D), rlcel3(0x024E), rlcel5(0x024F)
+              rlcel1(0x0034), rlcel3(0x0035), rlcel5(0x0036)
           } NamedGroup;
 
 </artwork></figure>
