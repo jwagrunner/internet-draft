@@ -348,7 +348,7 @@ Table of Contents
               <https://www.kaspersky.com/blog/postquantum-cryptography-
               2024-implementation-issues/52095/>.
 
-   [OpenSSL]  Wagner, J., "", 2025,
+   [OpenSSL]  Wagner, J. and Y. Wang, "openssl", 2025,
               <https://github.com/jwagrunner/openssl>.
 
 Authors' Addresses
