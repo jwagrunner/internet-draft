@@ -218,7 +218,7 @@ Based on the key share extension from RFC8446 is introduced a new key share exte
 
 </artwork></figure>
 
-This is then applied to the existing KeyShareClientHello structure, which originates from RFC8446, that now contains an additional field for KeyShareEntryPQC:
+This is then applied to the existing KeyShareClientHello structure, which originates from RFC 8446, that now contains an additional field for KeyShareEntryPQC:
 
 <figure><artwork>
 
@@ -240,7 +240,7 @@ Since the KeyShareClientHello needs to be expanded to accomodate for the KeyShar
 
 </artwork></figure>
 
-Since there is a new key share extension to accomodate keys larger than the 65535 limit (KeyShareEntryPQC), this is reflected in the existing ExtensionType structure from RFC 8446 where this is the new type that holds a value of 63, key_share_pqc:
+Since there is a new key share extension to accomodate keys larger than the 65535 Byte limit (KeyShareEntryPQC), this is reflected in the existing ExtensionType structure from RFC 8446 where this is the new type that holds a value of 63, key_share_pqc:
 
 <figure><artwork>
 
