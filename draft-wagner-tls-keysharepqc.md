@@ -218,7 +218,7 @@ Based on the key share extension from RFC8446 is introduced a new key share exte
 
 </artwork></figure>
 
-This is then applied to the existing KeyShareClientHello structure, when originates from RFC8446, which now contains an additional field for KeyShareEntryPQC:
+This is then applied to the existing KeyShareClientHello structure, which originates from RFC8446, that now contains an additional field for KeyShareEntryPQC:
 
 <figure><artwork>
 
