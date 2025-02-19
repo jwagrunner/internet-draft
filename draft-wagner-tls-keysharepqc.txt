@@ -2,10 +2,10 @@
 
 
 
-Transport Layer Security                                       J. Wagner
-Internet-Draft                                                   Y. Wang
+Transport Layer Security                                         Y. Wang
+Internet-Draft                                                 J. Wagner
 Intended status: Standards Track                           UNC Charlotte
-Expires: 22 August 2025                                 18 February 2025
+Expires: 23 August 2025                                 19 February 2025
 
 
         New Key Share Extension for Classic McEliece Algorithms
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 August 2025.
+   This Internet-Draft will expire on 23 August 2025.
 
 Copyright Notice
 
@@ -390,17 +390,17 @@ Table of Contents
 
 Authors' Addresses
 
-   Jonathan Wagner
-   UNC Charlotte
-   9201 University City Blvd
-   Charlotte, NC,  28223
-   United States of America
-   Email: jwagne31@charlotte.edu
-
-
    Yongge Wang
    UNC Charlotte
    9201 University City Blvd
    Charlotte, NC,  28223
    United States of America
    Email: yongge.wang@charlotte.edu
+
+
+   Jonathan Wagner
+   UNC Charlotte
+   9201 University City Blvd
+   Charlotte, NC,  28223
+   United States of America
+   Email: jwagne31@charlotte.edu
