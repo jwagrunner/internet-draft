@@ -195,6 +195,8 @@ RFC 8446 is modified to where another key share extension is introduced to accom
 
 --- middle
 
+-------------------------------
+
 # Introduction
 
 Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [RMC], [CMC], and [OQSCMC]) and the Random Linear Code-based Encryption (RLCE) algorithm group (see [RLCE]), cannot be easily implemented in TLS 1.3 due to the current key share limitations of 65535 bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the NIST standardization process (see [NISTPQC]). Therefore, this document proposes a new key share that has a higher limit and is utilized in ClientHello and ServerHello messages, which is a modification of [RFC8446]. For example, if a large post-quantum algorithm is requested in a TLS 1.3 key exchange, this new key share extension will be constructed but the original key share extension will not be constructed. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed and this new key share extension will not be constructed. Thus enabling the use of large public key post-quantum algorithms to be used in TLS 1.3 key exchanges, and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
