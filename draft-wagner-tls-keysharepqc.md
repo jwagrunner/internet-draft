@@ -195,7 +195,6 @@ RFC 8446 is modified to where another key share extension is introduced to accom
 
 --- middle
 
--------------------------------
 
 # Introduction
 
