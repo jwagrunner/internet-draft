@@ -346,7 +346,7 @@ The values for Classic McEliece and RLCE algorithms are added below in the Named
 There are two key establishments that are considered when examining the structure of PskKeyExchangeModes from RFC 8446. Since there is no Diffie Hellman algorithm in use with a pre-shared key (PSK) when considering the use of a long public key post-quantum algorithm of Classic McEliece or RLCE, then there must be another key exchange mode to utilize to taken into account both cases: PSK with PQC key establishment and this is reflected in the existing RFC 8446 PskKeyExchangeModes structure below where psk_pqc_ke(2) is added:
 
 <figure><artwork>
- 
+
 enum {
  psk_ke(0), psk_dhe_ke(1), psk_pqc_ke(2)
 } PskKeyExchangeMode;
