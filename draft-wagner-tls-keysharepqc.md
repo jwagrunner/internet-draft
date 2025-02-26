@@ -341,6 +341,20 @@ The values for Classic McEliece and RLCE algorithms are added below in the Named
 
 </artwork></figure>
 
+# Modification to PskKeyExchangeMode structure
+
+There are two key establishments that are considered when examining the structure of PskKeyExchangeModes from RFC 8446. Since there is no Diffie Hellman algorithm in use with a pre-shared key (PSK) when considering the use of a long public key post-quantum algorithm of Classic McEliece or RLCE, then there must be another key exchange mode to utilize to taken into account both cases: PSK with PQC key establishment and this is reflected in the existing RFC 8446 PskKeyExchangeModes structure below where psk_pqc_ke(2) is added:
+
+<figure><artwork>
+ 
+enum {
+ psk_ke(0), psk_dhe_ke(1), psk_pqc_ke(2)
+} PskKeyExchangeMode;
+
+</artwork></figure>
+
+Keep in mind that the above will be printed as "02" in hexadecimal in a ClientHello message in the psk_key_exchange_modes extension when a Classic McEliece or RLCE algorithm is considered (see TLS implementation below), and this extension with the new value of 2 can appear in both cases of when a pre-shared key is requested in a connection (where the pre_shared_key extension appears in a ClientHello) or when the pre-shared key is not requested (where the pre_shared_key extension does not appear in a ClientHello). However, the pre-shared key extension will not appear in the ServerHello message in both situations when a pre-shared key is request or not in the TLS implementation OpenSSL, but can change if there is a session resumption as defined in that implementation's code.
+
 # TLS Implementation
 
 A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where the Classic McEliece algorithm family and the RLCE algorithm group can be chosen for key exchange when initiating TLS connections. It can be accessed here: [OpenSSL].
