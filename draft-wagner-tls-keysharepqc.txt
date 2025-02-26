@@ -5,7 +5,7 @@
 Transport Layer Security                                         Y. Wang
 Internet-Draft                                                 J. Wagner
 Intended status: Standards Track                           UNC Charlotte
-Expires: 24 August 2025                                 20 February 2025
+Expires: 30 August 2025                                 26 February 2025
 
 
         New Key Share Extension for Classic McEliece Algorithms
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 August 2025.
+   This Internet-Draft will expire on 30 August 2025.
 
 Copyright Notice
 
@@ -73,13 +73,14 @@ Table of Contents
    2.  Conventions and Definitions
    3.  New Key Share Extension
    4.  NamedGroup Addition for Classic McEliece and RLCE
-   5.  TLS Implementation
-   6.  Summary of Changes from RFC 8446
-   7.  Security Considerations
-   8.  IANA Considerations
-   9.  References
-     9.1.  Normative References
-     9.2.  Informative References
+   5.  Modification to PskKeyExchangeMode structure
+   6.  TLS Implementation
+   7.  Summary of Changes from RFC 8446
+   8.  Security Considerations
+   9.  IANA Considerations
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
    Authors' Addresses
 
 1.  Introduction
@@ -266,7 +267,35 @@ Table of Contents
               rlcel1(0x0034), rlcel3(0x0035), rlcel5(0x0036)
           } NamedGroup;
 
-5.  TLS Implementation
+5.  Modification to PskKeyExchangeMode structure
+
+   There are two key establishments that are considered when examining
+   the structure of PskKeyExchangeModes from RFC 8446.  Since there is
+   no Diffie Hellman algorithm in use with a pre-shared key (PSK) when
+   considering the use of a long public key post-quantum algorithm of
+   Classic McEliece or RLCE, then there must be another key exchange
+   mode to utilize to taken into account both cases: PSK with PQC key
+   establishment and this is reflected in the existing RFC 8446
+   PskKeyExchangeModes structure below where psk_pqc_ke(2) is added:
+
+   enum {
+    psk_ke(0), psk_dhe_ke(1), psk_pqc_ke(2)
+   } PskKeyExchangeMode;
+
+   Keep in mind that the above will be printed as "02" in hexadecimal in
+   a ClientHello message in the psk_key_exchange_modes extension when a
+   Classic McEliece or RLCE algorithm is considered (see TLS
+   implementation below), and this extension with the new value of 2 can
+   appear in both cases of when a pre-shared key is requested in a
+   connection (where the pre_shared_key extension appears in a
+   ClientHello) or when the pre-shared key is not requested (where the
+   pre_shared_key extension does not appear in a ClientHello).  However,
+   the pre-shared key extension will not appear in the ServerHello
+   message in both situations when a pre-shared key is request or not in
+   the TLS implementation OpenSSL, but can change if there is a session
+   resumption as defined in that implementation's code.
+
+6.  TLS Implementation
 
    A TLS implementation exists that tests the use of a new key share
    extension for both the ClientHello and ServerHello messages that is
@@ -275,7 +304,7 @@ Table of Contents
    exchange when initiating TLS connections.  It can be accessed here:
    [OpenSSL].
 
-6.  Summary of Changes from RFC 8446
+7.  Summary of Changes from RFC 8446
 
    A new structure is introduced of KeyShareEntryPQC along with
    modifications of existing structures including KeyShareEntry,
@@ -290,7 +319,7 @@ Table of Contents
    Thus the extension_data is expanded in the existing Extension
    structure.
 
-7.  Security Considerations
+8.  Security Considerations
 
    Larger ClientHello messages can cause TLS connections to be dropped
    and for TLS handshakes to be broken, as evidenced by the inclusion of
@@ -300,7 +329,7 @@ Table of Contents
    servers if receiving an error with TLS/SSL if Kyber is utlized
    through Chrome or Firefox.  See [KASPPQC].
 
-8.  IANA Considerations
+9.  IANA Considerations
 
    The new key share proposed in this document key_share_pqc, along with
    its value of 63, needs to be updated in the registry specified for
@@ -309,9 +338,9 @@ Table of Contents
    Classic McEliece family with the entries of 42-51 and the RLCE
    algorithm group with 52-54.  See [TLSP].
 
-9.  References
+10.  References
 
-9.1.  Normative References
+10.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -336,7 +365,7 @@ Table of Contents
               <https://www.iana.org/assignments/tls-parameters/tls-
               parameters.xhtml>.
 
-9.2.  Informative References
+10.2.  Informative References
 
    [CMC]      Bernstein, D., Chou, T., Cid, C., Gilcher, J., Lange, T.,
               Maram, V., von Maurich, I., Misoczki, R., Niederhagen, R.,
