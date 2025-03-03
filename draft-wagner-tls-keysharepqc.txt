@@ -5,7 +5,7 @@
 Transport Layer Security                                         Y. Wang
 Internet-Draft                                                 J. Wagner
 Intended status: Standards Track                           UNC Charlotte
-Expires: 30 August 2025                                 26 February 2025
+Expires: 4 September 2025                                   3 March 2025
 
 
         New Key Share Extension for Classic McEliece Algorithms
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 August 2025.
+   This Internet-Draft will expire on 4 September 2025.
 
 Copyright Notice
 
@@ -270,30 +270,38 @@ Table of Contents
 5.  Modification to PskKeyExchangeMode structure
 
    There are two key establishments that are considered when examining
-   the structure of PskKeyExchangeModes from RFC 8446.  Since there is
-   no Diffie Hellman algorithm in use with a pre-shared key (PSK) when
-   considering the use of a long public key post-quantum algorithm of
-   Classic McEliece or RLCE, then there must be another key exchange
-   mode to utilize to taken into account both cases: PSK with PQC key
-   establishment and this is reflected in the existing RFC 8446
-   PskKeyExchangeModes structure below where psk_pqc_ke(2) is added:
+   the structure of PskKeyExchangeMode from RFC 8446.  Since there is no
+   Diffie Hellman algorithm in use with a pre-shared key (PSK) when
+   considering the use of a Classic McEliece algorithm for key exchange,
+   then there must be another key exchange mode to utilize to taken into
+   account this case.  Therefore, this is reflected in the existing RFC
+   8446 PskKeyExchangeMode structure below where psk_pqc_ke(2) is added:
 
    enum {
-    psk_ke(0), psk_dhe_ke(1), psk_pqc_ke(2)
+    psk_ke(0), psk_dhe_ke(1), psk_pqc_ke(2), (255)
    } PskKeyExchangeMode;
 
-   Keep in mind that the above will be printed as "02" in hexadecimal in
-   a ClientHello message in the psk_key_exchange_modes extension when a
-   Classic McEliece or RLCE algorithm is considered (see TLS
-   implementation below), and this extension with the new value of 2 can
-   appear in both cases of when a pre-shared key is requested in a
-   connection (where the pre_shared_key extension appears in a
-   ClientHello) or when the pre-shared key is not requested (where the
-   pre_shared_key extension does not appear in a ClientHello).  However,
-   the pre-shared key extension will not appear in the ServerHello
-   message in both situations when a pre-shared key is request or not in
-   the TLS implementation OpenSSL, but can change if there is a session
-   resumption as defined in that implementation's code.
+   When selecting a Classic McEliece algorithm and using an external PSK
+   or a resumption PSK, "02" will then be listed for the
+   psk_key_exchange_modes extension along with the new key_share_pqc
+   extension in the ClientHello message.  At the end of this ClientHello
+   message is printed the "00 29" extension (pre-shared key extension),
+   where the PSK identity should be printed and is mapped to the binder
+   that should proceed it in this pre-shared key extension.  The
+   ServerHello message will also contain the new key_share_pqc
+   extension, and will as well contain the pre-shared key extension,
+   where it should contain "00 00" at the end which represents the
+   server selecting the PSK identity of 0.  Overall, this is a new key
+   exchange selecting a Classic McEliece algorithm using a PSK, whether
+   its external or resumption, and this is can be demonstrated in the
+   TLS Implementation below.
+
+   For the situation where a Classic McEliece is used for key exchange
+   and a PSK is not chosen, then the value of "02" is printed for the
+   psk_key_exchange_modes extension.  But when choosing a Kyber post-
+   quantum algorithm or X25519 and PSK is not chosen, then a value of
+   "01" will be printed in this same extension (see TLS Implementation
+   below).
 
 6.  TLS Implementation
 
