@@ -303,7 +303,8 @@ Table of Contents
    psk_key_exchange_modes extension.  But when choosing a Kyber post-
    quantum algorithm or X25519 and PSK is not chosen, then a value of
    "01" will be printed in this same extension (see TLS Implementation
-   below).
+   below), just as it is shown for the psk_key_exchange_modes extension
+   listing "PSK with DHE" here: [JDCLF].
 
 6.  TLS Implementation
 
@@ -393,6 +394,10 @@ Table of Contents
               <https://www.bleepingcomputer.com/news/security/google-
               chromes-new-post-quantum-cryptography-may-break-tls-
               connections/>.
+
+   [JDCLF]    Davies, J., "A walkthrough of a TLS 1.3 handshake", 2019,
+              <https://commandlinefanatic.com/cgi-bin/
+              showarticle.cgi?article=art080>.
 
    [KASPPQC]  Kaminsky, S., "Where and how post-quantum cryptography is
               being used in 2024", 2024,
