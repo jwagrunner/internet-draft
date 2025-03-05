@@ -1050,7 +1050,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Wang &amp; Wagner</td>
-<td class="center">Expires 4 September 2025</td>
+<td class="center">Expires 6 September 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-wagner-tls-keysharepqc-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-03-03" class="published">3 March 2025</time>
+<time datetime="2025-03-05" class="published">5 March 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-09-04">4 September 2025</time></dd>
+<dd class="expires"><time datetime="2025-09-06">6 September 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1122,7 +1122,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 4 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 6 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1376,7 +1376,7 @@ enum {
 
 </pre><a href="#section-5-2" class="pilcrow">¶</a>
 </div>
-<p id="section-5-3">When selecting a Classic McEliece algorithm and using an external PSK or a resumption PSK, "02" will then be listed for the psk_key_exchange_modes extension along with the new key_share_pqc extension in the ClientHello message. At the end of this ClientHello message is printed the "00 29" extension (pre-shared key extension), where the PSK identity should be printed and is mapped to the binder that should proceed it in this pre-shared key extension. The ServerHello message will also contain the new key_share_pqc extension, and will as well contain the pre-shared key extension, where it should contain "00 00" at the end which represents the server selecting the PSK identity of 0. Overall, this is a new key exchange selecting a Classic McEliece algorithm using a PSK, whether its external or resumption, and this is can be demonstrated in the TLS Implementation below.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-3">When selecting a Classic McEliece algorithm and using an external PSK or a resumption PSK, "02" will then be listed for the psk_key_exchange_modes extension along with the new key_share_pqc extension in the ClientHello message. At the end of this ClientHello message is printed the "00 29" extension (pre-shared key extension), where the PSK identity should be printed and is mapped to the binder that should proceed it in this pre-shared key extension. The ServerHello message will also contain the new key_share_pqc extension, and will as well contain the pre-shared key extension, where it should contain "00 00" at the end which represents the server selecting the PSK identity of 0 (for example: the Selected Identity of 0 shown in the pre-shared key extension in a ServerHello message in this Wireshark example: <span>[<a href="#RASHOK" class="cite xref">RASHOK</a>]</span>). Overall, this is a new key exchange selecting a Classic McEliece algorithm using a PSK, whether its external or resumption, and this is can be demonstrated in the TLS Implementation below.<a href="#section-5-3" class="pilcrow">¶</a></p>
 <p id="section-5-4">For the situation where a Classic McEliece is used for key exchange and a PSK is not chosen, then the value of "02" is printed for the psk_key_exchange_modes extension. But when choosing a Kyber post-quantum algorithm or X25519 and PSK is not chosen, then a value of "01" will be printed in this same extension (see TLS Implementation below).<a href="#section-5-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1487,6 +1487,10 @@ enum {
 <dt id="OQSCMC">[OQSCMC]</dt>
         <dd>
 <span class="refAuthor">Open Quantum Safe</span>, <span class="refTitle">"liboqs / Algorithms / Classic McEliece"</span>, <time datetime="2024" class="refDate">2024</time>, <span>&lt;<a href="https://openquantumsafe.org/liboqs/algorithms/kem/classic_mceliece">https://openquantumsafe.org/liboqs/algorithms/kem/classic_mceliece</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RASHOK">[RASHOK]</dt>
+        <dd>
+<span class="refAuthor">rashok</span>, <span class="refTitle">"How to do TLS 1.3 PSK using openssl?"</span>, <time datetime="2020" class="refDate">2020</time>, <span>&lt;<a href="https://stackoverflow.com/questions/58719595/how-to-do-tls-1-3-psk-using-openssl">https://stackoverflow.com/questions/58719595/how-to-do-tls-1-3-psk-using-openssl</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RLCE">[RLCE]</dt>
         <dd>

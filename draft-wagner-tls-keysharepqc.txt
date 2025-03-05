@@ -5,7 +5,7 @@
 Transport Layer Security                                         Y. Wang
 Internet-Draft                                                 J. Wagner
 Intended status: Standards Track                           UNC Charlotte
-Expires: 4 September 2025                                   3 March 2025
+Expires: 6 September 2025                                   5 March 2025
 
 
         New Key Share Extension for Classic McEliece Algorithms
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 September 2025.
+   This Internet-Draft will expire on 6 September 2025.
 
 Copyright Notice
 
@@ -291,10 +291,12 @@ Table of Contents
    ServerHello message will also contain the new key_share_pqc
    extension, and will as well contain the pre-shared key extension,
    where it should contain "00 00" at the end which represents the
-   server selecting the PSK identity of 0.  Overall, this is a new key
-   exchange selecting a Classic McEliece algorithm using a PSK, whether
-   its external or resumption, and this is can be demonstrated in the
-   TLS Implementation below.
+   server selecting the PSK identity of 0 (for example: the Selected
+   Identity of 0 shown in the pre-shared key extension in a ServerHello
+   message in this Wireshark example: [RASHOK]).  Overall, this is a new
+   key exchange selecting a Classic McEliece algorithm using a PSK,
+   whether its external or resumption, and this is can be demonstrated
+   in the TLS Implementation below.
 
    For the situation where a Classic McEliece is used for key exchange
    and a PSK is not chosen, then the value of "02" is printed for the
@@ -416,6 +418,10 @@ Table of Contents
               McEliece", 2024,
               <https://openquantumsafe.org/liboqs/algorithms/kem/
               classic_mceliece>.
+
+   [RASHOK]   rashok, "How to do TLS 1.3 PSK using openssl?", 2020,
+              <https://stackoverflow.com/questions/58719595/how-to-do-
+              tls-1-3-psk-using-openssl>.
 
    [RLCE]     Wang, Y., "Quantum Resistant Public Key Encryption Scheme
               RLCE and IND-CCA2 Security for McEliece Schemes", 2017,
