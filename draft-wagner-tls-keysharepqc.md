@@ -184,6 +184,13 @@ informative:
     author:
       name: rashok
     date: 2020
+  JDCLF:
+    target: https://commandlinefanatic.com/cgi-bin/showarticle.cgi?article=art080
+    title: "A walkthrough of a TLS 1.3 handshake"
+    author:
+      ins: J. Davies
+      names: Joshua Davies
+    date: 2019
   OpenSSL:
     target: https://github.com/jwagrunner/openssl
     title : "openssl"
@@ -361,7 +368,7 @@ enum {
 
 When selecting a Classic McEliece algorithm and using an external PSK or a resumption PSK, "02" will then be listed for the psk_key_exchange_modes extension along with the new key_share_pqc extension in the ClientHello message. At the end of this ClientHello message is printed the "00 29" extension (pre-shared key extension), where the PSK identity should be printed and is mapped to the binder that should proceed it in this pre-shared key extension. The ServerHello message will also contain the new key_share_pqc extension, and will as well contain the pre-shared key extension, where it should contain "00 00" at the end which represents the server selecting the PSK identity of 0 (for example: the Selected Identity of 0 shown in the pre-shared key extension in a ServerHello message in this Wireshark example: [RASHOK]). Overall, this is a new key exchange selecting a Classic McEliece algorithm using a PSK, whether its external or resumption, and this is can be demonstrated in the TLS Implementation below.
 
-For the situation where a Classic McEliece is used for key exchange and a PSK is not chosen, then the value of "02" is printed for the psk_key_exchange_modes extension. But when choosing a Kyber post-quantum algorithm or X25519 and PSK is not chosen, then a value of "01" will be printed in this same extension (see TLS Implementation below).
+For the situation where a Classic McEliece is used for key exchange and a PSK is not chosen, then the value of "02" is printed for the psk_key_exchange_modes extension. But when choosing a Kyber post-quantum algorithm or X25519 and PSK is not chosen, then a value of "01" will be printed in this same extension (see TLS Implementation below), just as it is shown for the psk_key_exchange_modes extension listing "PSK with DHE" here: [JDCLF].
 
 # TLS Implementation
 
