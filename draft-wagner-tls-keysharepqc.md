@@ -382,7 +382,7 @@ As stated above, resumption PSK with a Classic McEliece algorithm chosen as a ke
 
 <figure><artwork>
 
-Client                                       Server
+      Client                                 Server
 
 Initial Handshake
       ClientHello
