@@ -378,7 +378,7 @@ For the situation where a Classic McEliece is used for key exchange and a PSK is
 
 As stated above, resumption PSK with Classic McEliece chosen as a key exchange algorithm involves the use of the new key_share_pqc extension for both the ClientHello and ServerHello messages. Thus the Subsequent Handshake in the Message Flow for Resumption and PSK figure, which is Figure 3 from RFC 8446, has been updated as follows to include this new key share extension:
 
-</artwork></figure>
+<figure><artwork>
 
    Subsequent Handshake:
           ClientHello
