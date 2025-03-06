@@ -316,36 +316,36 @@ Table of Contents
    and has been tested with the TLS Implementation mentioned in this
    document:
 
-Client                                                                           Server
+   Client Server
 
-Initial Handshake
-      ClientHello
-         key_share_pqc         --------->
-                                             ServerHello
-                                               key_share_pqc
-                                               EncryptedExtensions
-                                             Certificate
-                                             CertificateVerify
-                              <---------     Finished
-      Finished                 ---------->
-                              <---------     NewSessionTicket
-                              <---------     NewSessionTicket
-
-
-Subsequent Handshake
-       ClientHello
-          key_share_pqc
-          pre_shared_key       --------->
-                                               ServerHello
+   Initial Handshake
+         ClientHello
+            key_share_pqc         --------->
+                                                ServerHello
                                                   key_share_pqc
-                                                  pre_shared_key
-                                               EncryptedExtensions
-                              <---------       Finished
-       Finished               ---------->
-                              <---------       NewSessionTicket
+                                                  EncryptedExtensions
+                                                Certificate
+                                                CertificateVerify
+                                 <---------     Finished
+         Finished                ---------->
+                                 <---------     NewSessionTicket
+                                 <---------     NewSessionTicket
 
 
-Figure 1: A Classic McEliece algorithm used with Resumption PSK
+   Subsequent Handshake
+          ClientHello
+             key_share_pqc
+             pre_shared_key       --------->
+                                                  ServerHello
+                                                     key_share_pqc
+                                                     pre_shared_key
+                                                  EncryptedExtensions
+                                 <---------       Finished
+          Finished               ---------->
+                                 <---------       NewSessionTicket
+
+
+   Figure 1: A Classic McEliece algorithm used with Resumption PSK
 
 6.  TLS Implementation
 
