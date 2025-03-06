@@ -386,10 +386,10 @@ Client						                                 Server
 
 Initial Handshake
       ClientHello
-         key_share_pqc         --------->    
+         key_share_pqc         --------->
                                              ServerHello
-                                               key_share_pqc 
-                                               EncryptedExtensions  
+                                               key_share_pqc
+                                               EncryptedExtensions
                                              Certificate
                                              CertificateVerify
                               <---------     Finished
@@ -400,10 +400,10 @@ Initial Handshake
 
 Subsequent Handshake
        ClientHello
-          key_share_pqc 
+          key_share_pqc
           pre_shared_key       --------->
                                                ServerHello
-                                                  key_share_pqc 
+                                                  key_share_pqc
                                                   pre_shared_key
                                                EncryptedExtensions
                               <---------       Finished
