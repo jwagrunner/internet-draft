@@ -315,17 +315,22 @@ Table of Contents
    figure, which is Figure 3 from RFC 8446, has been updated as follows
    to include this new key share extension:
 
-   </artwork></figure>
+   Subsequent Handshake:
+          ClientHello
+          + key_share*
+          + key_share_pqc*
+          + pre_shared_key          -------->
+                                                          ServerHello
+                                                     + pre_shared_key
+                                                         + key_share*
+                                                     + key_share_pqc*
+                                                {EncryptedExtensions}
+                                                           {Finished}
+                                    <--------     [Application Data*]
+          {Finished}                -------->
+          [Application Data]        <------->      [Application Data]
 
-   Subsequent Handshake: ClientHello + key_share* + key_share_pqc* +
-   pre_shared_key --------> ServerHello + pre_shared_key + key_share* +
-   key_share_pqc* {EncryptedExtensions} {Finished} <--------
-   [Application Data*] {Finished} --------> [Application Data] <------->
-   [Application Data]
-
-           Figure 1: Resumption PSK that includes the key_share_pqc extension
-
-   </artwork></figure>
+               Figure 1: Resumption PSK that includes the key_share_pqc extension
 
 6.  TLS Implementation
 
