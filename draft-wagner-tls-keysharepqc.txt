@@ -5,7 +5,7 @@
 Transport Layer Security                                         Y. Wang
 Internet-Draft                                                 J. Wagner
 Intended status: Standards Track                           UNC Charlotte
-Expires: 6 September 2025                                   5 March 2025
+Expires: 7 September 2025                                   6 March 2025
 
 
         New Key Share Extension for Classic McEliece Algorithms
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 September 2025.
+   This Internet-Draft will expire on 7 September 2025.
 
 Copyright Notice
 
@@ -307,6 +307,25 @@ Table of Contents
    "01" will be printed in this same extension (see TLS Implementation
    below), just as it is shown for the psk_key_exchange_modes extension
    listing "PSK with DHE" here: [JDCLF].
+
+   As stated above, resumption PSK with Classic McEliece chosen as a key
+   exchange algorithm involves the use of the new key_share_pqc
+   extension for both the ClientHello and ServerHello messages.  Thus
+   the Subsequent Handshake in the Message Flow for Resumption and PSK
+   figure, which is Figure 3 from RFC 8446, has been updated as follows
+   to include this new key share extension:
+
+   </artwork></figure>
+
+   Subsequent Handshake: ClientHello + key_share* + key_share_pqc* +
+   pre_shared_key --------> ServerHello + pre_shared_key + key_share* +
+   key_share_pqc* {EncryptedExtensions} {Finished} <--------
+   [Application Data*] {Finished} --------> [Application Data] <------->
+   [Application Data]
+
+           Figure 1: Resumption PSK that includes the key_share_pqc extension
+
+   </artwork></figure>
 
 6.  TLS Implementation
 
