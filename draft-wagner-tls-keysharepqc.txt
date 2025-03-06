@@ -308,29 +308,44 @@ Table of Contents
    below), just as it is shown for the psk_key_exchange_modes extension
    listing "PSK with DHE" here: [JDCLF].
 
-   As stated above, resumption PSK with Classic McEliece chosen as a key
-   exchange algorithm involves the use of the new key_share_pqc
-   extension for both the ClientHello and ServerHello messages.  Thus
-   the Subsequent Handshake in the Message Flow for Resumption and PSK
-   figure, which is Figure 3 from RFC 8446, has been updated as follows
-   to include this new key share extension:
+   As stated above, resumption PSK with a Classic McEliece algorithm
+   chosen as a key exchange algorithm involves the use of the new
+   key_share_pqc extension for both the ClientHello and ServerHello
+   messages.  Thus the Resumption and PSK Message Flow diagram, which
+   originates from Figure 3 of RFC 8446, is derived for this situation
+   and has been tested with the TLS Implementation mentioned in this
+   document:
 
-   Subsequent Handshake:
-          ClientHello
-          + key_share*
-          + key_share_pqc*
-          + pre_shared_key          -------->
-                                                          ServerHello
-                                                     + pre_shared_key
-                                                         + key_share*
-                                                     + key_share_pqc*
-                                                {EncryptedExtensions}
-                                                           {Finished}
-                                    <--------     [Application Data*]
-          {Finished}                -------->
-          [Application Data]        <------->      [Application Data]
+Client                                                                           Server
 
-               Figure 1: Resumption PSK that includes the key_share_pqc extension
+Initial Handshake
+      ClientHello
+         key_share_pqc         --------->
+                                             ServerHello
+                                               key_share_pqc
+                                               EncryptedExtensions
+                                             Certificate
+                                             CertificateVerify
+                              <---------     Finished
+      Finished                 ---------->
+                              <---------     NewSessionTicket
+                              <---------     NewSessionTicket
+
+
+Subsequent Handshake
+       ClientHello
+          key_share_pqc
+          pre_shared_key       --------->
+                                               ServerHello
+                                                  key_share_pqc
+                                                  pre_shared_key
+                                               EncryptedExtensions
+                              <---------       Finished
+       Finished               ---------->
+                              <---------       NewSessionTicket
+
+
+Figure 1: A Classic McEliece algorithm used with Resumption PSK
 
 6.  TLS Implementation
 
