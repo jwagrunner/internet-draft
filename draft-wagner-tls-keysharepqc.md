@@ -376,6 +376,29 @@ When selecting a Classic McEliece algorithm and using an external PSK or a resum
 
 For the situation where a Classic McEliece is used for key exchange and a PSK is not chosen, then the value of "02" is printed for the psk_key_exchange_modes extension. But when choosing a Kyber post-quantum algorithm or X25519 and PSK is not chosen, then a value of "01" will be printed in this same extension (see TLS Implementation below), just as it is shown for the psk_key_exchange_modes extension listing "PSK with DHE" here: [JDCLF].
 
+As stated above, resumption PSK with Classic McEliece chosen as a key exchange algorithm involves the use of the new key_share_pqc extension for both the ClientHello and ServerHello messages. Thus the Subsequent Handshake in the Message Flow for Resumption and PSK figure, which is Figure 3 from RFC 8446, has been updated as follows to include this new key share extension:
+
+</artwork></figure>
+
+   Subsequent Handshake:
+          ClientHello
+          + key_share*
+          + key_share_pqc*
+          + pre_shared_key          -------->
+                                                          ServerHello
+                                                     + pre_shared_key
+                                                         + key_share*
+                                                     + key_share_pqc*
+                                                {EncryptedExtensions}
+                                                           {Finished}
+                                    <--------     [Application Data*]
+          {Finished}                -------->
+          [Application Data]        <------->      [Application Data]
+
+               Figure 1: Resumption PSK that includes the key_share_pqc extension
+
+</artwork></figure>
+
 # TLS Implementation
 
 A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where the Classic McEliece algorithm family and the RLCE algorithm group can be chosen for key exchange when initiating TLS connections. It can be accessed here: [OpenSSL].
