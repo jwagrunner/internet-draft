@@ -316,7 +316,7 @@ Table of Contents
    and has been tested with the TLS Implementation mentioned in this
    document:
 
-   Client                                       Server
+         Client                                 Server
 
    Initial Handshake
          ClientHello
