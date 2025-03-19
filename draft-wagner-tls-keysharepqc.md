@@ -437,16 +437,16 @@ Therefore, this Hello Retry Request scenario is reflected in Figure 2 below, whi
           key_share_pqc         -------->
                                                   ServerHello
                                                     key_share_pqc
-                                                  EncryptedExtensions      
+                                                  EncryptedExtensions
                                                   Certificate
                                                   CertificateVerify
-                                <--------         Finished 
-         Finished               --------> 
+                                <--------         Finished
+         Finished               -------->
                                 <--------         NewSessionTicket
                                 <--------         NewSessionTicket
 
 Figure 2: A Classic McEliece algorithm used in a Hello Retry Request scenario.
- 
+
 </artwork></figure>
 
 # TLS Implementation
