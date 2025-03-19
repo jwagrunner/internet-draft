@@ -415,6 +415,40 @@ Figure 1: A Classic McEliece algorithm used with Resumption PSK
 
 </artwork></figure>
 
+# Hello Retry Request using New Key Share Extension
+
+In a Hello Retry Request scenario, the first ClientHello message will have two algorithms listed in its supported_groups extension, where the NID for the algorithm that is no longer recognized by the server as an acceptable algorithm (X448 for example as proven in the TLS implementation), will first be listed in this extension, followed by the NID for a Classic McEliece algorithm. In this same ClientHello message is where "02" will be listed in the psk_key_exchange_modes extension, and the original key_share extension (value 51) is also shown with its public key for the unacceptable algorithm.
+
+When the server responds with the HelloRetryRequest message, the random is the same special value for SHA-256 as indicated in Section 4.1.3 of RFC 8446, and all this has the same exact fields (legacy_version, random, legacy_session_id_echo, cipher_suite, legacy_compression_method, and extensions) as in the ServerHello structure indicated in RFC 8446 (see section 4.1.3). The extensions field consists of the supported_versions extension, but also the new key_share_pqc extension where the server offers the client the Classic McEliece algorithm NID it shares with the client. There is no "cookie" extension present in this same HelloRetryRequest.
+
+When the client sends a second ClientHello in response to the HelloRetryRequest, this will be the same message as the firstClientHello with one exception: the original key_share extension is replaced with the new key_share_pqc extension which contains the large public key of a Classic McEliece algorithm. Then ServerHello message will then respond containing the new key_share_pqc extension and not the original key_share extension.
+
+Therefore, this Hello Retry Request scenario is reflected in Figure 2 below, which is a modification of RFC 8446's Figure 2, and this can be demonstrated in the TLS Implementation mentioned in this documentation:
+
+<figure><artwork>
+
+        Client                                    Server
+
+        ClientHello
+          key_share             -------->
+                                                  HelloRetryRequest
+                                <--------           key_share_pqc
+        ClientHello
+          key_share_pqc         -------->
+                                                  ServerHello
+                                                    key_share_pqc
+                                                  EncryptedExtensions      
+                                                  Certificate
+                                                  CertificateVerify
+                                <--------         Finished 
+         Finished               --------> 
+                                <--------         NewSessionTicket
+                                <--------         NewSessionTicket
+
+Figure 2: A Classic McEliece algorithm used in a Hello Retry Request scenario.
+ 
+</artwork></figure>
+
 # TLS Implementation
 
 A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where the Classic McEliece algorithm family and the RLCE algorithm group can be chosen for key exchange when initiating TLS connections. It can be accessed here: [OpenSSL].
