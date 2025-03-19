@@ -5,7 +5,7 @@
 Transport Layer Security                                         Y. Wang
 Internet-Draft                                                 J. Wagner
 Intended status: Standards Track                           UNC Charlotte
-Expires: 7 September 2025                                   6 March 2025
+Expires: 20 September 2025                                 19 March 2025
 
 
         New Key Share Extension for Classic McEliece Algorithms
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 September 2025.
+   This Internet-Draft will expire on 20 September 2025.
 
 Copyright Notice
 
@@ -74,13 +74,14 @@ Table of Contents
    3.  New Key Share Extension
    4.  NamedGroup Addition for Classic McEliece and RLCE
    5.  Modification to PskKeyExchangeMode structure
-   6.  TLS Implementation
-   7.  Summary of Changes from RFC 8446
-   8.  Security Considerations
-   9.  IANA Considerations
-   10. References
-     10.1.  Normative References
-     10.2.  Informative References
+   6.  Hello Retry Request using New Key Share Extension
+   7.  TLS Implementation
+   8.  Summary of Changes from RFC 8446
+   9.  Security Considerations
+   10. IANA Considerations
+   11. References
+     11.1.  Normative References
+     11.2.  Informative References
    Authors' Addresses
 
 1.  Introduction
@@ -347,7 +348,63 @@ Table of Contents
 
    Figure 1: A Classic McEliece algorithm used with Resumption PSK
 
-6.  TLS Implementation
+6.  Hello Retry Request using New Key Share Extension
+
+   In a Hello Retry Request scenario, the first ClientHello message will
+   have two algorithms listed in its supported_groups extension, where
+   the NID for the algorithm that is no longer recognized by the server
+   as an acceptable algorithm (X448 for example as proven in the TLS
+   implementation), will first be listed in this extension, followed by
+   the NID for a Classic McEliece algorithm.  In this same ClientHello
+   message is where "02" will be listed in the psk_key_exchange_modes
+   extension, and the original key_share extension (value 51) is also
+   shown with its public key for the unacceptable algorithm.
+
+   When the server responds with the HelloRetryRequest message, the
+   random is the same special value for SHA-256 as indicated in
+   Section 4.1.3 of RFC 8446, and all this has the same exact fields
+   (legacy_version, random, legacy_session_id_echo, cipher_suite,
+   legacy_compression_method, and extensions) as in the ServerHello
+   structure indicated in RFC 8446 (see section 4.1.3).  The extensions
+   field consists of the supported_versions extension, but also the new
+   key_share_pqc extension where the server offers the client the
+   Classic McEliece algorithm NID it shares with the client.  There is
+   no "cookie" extension present in this same HelloRetryRequest.
+
+   When the client sends a second ClientHello in response to the
+   HelloRetryRequest, this will be the same message as the
+   firstClientHello with one exception: the original key_share extension
+   is replaced with the new key_share_pqc extension which contains the
+   large public key of a Classic McEliece algorithm.  Then ServerHello
+   message will then respond containing the new key_share_pqc extension
+   and not the original key_share extension.
+
+   Therefore, this Hello Retry Request scenario is reflected in Figure 2
+   below, which is a modification of RFC 8446's Figure 2, and this can
+   be demonstrated in the TLS Implementation mentioned in this
+   documentation:
+
+        Client                                    Server
+
+        ClientHello
+          key_share             -------->
+                                                  HelloRetryRequest
+                                <--------           key_share_pqc
+        ClientHello
+          key_share_pqc         -------->
+                                                  ServerHello
+                                                    key_share_pqc
+                                                  EncryptedExtensions
+                                                  Certificate
+                                                  CertificateVerify
+                                <--------         Finished
+         Finished               -------->
+                                <--------         NewSessionTicket
+                                <--------         NewSessionTicket
+
+Figure 2: A Classic McEliece algorithm used in a Hello Retry Request scenario.
+
+7.  TLS Implementation
 
    A TLS implementation exists that tests the use of a new key share
    extension for both the ClientHello and ServerHello messages that is
@@ -356,7 +413,7 @@ Table of Contents
    exchange when initiating TLS connections.  It can be accessed here:
    [OpenSSL].
 
-7.  Summary of Changes from RFC 8446
+8.  Summary of Changes from RFC 8446
 
    A new structure is introduced of KeyShareEntryPQC along with
    modifications of existing structures including KeyShareEntry,
@@ -371,7 +428,7 @@ Table of Contents
    Thus the extension_data is expanded in the existing Extension
    structure.
 
-8.  Security Considerations
+9.  Security Considerations
 
    Larger ClientHello messages can cause TLS connections to be dropped
    and for TLS handshakes to be broken, as evidenced by the inclusion of
@@ -381,7 +438,7 @@ Table of Contents
    servers if receiving an error with TLS/SSL if Kyber is utlized
    through Chrome or Firefox.  See [KASPPQC].
 
-9.  IANA Considerations
+10.  IANA Considerations
 
    The new key share proposed in this document key_share_pqc, along with
    its value of 63, needs to be updated in the registry specified for
@@ -390,9 +447,9 @@ Table of Contents
    Classic McEliece family with the entries of 42-51 and the RLCE
    algorithm group with 52-54.  See [TLSP].
 
-10.  References
+11.  References
 
-10.1.  Normative References
+11.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -417,7 +474,7 @@ Table of Contents
               <https://www.iana.org/assignments/tls-parameters/tls-
               parameters.xhtml>.
 
-10.2.  Informative References
+11.2.  Informative References
 
    [CMC]      Bernstein, D., Chou, T., Cid, C., Gilcher, J., Lange, T.,
               Maram, V., von Maurich, I., Misoczki, R., Niederhagen, R.,
