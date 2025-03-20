@@ -449,6 +449,16 @@ Figure 2: A Classic McEliece algorithm used in a Hello Retry Request scenario.
 
 </artwork></figure>
 
+The following structure would remain intact from RFC 8446, since support would already be provided for a Classic McEliece algorithm being in NamedGroup (see Section 4):
+
+<figure><artwork>
+
+struct {
+    NamedGroup selected_group;
+} KeyShareHelloRetryRequest;
+ 
+</artwork></figure>
+
 # TLS Implementation
 
 A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where the Classic McEliece algorithm family and the RLCE algorithm group can be chosen for key exchange when initiating TLS connections. It can be accessed here: [OpenSSL].
