@@ -456,7 +456,7 @@ The following structure would remain intact from RFC 8446, since support would a
 struct {
     NamedGroup selected_group;
 } KeyShareHelloRetryRequest;
- 
+
 </artwork></figure>
 
 # TLS Implementation
