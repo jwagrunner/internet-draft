@@ -5,7 +5,7 @@
 Transport Layer Security                                         Y. Wang
 Internet-Draft                                                 J. Wagner
 Intended status: Standards Track                           UNC Charlotte
-Expires: 21 September 2025                                 20 March 2025
+Expires: 23 September 2025                                 22 March 2025
 
 
         New Key Share Extension for Classic McEliece Algorithms
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 September 2025.
+   This Internet-Draft will expire on 23 September 2025.
 
 Copyright Notice
 
@@ -411,6 +411,18 @@ Figure 2: A Classic McEliece algorithm used in a Hello Retry Request scenario.
    struct {
        NamedGroup selected_group;
    } KeyShareHelloRetryRequest;
+
+   When a Hello Retry Request involves an external PSK in use with a
+   Classic McEliece algorithm, both the first and second ClientHello
+   messages (the second one being sent after a HelloRetryRequest
+   message) will contain the exact same content except the first
+   ClientHello will have the original key_share extension and the second
+   ClientHello will have the new key_share_pqc extension.  Another
+   exception includes different binders in both ClientHello messages'
+   pre-shared key extensions.  This pre-shared key extension appears as
+   the last extension in both ClientHello messages as well in the
+   ServerHello message.  However, this pre-shared key extension is not
+   present in the HelloRetryRequest message.
 
 7.  TLS Implementation
 
