@@ -459,6 +459,8 @@ struct {
 
 </artwork></figure>
 
+When a Hello Retry Request involves an external PSK in use with a Classic McEliece algorithm, both the first and second ClientHello messages (the second one being sent after a HelloRetryRequest message) will contain the exact same content except the first ClientHello will have the original key_share extension and the second ClientHello will have the new key_share_pqc extension. Another exception includes different binders in both ClientHello messages' pre-shared key extensions. This pre-shared key extension appears as the last extension in both ClientHello messages as well in the ServerHello message. However, this pre-shared key extension is not present in the HelloRetryRequest message.
+
 # TLS Implementation
 
 A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where the Classic McEliece algorithm family and the RLCE algorithm group can be chosen for key exchange when initiating TLS connections. It can be accessed here: [OpenSSL].
