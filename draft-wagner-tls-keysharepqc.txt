@@ -5,7 +5,7 @@
 Transport Layer Security                                         Y. Wang
 Internet-Draft                                                 J. Wagner
 Intended status: Standards Track                           UNC Charlotte
-Expires: 23 September 2025                                 22 March 2025
+Expires: 24 September 2025                                 23 March 2025
 
 
         New Key Share Extension for Classic McEliece Algorithms
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 September 2025.
+   This Internet-Draft will expire on 24 September 2025.
 
 Copyright Notice
 
@@ -403,6 +403,13 @@ Table of Contents
                                 <--------         NewSessionTicket
 
 Figure 2: A Classic McEliece algorithm used in a Hello Retry Request scenario.
+
+   Note: When the client processes the HelloRetryRequest message, it
+   must mark the new key_share_pqc extension as an unsolicited
+   extension, which would be an additional exception to the rule noted
+   in RFC 8446 regarding extension responses MUST NOT be sent if the
+   corresponding extension requests were not sent by a remote endpoint
+   (see section 4.2 in RFC 8446).
 
    The following structure would remain intact from RFC 8446, since
    support would already be provided for a Classic McEliece algorithm
