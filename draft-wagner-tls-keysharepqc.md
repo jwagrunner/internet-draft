@@ -449,6 +449,8 @@ Figure 2: A Classic McEliece algorithm used in a Hello Retry Request scenario.
 
 </artwork></figure>
 
+Note: When the client processes the HelloRetryRequest message, it must mark the new key_share_pqc extension as an unsolicited extension, which would be an additional exception to the rule noted in RFC 8446 regarding extension responses MUST NOT be sent if the corresponding extension requests were not sent by a remote endpoint (see section 4.2 in RFC 8446).
+
 The following structure would remain intact from RFC 8446, since support would already be provided for a Classic McEliece algorithm being in NamedGroup (see Section 4):
 
 <figure><artwork>
