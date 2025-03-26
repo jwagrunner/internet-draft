@@ -164,6 +164,19 @@ informative:
       ins: J. Wagner
       name: Jonathan Wagner
     date: 2024
+  MEab:
+    target: https://ieeexplore.ieee.org/document/10278190
+    title: "Replay Attack in TLS 1.3 0-RTT Handshake: Countermeasure Techniques"
+    author:
+     -
+      ins: M.E Abdelhafez
+      name: M.E Abdelhafez
+     -
+      ins: S. Ramadass
+      name: Sureswaran Ramadass
+     -
+      ins: M. S. M. Gismallab
+      name: Mohammed S. M. Gismallab
   GCTLS:
     target: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
     title: "Google Chrome's new post-quantum cryptography may break TLS connections"
@@ -473,6 +486,8 @@ A new structure is introduced of KeyShareEntryPQC along with modifications of ex
 
 
 # Security Considerations
+
+The new key_share_pqc extension MUST NOT be used with 0-RTT, as this subjects the server to replay attacks of multiple large ClientHello messages. If this extension were to be used with 0-RTT, the server may receive duplicated ClientHello messages where each of them contain a large public key of a Classic McEliece algorithm in each ClientHello's key_share_pqc extension, which will not only cause resource exhaustion on the server (see Section 8 in RFC 8446), but memory utlization will rise quickly than noted in [MEAb] and will cause the client-hello recording defense mechanism (see Section 8.2 in RFC 8446 and [MEAb]) to be used as a Denial-of-Service attack on the server. Therefore, 0-RTT and the use of the "early_data" extension MUST NOT be used with the key_share_pqc extension.
 
 Larger ClientHello messages can cause TLS connections to be dropped and for TLS handshakes to be broken, as evidenced by the inclusion of post-quantum cryptography in applications of Google Chrome 124 and Microsoft Edge 124, specifically the use of Kyber768 for key agreement. See [GCTLS]. A possible workaround includes updating web servers if receiving an error with TLS/SSL if Kyber is utlized through Chrome or Firefox. See [KASPPQC].
 
