@@ -50,13 +50,13 @@ normative:
       ins: E. Rescorla
       name: Eric Rescorla
     date: 2018
-  TLSE:
+  TLSE24:
     target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
     title: "Transport Layer Security (TLS) Extensions"
     author:
       org: Internet Assigned Numbers Authority
     date: 2024
-  TLSP:
+  TLSP25:
     target: https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml
     title: "Transport Layer Security (TLS) Parameters"
     author:
@@ -64,14 +64,14 @@ normative:
     date: 2025
 
 informative:
-  RMC:
+  RJM78:
     target: https://ipnpr.jpl.nasa.gov/progress_report2/42-44/44N.PDF
     title: "A Public-Key Cryptosystem Based On Algebraic Coding Theory"
     author:
       ins: R. McEliece
       name: R. J. McEliece
     date: 1978
-  CMC:
+  DJB25:
     target: https://classic.mceliece.org/impl.html
     title: "Classic McEliece: Implementation"
     author:
@@ -124,47 +124,47 @@ informative:
       ins: W. Wang
       name: Wen Wang
     date: 2024
-  RLCE:
+  RLCE17:
     target: https://eprint.iacr.org/2017/206.pdf
     title: "Quantum Resistant Public Key Encryption Scheme RLCE and IND-CCA2 Security for McEliece Schemes"
     author:
       ins: Y. Wang
       name: Yongge Wang
     date: 2017
-  NISTPQC:
+  PQC25:
     target: https://csrc.nist.gov/projects/post-quantum-cryptography/round-4-submissions
     title: "Post-Quantum Cryptography: Round 4 Submissions"
     author:
       org: NIST
     date: 2025
-  OQSCMC:
+  OQS24:
     target: https://openquantumsafe.org/liboqs/algorithms/kem/classic_mceliece
     title: "liboqs / Algorithms / Classic McEliece"
     author:
       org: Open Quantum Safe
     date: 2024
-  MINEXT:
+  SRVR1650:
     target: https://github.com/jwagrunner/openssl/blob/master/ssl/statem/statem_srvr.c#L1650
     title: "ssl/statem/statem_srvr.c#L1650"
     author:
       ins: J. Wagner
       name: Jonathan Wagner
     date: 2024
-  CONSTEXT:
+  SRVR1211:
     target: https://github.com/jwagrunner/openssl/blob/master/ssl/statem/statem_srvr.c#L1211
     title: "ssl/statem/statem_srvr.c#L1211"
     author:
       ins: J. Wagner
       name: Jonathan Wagner
     date: 2024
-  MODCOL:
+  EXT652:
     target: https://github.com/jwagrunner/openssl/blob/master/ssl/statem/extensions.c#L652C9-L663C9
     title: "ssl/statem/extensions.c#L652C9-L663C9"
     author:
       ins: J. Wagner
       name: Jonathan Wagner
     date: 2024
-  MEab:
+  MEA23:
     target: https://ieeexplore.ieee.org/document/10278190
     title: "Replay Attack in TLS 1.3 0-RTT Handshake: Countermeasure Techniques"
     author:
@@ -177,40 +177,40 @@ informative:
      -
       ins: M. S. M. Gismallab
       name: Mohammed S. M. Gismallab
-  GCTLS:
+  SG24:
     target: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
     title: "Google Chrome's new post-quantum cryptography may break TLS connections"
     author:
       ins: S. Gatlan
       name: Sergiu Gatlan
     date: 2024
-  KASPPQC:
+  SK24:
     target: https://www.kaspersky.com/blog/postquantum-cryptography-2024-implementation-issues/52095/
     title: "Where and how post-quantum cryptography is being used in 2024"
     author:
       ins: S. Kaminsky
       name: Stan Kaminsky
     date: 2024
-  MOZTLS:
+  MOZ25:
     target: https://wiki.mozilla.org/Security/Server_Side_TLS
     title: "Security/Server Side TLS"
     author:
       name: Mozilla
     date: 2025
-  RASHOK:
+  RASHOK20:
     target: https://stackoverflow.com/questions/58719595/how-to-do-tls-1-3-psk-using-openssl
     title: "How to do TLS 1.3 PSK using openssl?"
     author:
       name: rashok
     date: 2020
-  JDCLF:
+  JD19:
     target: https://commandlinefanatic.com/cgi-bin/showarticle.cgi?article=art080
     title: "A walkthrough of a TLS 1.3 handshake"
     author:
       ins: J. Davies
       names: Joshua Davies
     date: 2019
-  OpenSSL:
+  JWYW25:
     target: https://github.com/jwagrunner/openssl
     title : "openssl"
     author:
@@ -230,7 +230,7 @@ RFC 8446 is modified to where another key share extension is introduced to accom
 
 # Introduction
 
-Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [RMC], [CMC], and [OQSCMC]) and the Random Linear Code-based Encryption (RLCE) algorithm group (see [RLCE]), cannot be easily implemented in TLS 1.3 due to the current key share limitations of 65535 bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the NIST standardization process (see [NISTPQC]). Therefore, this document proposes a new key share that has a higher limit and is utilized in ClientHello and ServerHello messages, which is a modification of [RFC8446]. For example, if a large post-quantum algorithm is requested in a TLS 1.3 key exchange, this new key share extension will be constructed but the original key share extension will not be constructed. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed and this new key share extension will not be constructed. Thus enabling the use of large public key post-quantum algorithms to be used in TLS 1.3 key exchanges, and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
+Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [RJM78], [DJB25], and [OQS24) and the Random Linear Code-based Encryption (RLCE) algorithm group (see [RLCE17]), cannot be easily implemented in TLS 1.3 due to the current key share limitations of 65535 bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the NIST standardization process (see [PQC25]). Therefore, this document proposes a new key share that has a higher limit and is utilized in ClientHello and ServerHello messages, which is a modification of [RFC8446]. For example, if a large post-quantum algorithm is requested in a TLS 1.3 key exchange, this new key share extension will be constructed but the original key share extension will not be constructed. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed and this new key share extension will not be constructed. Thus enabling the use of large public key post-quantum algorithms to be used in TLS 1.3 key exchanges, and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
 
 # Conventions and Definitions
 
@@ -327,7 +327,7 @@ Since there is a new key share extension to accomodate keys larger than the 6553
 
 </artwork></figure>
 
-Since the "extension_data" field will be much larger for a KeyShareClientHello that contains a large public key that is greater than the previously defined 65535 byte limit, an example being a Classic McEliece public key, the server must be able to handle this circumstance when receiving the ClientHello message. One way is to compare the value for a packet that contains extensions including a large public key from the ClientHello message to a macro constant (for example,  CLIENT_HELLO_MIN_EXT_LENGTH as defined in this introduced TLS implementation in this paper, see [MINEXT] and [CONSTEXT]) and if this packet value is longer than this constant, the server will change the way it normally handles all of the extensions. This constant could be easily modified in the aformentioned TLS OpenSSL implementation. The process of how the server collects the extensions from a ClientHello message must also be modified, as the server must be able to process the new key share extension of Type 63 differently than the other extensions, should the server see this inside a ClientHello message. For example, see [MODCOL].
+Since the "extension_data" field will be much larger for a KeyShareClientHello that contains a large public key that is greater than the previously defined 65535 byte limit, an example being a Classic McEliece public key, the server must be able to handle this circumstance when receiving the ClientHello message. One way is to compare the value for a packet that contains extensions including a large public key from the ClientHello message to a macro constant (for example,  CLIENT_HELLO_MIN_EXT_LENGTH as defined in this introduced TLS implementation in this paper, see [SRVR1650] and [SRVR1211]) and if this packet value is longer than this constant, the server will change the way it normally handles all of the extensions. This constant could be easily modified in the aformentioned TLS OpenSSL implementation. The process of how the server collects the extensions from a ClientHello message must also be modified, as the server must be able to process the new key share extension of Type 63 differently than the other extensions, should the server see this inside a ClientHello message. For example, see [EXT652].
 
 The ServerHello message is modified as well where the KeyShareServerHello structure originates from RFC 8446:
 
@@ -429,9 +429,9 @@ enum {
 
 </artwork></figure>
 
-When selecting a Classic McEliece algorithm and using an external PSK or a resumption PSK (using the cipher suites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256 listed from [MOZTLS] for TLS 1.3 "Modern Compatibility" configuration), "02" will then be listed for the psk_key_exchange_modes extension along with the new "key_share_pqc" extension in the ClientHello message. At the end of this ClientHello message is printed the "00 29" extension (pre-shared key extension), where the PSK identity should be printed and is mapped to the binder that should proceed it in this pre-shared key extension. The ServerHello message will also contain the new "key_share_pqc" extension, and will as well contain the pre-shared key extension, where it should contain "00 00" at the end which represents the server selecting the PSK identity of 0 (for example: the Selected Identity of 0 shown in the pre-shared key extension in a ServerHello message in this Wireshark example: [RASHOK]). Overall, this is a new key exchange selecting a Classic McEliece algorithm using a PSK, whether its external or resumption, and this is can be demonstrated in the TLS Implementation below.
+When selecting a Classic McEliece algorithm and using an external PSK or a resumption PSK (using the cipher suites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256 listed from [MOZTLS] for TLS 1.3 "Modern Compatibility" configuration), "02" will then be listed for the psk_key_exchange_modes extension along with the new "key_share_pqc" extension in the ClientHello message. At the end of this ClientHello message is printed the "00 29" extension (pre-shared key extension), where the PSK identity should be printed and is mapped to the binder that should proceed it in this pre-shared key extension. The ServerHello message will also contain the new "key_share_pqc" extension, and will as well contain the pre-shared key extension, where it should contain "00 00" at the end which represents the server selecting the PSK identity of 0 (for example: the Selected Identity of 0 shown in the pre-shared key extension in a ServerHello message in this Wireshark example: [RASHOK20]). Overall, this is a new key exchange selecting a Classic McEliece algorithm using a PSK, whether its external or resumption, and this is can be demonstrated in the TLS Implementation below.
 
-For the situation where a Classic McEliece is used for key exchange and a PSK is not chosen, then the value of "02" is printed for the psk_key_exchange_modes extension. But when choosing a Kyber post-quantum algorithm or X25519 and PSK is not chosen, then a value of "01" will be printed in this same extension (see TLS Implementation below), just as it is shown for the psk_key_exchange_modes extension listing "PSK with DHE" here: [JDCLF].
+For the situation where a Classic McEliece is used for key exchange and a PSK is not chosen, then the value of "02" is printed for the psk_key_exchange_modes extension. But when choosing a Kyber post-quantum algorithm or X25519 and PSK is not chosen, then a value of "01" will be printed in this same extension (see TLS Implementation below), just as it is shown for the psk_key_exchange_modes extension listing "PSK with DHE" here: [JD19].
 
 As stated above, resumption PSK with a Classic McEliece algorithm chosen as a key exchange algorithm involves the use of the new "key_share_pqc" extension for both the ClientHello and ServerHello messages. Thus the Resumption and PSK Message Flow diagram, which originates from Figure 3 of RFC 8446, is derived for this situation and has been tested with the TLS Implementation mentioned in this document:
 
@@ -522,7 +522,7 @@ When a Hello Retry Request involves either a resumption PSK or an external PSK i
 
 # TLS Implementation
 
-A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where the Classic McEliece algorithm family and the RLCE algorithm group can be chosen for key exchange when initiating TLS connections. It can be accessed here: [OpenSSL].
+A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where the Classic McEliece algorithm family and the RLCE algorithm group can be chosen for key exchange when initiating TLS connections. It can be accessed here: [JWYW25].
 
 # Summary of Changes from RFC 8446
 
@@ -531,13 +531,13 @@ A new structure is introduced of KeyShareEntryPQC along with modifications of ex
 
 # Security Considerations
 
-The new "key_share_pqc" extension MUST NOT be used with 0-RTT, as this subjects the server to replay attacks of multiple large ClientHello messages. If this extension were to be used with 0-RTT, the server may receive duplicated ClientHello messages where each of them contain a large public key of a Classic McEliece algorithm in each ClientHello's "key_share_pqc" extension, which will not only cause resource exhaustion on the server (see Section 8 in RFC 8446), but memory utlization will rise quickly than noted in [MEAb] and will cause the client-hello recording defense mechanism (see Section 8.2 in RFC 8446 and [MEAb]) to be used as a Denial-of-Service attack on the server. Therefore, 0-RTT and the use of the "early_data" extension MUST NOT be used with the "key_share_pqc" extension.
+The new "key_share_pqc" extension MUST NOT be used with 0-RTT, as this subjects the server to replay attacks of multiple large ClientHello messages. If this extension were to be used with 0-RTT, the server may receive duplicated ClientHello messages where each of them contain a large public key of a Classic McEliece algorithm in each ClientHello's "key_share_pqc" extension, which will not only cause resource exhaustion on the server (see Section 8 in RFC 8446), but memory utlization will rise quickly than noted in [MEA23] and will cause the client-hello recording defense mechanism (see Section 8.2 in RFC 8446 and [MEA23]) to be used as a Denial-of-Service attack on the server. Therefore, 0-RTT and the use of the "early_data" extension MUST NOT be used with the "key_share_pqc" extension.
 
-Larger ClientHello messages can cause TLS connections to be dropped and for TLS handshakes to be broken, as evidenced by the inclusion of post-quantum cryptography in applications of Google Chrome 124 and Microsoft Edge 124, specifically the use of Kyber768 for key agreement. See [GCTLS]. A possible workaround includes updating web servers if receiving an error with TLS/SSL if Kyber is utlized through Chrome or Firefox. See [KASPPQC].
+Larger ClientHello messages can cause TLS connections to be dropped and for TLS handshakes to be broken, as evidenced by the inclusion of post-quantum cryptography in applications of Google Chrome 124 and Microsoft Edge 124, specifically the use of Kyber768 for key agreement. See [SG24]. A possible workaround includes updating web servers if receiving an error with TLS/SSL if Kyber is utlized through Chrome or Firefox. See [KASPPQC].
 
 # IANA Considerations
 
-The new key share proposed in this document "key_share_pqc", along with its value of 63, needs to be updated in the registry specified for TLS ExtensionType Values. See [TLSE]. The registry for TLS Supported Groups will need to have the proper values assigned to the Classic McEliece family with the entries of 42-51 and the RLCE algorithm group with 52-54. See [TLSP].
+The new key share proposed in this document "key_share_pqc", along with its value of 63, needs to be updated in the registry specified for TLS ExtensionType Values. See [TLSE24]. The registry for TLS Supported Groups will need to have the proper values assigned to the Classic McEliece family with the entries of 42-51 and the RLCE algorithm group with 52-54. See [TLSP25].
 
 
 --- back
