@@ -223,14 +223,14 @@ informative:
     date: 2025
 --- abstract
 
-RFC 8446 is modified to where another key share extension is introduced to accommodate both public keys and ciphertexts in ClientHello and ServerHello messages for post-quantum algorithms that have large public keys, including the code-based cryptographic schemes the Classic McEliece family and the RLCE algorithm group.
+[RFC8446] is modified to where another key share extension is introduced to accommodate both public keys and ciphertexts in ClientHello and ServerHello messages for post-quantum algorithms that have large public keys, including the code-based cryptographic schemes the Classic McEliece family and the RLCE algorithm group.
 
 --- middle
 
 
 # Introduction
 
-Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [RJM78], [DJB25], and [OQS24) and the Random Linear Code-based Encryption (RLCE) algorithm group (see [RLCE17]), cannot be easily implemented in TLS 1.3 due to the current key share limitations of 65535 bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the NIST standardization process (see [PQC25]). Therefore, this document proposes a new key share that has a higher limit and is utilized in ClientHello and ServerHello messages, which is a modification of [RFC8446]. For example, if a large post-quantum algorithm is requested in a TLS 1.3 key exchange, this new key share extension will be constructed but the original key share extension will not be constructed. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed and this new key share extension will not be constructed. Thus enabling the use of large public key post-quantum algorithms to be used in TLS 1.3 key exchanges, and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
+Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [RJM78], [DJB25], and [OQS24] and the Random Linear Code-based Encryption (RLCE) algorithm group (see [RLCE17]), cannot be easily implemented in TLS 1.3 due to the current key share limitations of 65535 bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the NIST standardization process (see [PQC25]). Therefore, this document proposes a new key share that has a higher limit and is utilized in ClientHello and ServerHello messages, which is a modification of [RFC8446]. For example, if a large post-quantum algorithm is requested in a TLS 1.3 key exchange, this new key share extension will be constructed but the original key share extension will not be constructed. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed and this new key share extension will not be constructed. Thus enabling the use of large public key post-quantum algorithms to be used in TLS 1.3 key exchanges, and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
 
 # Conventions and Definitions
 
@@ -238,7 +238,7 @@ Large public key algorithms, including the code-based cryptographic algorithm fa
 
 # New Key Share Extension
 
-Based on the key share extension from RFC 8446 is introduced a new key share extension in this document, "key_share_pqc". This is reflected in this document and is represented as KeyShareEntryPQC below, based off of the existing KeyShareEntry from [RFC8446]. However this is modified along with the existing KeyShareEntry structure to include case statements to test if the key exchange algorithm chosen in a TLS 1.3 connection belongs to either the Classic McEliece family or RLCE algorithm group, and if it is, then KeyShareEntryPQC is constructed and KeyShareEntry is not constructed. If the opposite is true, where the key exchange algorithm does not belong to either group, then KeyShareEntryPQC is not constructed but KeyShareEntry is constructed. Note that the key_exchange field is expanded in KeyShareEntryPQC to accomodate a large public key that is greater than 65535 bytes:
+Based on the key share extension from [RFC8446] is introduced a new key share extension in this document, "key_share_pqc". This is reflected in this document and is represented as KeyShareEntryPQC below, based off of the existing KeyShareEntry from [RFC8446]. However this is modified along with the existing KeyShareEntry structure to include case statements to test if the key exchange algorithm chosen in a TLS 1.3 connection belongs to either the Classic McEliece family or RLCE algorithm group, and if it is, then KeyShareEntryPQC is constructed and KeyShareEntry is not constructed. If the opposite is true, where the key exchange algorithm does not belong to either group, then KeyShareEntryPQC is not constructed but KeyShareEntry is constructed. Note that the key_exchange field is expanded in KeyShareEntryPQC to accomodate a large public key that is greater than 65535 bytes:
 
 <figure><artwork>
 
@@ -272,7 +272,7 @@ Based on the key share extension from RFC 8446 is introduced a new key share ext
 
 </artwork></figure>
 
-This is then applied to the existing KeyShareClientHello structure, which originates from RFC 8446, that now contains an additional field for KeyShareEntryPQC:
+This is then applied to the existing KeyShareClientHello structure, which originates from [RFC8446], that now contains an additional field for KeyShareEntryPQC:
 
 <figure><artwork>
 
@@ -283,7 +283,7 @@ This is then applied to the existing KeyShareClientHello structure, which origin
 
 </artwork></figure>
 
-Since the KeyShareClientHello needs to be expanded to accomodate for the KeyShareEntryPQC struct, the same applies to the existing Extension struct, originated as well from RFC 8446 but extension_data is now expanded:
+Since the KeyShareClientHello needs to be expanded to accomodate for the KeyShareEntryPQC struct, the same applies to the existing Extension struct, originated as well from [RFC8446] but extension_data is now expanded:
 
 <figure><artwork>
 
@@ -294,7 +294,7 @@ Since the KeyShareClientHello needs to be expanded to accomodate for the KeyShar
 
 </artwork></figure>
 
-Since there is a new key share extension to accomodate keys larger than the 65535 Byte limit (KeyShareEntryPQC), this is reflected in the existing ExtensionType structure from RFC 8446 where this is the new type that holds a value of 63, "key_share_pqc":
+Since there is a new key share extension to accomodate keys larger than the 65535 Byte limit (KeyShareEntryPQC), this is reflected in the existing ExtensionType structure from [RFC8446] where this is the new type that holds a value of 63, "key_share_pqc":
 
 <figure><artwork>
 
@@ -329,7 +329,7 @@ Since there is a new key share extension to accomodate keys larger than the 6553
 
 Since the "extension_data" field will be much larger for a KeyShareClientHello that contains a large public key that is greater than the previously defined 65535 byte limit, an example being a Classic McEliece public key, the server must be able to handle this circumstance when receiving the ClientHello message. One way is to compare the value for a packet that contains extensions including a large public key from the ClientHello message to a macro constant (for example,  CLIENT_HELLO_MIN_EXT_LENGTH as defined in this introduced TLS implementation in this paper, see [SRVR1650] and [SRVR1211]) and if this packet value is longer than this constant, the server will change the way it normally handles all of the extensions. This constant could be easily modified in the aformentioned TLS OpenSSL implementation. The process of how the server collects the extensions from a ClientHello message must also be modified, as the server must be able to process the new key share extension of Type 63 differently than the other extensions, should the server see this inside a ClientHello message. For example, see [EXT652].
 
-The ServerHello message is modified as well where the KeyShareServerHello structure originates from RFC 8446:
+The ServerHello message is modified as well where the KeyShareServerHello structure originates from [RFC8446]:
 
 <figure><artwork>
 
@@ -340,7 +340,7 @@ struct {
 
 </artwork></figure>
 
-This new "key_share_pqc" extension is therefore can be implemented in the full TLS handshake, where Figure 1 from RFC 8446 is modified to be the following:
+This new "key_share_pqc" extension is therefore can be implemented in the full TLS handshake, where Figure 1 from [RFC8446] is modified to be the following:
 
 <figure><artwork>
 
@@ -386,7 +386,7 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension
 
 # NamedGroup Addition for Classic McEliece and RLCE
 
-The values for Classic McEliece and RLCE algorithms are added below in the NamedGroup struct that originates from RFC 8446:
+The values for Classic McEliece and RLCE algorithms are added below in the NamedGroup struct that originates from [RFC8446]:
 
 <figure><artwork>
 
@@ -419,7 +419,7 @@ The values for Classic McEliece and RLCE algorithms are added below in the Named
 
 # Modification to PskKeyExchangeMode structure
 
-There are two key establishments that are considered when examining the structure of PskKeyExchangeMode from RFC 8446. Since there is no Diffie Hellman algorithm in use with a pre-shared key (PSK) when considering the use of a Classic McEliece algorithm for key exchange, then there must be another key exchange mode to utilize to taken into account this case. Therefore, this is reflected in the existing RFC 8446 PskKeyExchangeMode structure below where psk_pqc_ke(2) is added:
+There are two key establishments that are considered when examining the structure of PskKeyExchangeMode from [RFC8446]. Since there is no Diffie Hellman algorithm in use with a pre-shared key (PSK) when considering the use of a Classic McEliece algorithm for key exchange, then there must be another key exchange mode to utilize to taken into account this case. Therefore, this is reflected in the existing [RFC8446] PskKeyExchangeMode structure below where psk_pqc_ke(2) is added:
 
 <figure><artwork>
 
@@ -433,7 +433,7 @@ When selecting a Classic McEliece algorithm and using an external PSK or a resum
 
 For the situation where a Classic McEliece is used for key exchange and a PSK is not chosen, then the value of "02" is printed for the psk_key_exchange_modes extension. But when choosing a Kyber post-quantum algorithm or X25519 and PSK is not chosen, then a value of "01" will be printed in this same extension (see TLS Implementation below), just as it is shown for the psk_key_exchange_modes extension listing "PSK with DHE" here: [JD19].
 
-As stated above, resumption PSK with a Classic McEliece algorithm chosen as a key exchange algorithm involves the use of the new "key_share_pqc" extension for both the ClientHello and ServerHello messages. Thus the Resumption and PSK Message Flow diagram, which originates from Figure 3 of RFC 8446, is derived for this situation and has been tested with the TLS Implementation mentioned in this document:
+As stated above, resumption PSK with a Classic McEliece algorithm chosen as a key exchange algorithm involves the use of the new "key_share_pqc" extension for both the ClientHello and ServerHello messages. Thus the Resumption and PSK Message Flow diagram, which originates from Figure 3 of [RFC8446], is derived for this situation and has been tested with the TLS Implementation mentioned in this document:
 
 
 
@@ -476,11 +476,11 @@ Figure 2: A Classic McEliece algorithm used with Resumption PSK
 
 In a Hello Retry Request scenario, the first ClientHello message will have two algorithms listed in its supported_groups extension, where the NID for the algorithm that is no longer recognized by the server as an acceptable algorithm (X448 for example as proven in the TLS implementation), will first be listed in this extension, followed by the NID for a Classic McEliece algorithm. In this same ClientHello message is where "02" will be listed in the psk_key_exchange_modes extension, and the original "key_share" extension (value 51) is also shown with its public key for the unacceptable algorithm.
 
-When the server responds with the HelloRetryRequest message, the random is the same special value for SHA-256 as indicated in Section 4.1.3 of RFC 8446, and all this has the same exact fields (legacy_version, random, legacy_session_id_echo, cipher_suite, legacy_compression_method, and extensions) as in the ServerHello structure indicated in RFC 8446 (see section 4.1.3). The extensions field consists of the supported_versions extension, but also the new "key_share_pqc" extension where the server offers the client the Classic McEliece algorithm NID it shares with the client. There is no "cookie" extension present in this same HelloRetryRequest.
+When the server responds with the HelloRetryRequest message, the random is the same special value for SHA-256 as indicated in Section 4.1.3 of [RFC8446], and all this has the same exact fields (legacy_version, random, legacy_session_id_echo, cipher_suite, legacy_compression_method, and extensions) as in the ServerHello structure indicated in [RFC8446] (see section 4.1.3). The extensions field consists of the supported_versions extension, but also the new "key_share_pqc" extension where the server offers the client the Classic McEliece algorithm NID it shares with the client. There is no "cookie" extension present in this same HelloRetryRequest.
 
 When the client sends a second ClientHello in response to the HelloRetryRequest, this will be the same message as the firstClientHello with one exception: the original "key_share" extension is replaced with the new "key_share_pqc" extension which contains the large public key of a Classic McEliece algorithm. Then ServerHello message will then respond containing the new "key_share_pqc" extension and not the original "key_share" extension.
 
-Therefore, this Hello Retry Request scenario is reflected in Figure 3 below, which is a modification of RFC 8446's Figure 2, and this can be demonstrated in the TLS Implementation mentioned in this documentation:
+Therefore, this Hello Retry Request scenario is reflected in Figure 3 below, which is a modification of Figure 2 in [RFC8446], and this can be demonstrated in the TLS Implementation mentioned in this documentation:
 
 <figure><artwork>
 
@@ -506,9 +506,9 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
 
 </artwork></figure>
 
-Note: When the client processes the HelloRetryRequest message, it must mark the new "key_share_pqc" extension as an unsolicited extension, which would be an additional exception to the rule noted in RFC 8446 regarding extension responses MUST NOT be sent if the corresponding extension requests were not sent by a remote endpoint (see section 4.2 in RFC 8446).
+Note: When the client processes the HelloRetryRequest message, it must mark the new "key_share_pqc" extension as an unsolicited extension, which would be an additional exception to the rule noted in [RFC8446] regarding extension responses MUST NOT be sent if the corresponding extension requests were not sent by a remote endpoint (see section 4.2 in [RFC8446].
 
-The following structure would remain intact from RFC 8446, since support would already be provided for a Classic McEliece algorithm being in NamedGroup (see Section 4):
+The following structure would remain intact from [RFC8446], since support would already be provided for a Classic McEliece algorithm being in NamedGroup (see Section 4):
 
 <figure><artwork>
 
@@ -531,7 +531,7 @@ A new structure is introduced of KeyShareEntryPQC along with modifications of ex
 
 # Security Considerations
 
-The new "key_share_pqc" extension MUST NOT be used with 0-RTT, as this subjects the server to replay attacks of multiple large ClientHello messages. If this extension were to be used with 0-RTT, the server may receive duplicated ClientHello messages where each of them contain a large public key of a Classic McEliece algorithm in each ClientHello's "key_share_pqc" extension, which will not only cause resource exhaustion on the server (see Section 8 in RFC 8446), but memory utlization will rise quickly than noted in [MEA23] and will cause the client-hello recording defense mechanism (see Section 8.2 in RFC 8446 and [MEA23]) to be used as a Denial-of-Service attack on the server. Therefore, 0-RTT and the use of the "early_data" extension MUST NOT be used with the "key_share_pqc" extension.
+The new "key_share_pqc" extension MUST NOT be used with 0-RTT, as this subjects the server to replay attacks of multiple large ClientHello messages. If this extension were to be used with 0-RTT, the server may receive duplicated ClientHello messages where each of them contain a large public key of a Classic McEliece algorithm in each ClientHello's "key_share_pqc" extension, which will not only cause resource exhaustion on the server (see Section 8 in [RFC8446]), but memory utlization will rise quickly than noted in [MEA23] and will cause the client-hello recording defense mechanism (see Section 8.2 in [RFC8446] and [MEA23]) to be used as a Denial-of-Service attack on the server. Therefore, 0-RTT and the use of the "early_data" extension MUST NOT be used with the "key_share_pqc" extension.
 
 Larger ClientHello messages can cause TLS connections to be dropped and for TLS handshakes to be broken, as evidenced by the inclusion of post-quantum cryptography in applications of Google Chrome 124 and Microsoft Edge 124, specifically the use of Kyber768 for key agreement. See [SG24]. A possible workaround includes updating web servers if receiving an error with TLS/SSL if Kyber is utlized through Chrome or Firefox. See [KASPPQC].
 
