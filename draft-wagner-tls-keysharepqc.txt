@@ -118,7 +118,7 @@ Table of Contents
 3.  New Key Share Extension
 
    Based on the key share extension from RFC 8446 is introduced a new
-   key share extension in this document, key_share_pqc.  This is
+   key share extension in this document, "key_share_pqc".  This is
    reflected in this document and is represented as KeyShareEntryPQC
    below, based off of the existing KeyShareEntry from [RFC8446].
    However this is modified along with the existing KeyShareEntry
@@ -182,7 +182,7 @@ Table of Contents
    Since there is a new key share extension to accomodate keys larger
    than the 65535 Byte limit (KeyShareEntryPQC), this is reflected in
    the existing ExtensionType structure from RFC 8446 where this is the
-   new type that holds a value of 63, key_share_pqc:
+   new type that holds a value of 63, "key_share_pqc":
 
     enum {
             server_name(0),                             /* RFC 6066 */
@@ -328,13 +328,13 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension
    LS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256 listed from
    [MOZTLS] for TLS 1.3 "Modern Compatibility" configuration), "02" will
    then be listed for the psk_key_exchange_modes extension along with
-   the new key_share_pqc extension in the ClientHello message.  At the
+   the new "key_share_pqc" extension in the ClientHello message.  At the
    end of this ClientHello message is printed the "00 29" extension
    (pre-shared key extension), where the PSK identity should be printed
    and is mapped to the binder that should proceed it in this pre-shared
    key extension.  The ServerHello message will also contain the new
-   key_share_pqc extension, and will as well contain the pre-shared key
-   extension, where it should contain "00 00" at the end which
+   "key_share_pqc" extension, and will as well contain the pre-shared
+   key extension, where it should contain "00 00" at the end which
    represents the server selecting the PSK identity of 0 (for example:
    the Selected Identity of 0 shown in the pre-shared key extension in a
    ServerHello message in this Wireshark example: [RASHOK]).  Overall,
@@ -352,7 +352,7 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension
 
    As stated above, resumption PSK with a Classic McEliece algorithm
    chosen as a key exchange algorithm involves the use of the new
-   key_share_pqc extension for both the ClientHello and ServerHello
+   "key_share_pqc" extension for both the ClientHello and ServerHello
    messages.  Thus the Resumption and PSK Message Flow diagram, which
    originates from Figure 3 of RFC 8446, is derived for this situation
    and has been tested with the TLS Implementation mentioned in this
@@ -398,7 +398,7 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension
    implementation), will first be listed in this extension, followed by
    the NID for a Classic McEliece algorithm.  In this same ClientHello
    message is where "02" will be listed in the psk_key_exchange_modes
-   extension, and the original key_share extension (value 51) is also
+   extension, and the original "key_share" extension (value 51) is also
    shown with its public key for the unacceptable algorithm.
 
    When the server responds with the HelloRetryRequest message, the
@@ -408,17 +408,17 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension
    legacy_compression_method, and extensions) as in the ServerHello
    structure indicated in RFC 8446 (see section 4.1.3).  The extensions
    field consists of the supported_versions extension, but also the new
-   key_share_pqc extension where the server offers the client the
+   "key_share_pqc" extension where the server offers the client the
    Classic McEliece algorithm NID it shares with the client.  There is
    no "cookie" extension present in this same HelloRetryRequest.
 
    When the client sends a second ClientHello in response to the
    HelloRetryRequest, this will be the same message as the
-   firstClientHello with one exception: the original key_share extension
-   is replaced with the new key_share_pqc extension which contains the
-   large public key of a Classic McEliece algorithm.  Then ServerHello
-   message will then respond containing the new key_share_pqc extension
-   and not the original key_share extension.
+   firstClientHello with one exception: the original "key_share"
+   extension is replaced with the new "key_share_pqc" extension which
+   contains the large public key of a Classic McEliece algorithm.  Then
+   ServerHello message will then respond containing the new
+   "key_share_pqc" extension and not the original "key_share" extension.
 
    Therefore, this Hello Retry Request scenario is reflected in Figure 3
    below, which is a modification of RFC 8446's Figure 2, and this can
@@ -446,7 +446,7 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension
 Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
 
    Note: When the client processes the HelloRetryRequest message, it
-   must mark the new key_share_pqc extension as an unsolicited
+   must mark the new "key_share_pqc" extension as an unsolicited
    extension, which would be an additional exception to the rule noted
    in RFC 8446 regarding extension responses MUST NOT be sent if the
    corresponding extension requests were not sent by a remote endpoint
@@ -464,13 +464,13 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
    external PSK in use with a Classic McEliece algorithm, both the first
    and second ClientHello messages (the second one being sent after a
    HelloRetryRequest message) will contain the exact same content except
-   the first ClientHello will have the original key_share extension and
-   the second ClientHello will have the new key_share_pqc extension.
-   Another exception includes different binders in both ClientHello
-   messages' pre-shared key extensions.  This pre-shared key extension
-   appears as the last extension in both ClientHello messages as well in
-   the ServerHello message.  However, this pre-shared key extension is
-   not present in the HelloRetryRequest message.
+   the first ClientHello will have the original "key_share" extension
+   and the second ClientHello will have the new "key_share_pqc"
+   extension.  Another exception includes different binders in both
+   ClientHello messages' pre-shared key extensions.  This pre-shared key
+   extension appears as the last extension in both ClientHello messages
+   as well in the ServerHello message.  However, this pre-shared key
+   extension is not present in the HelloRetryRequest message.
 
 7.  TLS Implementation
 
@@ -486,7 +486,7 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
    A new structure is introduced of KeyShareEntryPQC along with
    modifications of existing structures including KeyShareEntry,
    NamedGroup, Extension, ExtensionType, KeyShareClientHello, and
-   KeyShareServerHello.  Adding a new ExtensionType of key_share_pqc
+   KeyShareServerHello.  Adding a new ExtensionType of "key_share_pqc"
    allows for the addition of this new structure of KeyShareEntryPQC,
    which is based on the existing KeyShareEntry, but key_exchange has
    been expanded and select statements are added to both structures
@@ -498,18 +498,18 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
 
 9.  Security Considerations
 
-   The new key_share_pqc extension MUST NOT be used with 0-RTT, as this
-   subjects the server to replay attacks of multiple large ClientHello
-   messages.  If this extension were to be used with 0-RTT, the server
-   may receive duplicated ClientHello messages where each of them
-   contain a large public key of a Classic McEliece algorithm in each
-   ClientHello's key_share_pqc extension, which will not only cause
-   resource exhaustion on the server (see Section 8 in RFC 8446), but
-   memory utlization will rise quickly than noted in [MEab] and will
+   The new "key_share_pqc" extension MUST NOT be used with 0-RTT, as
+   this subjects the server to replay attacks of multiple large
+   ClientHello messages.  If this extension were to be used with 0-RTT,
+   the server may receive duplicated ClientHello messages where each of
+   them contain a large public key of a Classic McEliece algorithm in
+   each ClientHello's "key_share_pqc" extension, which will not only
+   cause resource exhaustion on the server (see Section 8 in RFC 8446),
+   but memory utlization will rise quickly than noted in [MEab] and will
    cause the client-hello recording defense mechanism (see Section 8.2
    in RFC 8446 and [MEab]) to be used as a Denial-of-Service attack on
    the server.  Therefore, 0-RTT and the use of the "early_data"
-   extension MUST NOT be used with the key_share_pqc extension.
+   extension MUST NOT be used with the "key_share_pqc" extension.
 
    Larger ClientHello messages can cause TLS connections to be dropped
    and for TLS handshakes to be broken, as evidenced by the inclusion of
@@ -521,9 +521,9 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
 
 10.  IANA Considerations
 
-   The new key share proposed in this document key_share_pqc, along with
-   its value of 63, needs to be updated in the registry specified for
-   TLS ExtensionType Values.  See [TLSE].  The registry for TLS
+   The new key share proposed in this document "key_share_pqc", along
+   with its value of 63, needs to be updated in the registry specified
+   for TLS ExtensionType Values.  See [TLSE].  The registry for TLS
    Supported Groups will need to have the proper values assigned to the
    Classic McEliece family with the entries of 42-51 and the RLCE
    algorithm group with 52-54.  See [TLSP].
