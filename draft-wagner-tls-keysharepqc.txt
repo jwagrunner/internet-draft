@@ -327,7 +327,7 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension
    When selecting a Classic McEliece algorithm and using an external PSK
    or a resumption PSK (using the cipher suites "TLS_AES_128_GCM_SHA256:
    TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256" listed from
-   [MOZTLS] for TLS 1.3 "Modern Compatibility" configuration), "02" will
+   [MOZ25] for TLS 1.3 "Modern Compatibility" configuration), "02" will
    then be listed for the "psk_key_exchange_modes" extension along with
    the new "key_share_pqc" extension in the ClientHello message.  At the
    end of this ClientHello message is printed the "00 29" extension
@@ -520,7 +520,7 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
    Microsoft Edge 124, specifically the use of Kyber768 for key
    agreement.  See [SG24].  A possible workaround includes updating web
    servers if receiving an error with TLS/SSL if Kyber is utlized
-   through Chrome or Firefox.  See [KASPPQC].
+   through Chrome or Firefox.  See [SK24].
 
 10.  IANA Considerations
 
