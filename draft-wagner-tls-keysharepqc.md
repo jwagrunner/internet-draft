@@ -340,6 +340,50 @@ struct {
 
 </artwork></figure>
 
+This new "key_share_pqc" extension is therefore can be implemented in the full TLS handshake, where Figure 1 from RFC 8446 is modified to be the following:
+
+<figure><artwork>
+
+       Client                                           Server
+
+Key  ^ ClientHello
+Exch | + key_share*
+     | + key_share_pqc*
+     | + signature_algorithms*
+     | + psk_key_exchange_modes*
+     v + pre_shared_key*       -------->
+                                                  ServerHello  ^ Key
+                                                 + key_share*  | Exch
+                                             + key_share_pqc*  |
+                                            + pre_shared_key*  v
+                                        {EncryptedExtensions}  ^  Server
+                                        {CertificateRequest*}  v  Params
+                                               {Certificate*}  ^
+                                         {CertificateVerify*}  | Auth
+                                                   {Finished}  v
+                               <--------  [Application Data*]
+     ^ {Certificate*}
+Auth | {CertificateVerify*}
+     v {Finished}              -------->
+       [Application Data]      <------->  [Application Data]
+
+              +  Indicates noteworthy extensions sent in the
+                 previously noted message.
+
+              *  Indicates optional or situation-dependent
+                 messages/extensions that are not always sent.
+
+              {} Indicates messages protected using keys
+                 derived from a [sender]_handshake_traffic_secret.
+
+              [] Indicates messages protected using keys
+                 derived from [sender]_application_traffic_secret_N.
+
+Figure 1: Full TLS Handshake with "key_share_pqc" extension
+
+</artwork></figure>
+
+
 # NamedGroup Addition for Classic McEliece and RLCE
 
 The values for Classic McEliece and RLCE algorithms are added below in the NamedGroup struct that originates from RFC 8446:
@@ -424,7 +468,7 @@ Subsequent Handshake
                               <---------       NewSessionTicket
 
 
-Figure 1: A Classic McEliece algorithm used with Resumption PSK
+Figure 2: A Classic McEliece algorithm used with Resumption PSK
 
 </artwork></figure>
 
@@ -436,7 +480,7 @@ When the server responds with the HelloRetryRequest message, the random is the s
 
 When the client sends a second ClientHello in response to the HelloRetryRequest, this will be the same message as the firstClientHello with one exception: the original key_share extension is replaced with the new key_share_pqc extension which contains the large public key of a Classic McEliece algorithm. Then ServerHello message will then respond containing the new key_share_pqc extension and not the original key_share extension.
 
-Therefore, this Hello Retry Request scenario is reflected in Figure 2 below, which is a modification of RFC 8446's Figure 2, and this can be demonstrated in the TLS Implementation mentioned in this documentation:
+Therefore, this Hello Retry Request scenario is reflected in Figure 3 below, which is a modification of RFC 8446's Figure 2, and this can be demonstrated in the TLS Implementation mentioned in this documentation:
 
 <figure><artwork>
 
@@ -458,7 +502,7 @@ Therefore, this Hello Retry Request scenario is reflected in Figure 2 below, whi
                                 <--------         NewSessionTicket
                                 <--------         NewSessionTicket
 
-Figure 2: A Classic McEliece algorithm used in a Hello Retry Request scenario.
+Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
 
 </artwork></figure>
 
