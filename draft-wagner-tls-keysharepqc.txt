@@ -5,7 +5,7 @@
 Transport Layer Security                                         Y. Wang
 Internet-Draft                                                 J. Wagner
 Intended status: Standards Track                           UNC Charlotte
-Expires: 28 September 2025                                 27 March 2025
+Expires: 4 October 2025                                     2 April 2025
 
 
         New Key Share Extension for Classic McEliece Algorithms
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 September 2025.
+   This Internet-Draft will expire on 4 October 2025.
 
 Copyright Notice
 
@@ -502,17 +502,18 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
 
    The new "key_share_pqc" extension MUST NOT be used with 0-RTT, as
    this subjects the server to replay attacks of multiple large
-   ClientHello messages.  If this extension were to be used with 0-RTT,
-   the server may receive duplicated ClientHello messages where each of
-   them contain a large public key of a Classic McEliece algorithm in
-   each ClientHello's "key_share_pqc" extension, which will not only
-   cause resource exhaustion on the server (see Section 8 in [RFC8446]),
-   but memory utlization will rise quickly than noted in [MEA23] and
-   will cause the client-hello recording defense mechanism (see
-   Section 8.2 in [RFC8446] and [MEA23]) to be used as a Denial-of-
-   Service attack on the server.  Therefore, 0-RTT and the use of the
-   "early_data" extension MUST NOT be used with the "key_share_pqc"
-   extension.
+   ClientHello messages (see [RFC8446] and an example of a replay attack
+   of several ClientHello messages in [HN23]).  If this extension were
+   to be used with 0-RTT, the server may receive duplicated ClientHello
+   messages where each of them contain a large public key of a Classic
+   McEliece algorithm in each ClientHello's "key_share_pqc" extension,
+   which will not only cause resource exhaustion on the server (see
+   Section 8.2 in [RFC8446]), but memory utlization will rise quickly
+   than noted in [MEA23] and will cause the client-hello recording
+   defense mechanism (see Section 8.2 in [RFC8446] and [MEA23]) to be
+   used as a Denial-of-Service attack on the server.  Therefore, 0-RTT
+   and the use of the "early_data" extension MUST NOT be used with the
+   "key_share_pqc" extension.
 
    Larger ClientHello messages can cause TLS connections to be dropped
    and for TLS handshakes to be broken, as evidenced by the inclusion of
@@ -570,6 +571,10 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
    [EXT652]   Wagner, J., "ssl/statem/extensions.c#L652C9-L663C9", 2024,
               <https://github.com/jwagrunner/openssl/blob/master/ssl/
               statem/extensions.c#L652C9-L663C9>.
+
+   [HN23]     Nasser, H., "The danger of TLS Zero RTT", n.d.,
+              <https://medium.com/@hnasr/the-danger-of-0-rtt-
+              a815d2b99ac6>.
 
    [JD19]     Davies, J., "A walkthrough of a TLS 1.3 handshake", 2019,
               <https://commandlinefanatic.com/cgi-bin/
