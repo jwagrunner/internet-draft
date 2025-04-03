@@ -539,7 +539,8 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
    Draft template was used to generate this document, before the
    authors' information was added.  The authors also want to thank the
    contributers of the kramdown-rfc GitHub repository, as their examples
-   helped with the format for the figures presented in this document.
+   helped with the format of the figures, references, and authors'
+   information presented in this document.
 
 12.  References
 
