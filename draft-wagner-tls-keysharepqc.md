@@ -546,5 +546,8 @@ Larger ClientHello messages can cause TLS connections to be dropped and for TLS 
 
 The new key share proposed in this document "key_share_pqc", along with its value of 63, needs to be updated in the registry specified for TLS ExtensionType Values. See [TLSE24]. The registry for TLS Supported Groups will need to have the proper values assigned to the Classic McEliece family with the entries of 42-51 and the RLCE algorithm group with 52-54. See [TLSP25].
 
+# Acknowledgements
+
+Thank you to Martin Thomson and David Schinazi, as their Internet Draft template was used to generate this document, before the authors' information was added. The authors also want to thank the contributers of the kramdown-rfc GitHub repository, as their examples helped with the format for the figures presented in this document. 
 
 --- back
