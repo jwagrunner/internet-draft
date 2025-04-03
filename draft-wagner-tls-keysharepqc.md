@@ -548,6 +548,6 @@ The new key share proposed in this document "key_share_pqc", along with its valu
 
 # Acknowledgements
 
-Thank you to Martin Thomson and David Schinazi, as their Internet Draft template was used to generate this document, before the authors' information was added. The authors also want to thank the contributers of the kramdown-rfc GitHub repository, as their examples helped with the format for the figures presented in this document. 
+Thank you to Martin Thomson and David Schinazi, as their Internet Draft template was used to generate this document, before the authors' information was added. The authors also want to thank the contributers of the kramdown-rfc GitHub repository, as their examples helped with the format for the figures presented in this document.
 
 --- back
