@@ -585,7 +585,7 @@ Informative References
               <https://github.com/jwagrunner/openssl/blob/master/ssl/
               statem/extensions.c#L652C9-L663C9>.
 
-   [HN23]     Nasser, H., "The danger of TLS Zero RTT", n.d.,
+   [HN23]     Nasser, H., "The danger of TLS Zero RTT", 2023,
               <https://medium.com/@hnasr/the-danger-of-0-rtt-
               a815d2b99ac6>.
 
@@ -594,7 +594,7 @@ Informative References
               showarticle.cgi?article=art080>.
 
    [JR04]     Reynolds, J. and R. Braden, "Instructions to Request for
-              Comments (RFC) Authors", n.d.,
+              Comments (RFC) Authors", 2004,
               <https://www.rfc-editor.org/old/instructions2authors.txt>.
 
    [JWYW25]   Wagner, J. and Y. Wang, "openssl", 2025,
