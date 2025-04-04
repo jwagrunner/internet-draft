@@ -237,7 +237,7 @@ informative:
       name: Joyce Reynolds
      -
       ins: R. Braden
-      name: Robert Braden      
+      name: Robert Braden
 --- abstract
 
 [RFC8446] is modified to where another key share extension is introduced to accommodate both public keys and ciphertexts in ClientHello and ServerHello messages for post-quantum algorithms that have large public keys, including the code-based cryptographic schemes the Classic McEliece family and the RLCE algorithm group.
@@ -559,6 +559,6 @@ The new key share proposed in this document "key_share_pqc", along with its valu
 # Acknowledgements
 {:numbered="false"}
 
-Thank you to Martin Thomson and David Schinazi, as their Internet Draft template was used to generate this document, before the authors' information was added. The authors also want to thank the contributers of the kramdown-rfc GitHub repository, as their examples helped with the format of the figures, references, and authors' information presented in this document. Thank you also to Joyce Reynolds and Robert Braden, as their Internet Draft [JR04] was helpful as a guide on how to write the citations in this document (i.e. using citation brackets with author's initials, year, etc.).
+Thank you to Martin Thomson and David Schinazi, as their Internet Draft template was used to generate this document, before the authors' information was added. The authors also want to thank the contributers of the kramdown-rfc GitHub repository, as their examples helped with the format of the figures, references, and authors' information presented in this document. Thank you also to Joyce Reynolds and Robert Braden, as their Internet Draft [JR04] was helpful as a guide on how to write the citations in this document (i.e., using citation brackets with author's initials, year, etc.).
 
 --- back
