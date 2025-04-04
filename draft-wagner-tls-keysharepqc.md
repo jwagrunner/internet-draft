@@ -228,6 +228,7 @@ informative:
      -
       ins: H. Nasser
       name: Hussein Nasser
+    date: 2023
   JR04:
     target: https://www.rfc-editor.org/old/instructions2authors.txt
     title: "Instructions to Request for Comments (RFC) Authors"
@@ -238,6 +239,7 @@ informative:
      -
       ins: R. Braden
       name: Robert Braden
+    date: 2004
 --- abstract
 
 [RFC8446] is modified to where another key share extension is introduced to accommodate both public keys and ciphertexts in ClientHello and ServerHello messages for post-quantum algorithms that have large public keys, including the code-based cryptographic schemes the Classic McEliece family and the RLCE algorithm group.
