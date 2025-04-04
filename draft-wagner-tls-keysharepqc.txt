@@ -5,7 +5,7 @@
 Transport Layer Security                                       J. Wagner
 Internet-Draft                                                   Y. Wang
 Intended status: Standards Track                           UNC Charlotte
-Expires: 5 October 2025                                     3 April 2025
+Expires: 6 October 2025                                     4 April 2025
 
 
         New Key Share Extension for Classic McEliece Algorithms
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 October 2025.
+   This Internet-Draft will expire on 6 October 2025.
 
 Copyright Notice
 
@@ -540,7 +540,10 @@ Acknowledgements
    authors' information was added.  The authors also want to thank the
    contributers of the kramdown-rfc GitHub repository, as their examples
    helped with the format of the figures, references, and authors'
-   information presented in this document.
+   information presented in this document.  Thank you also to Joyce
+   Reynolds and Robert Braden, as their Internet Draft [JR04] was
+   helpful as a guide on how to write the citations in this document
+   (i.e., using citation brackets with author's initials, year, etc.).
 
 References
 
@@ -589,6 +592,10 @@ Informative References
    [JD19]     Davies, J., "A walkthrough of a TLS 1.3 handshake", 2019,
               <https://commandlinefanatic.com/cgi-bin/
               showarticle.cgi?article=art080>.
+
+   [JR04]     Reynolds, J. and R. Braden, "Instructions to Request for
+              Comments (RFC) Authors", n.d.,
+              <https://www.rfc-editor.org/old/instructions2authors.txt>.
 
    [JWYW25]   Wagner, J. and Y. Wang, "openssl", 2025,
               <https://github.com/jwagrunner/openssl>.
