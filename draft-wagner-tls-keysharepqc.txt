@@ -5,7 +5,7 @@
 Transport Layer Security                                       J. Wagner
 Internet-Draft                                                   Y. Wang
 Intended status: Standards Track                           UNC Charlotte
-Expires: 6 October 2025                                     4 April 2025
+Expires: 13 November 2025                                    12 May 2025
 
 
         New Key Share Extension for Classic McEliece Algorithms
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 October 2025.
+   This Internet-Draft will expire on 13 November 2025.
 
 Copyright Notice
 
@@ -88,11 +88,11 @@ Table of Contents
 1.  Introduction
 
    Large public key algorithms, including the code-based cryptographic
-   algorithm family Classic McEliece (see [RJM78], [DJB25], and [OQS24]
-   and the Random Linear Code-based Encryption (RLCE) algorithm group
-   (see [RLCE17]), cannot be easily implemented in TLS 1.3 due to the
-   current key share limitations of 65535 bytes.  It is important to
-   consider such uses of algorithms given that Classic McEliece is a
+   algorithm family Classic McEliece (see [SJ25], [DJB25], [RJM78], and
+   [OQS24]) and the Random Linear Code-based Encryption (RLCE) algorithm
+   group (see [RLCE17]), cannot be easily implemented in TLS 1.3 due to
+   the current key share limitations of 65,535 Bytes.  It is important
+   to consider such uses of algorithms given that Classic McEliece is a
    Round 4 algorithm submitted in the NIST standardization process (see
    [PQC25]).  Therefore, this document proposes a new key share that has
    a higher limit and is utilized in ClientHello and ServerHello
@@ -131,7 +131,7 @@ Table of Contents
    belong to either group, then KeyShareEntryPQC is not constructed but
    KeyShareEntry is constructed.  Note that the "key_exchange" field is
    expanded in KeyShareEntryPQC to accomodate a large public key that is
-   greater than 65535 bytes:
+   greater than 65,535 Bytes:
 
     struct {
        NamedGroup group;
@@ -181,7 +181,7 @@ Table of Contents
        } Extension;
 
    Since there is a new key share extension to accomodate keys larger
-   than the 65535 Byte limit (KeyShareEntryPQC), this is reflected in
+   than the 65,535 Byte limit (KeyShareEntryPQC), this is reflected in
    the existing ExtensionType structure from [RFC8446] where this is the
    new type that holds a value of 63, "key_share_pqc":
 
@@ -214,7 +214,7 @@ Table of Contents
 
    Since the "extension_data" field will be much larger for a
    KeyShareClientHello that contains a large public key that is greater
-   than the previously defined 65535 byte limit, an example being a
+   than the previously defined 65,535 Byte limit, an example being a
    Classic McEliece public key, the server must be able to handle this
    circumstance when receiving the ClientHello message.  One way is to
    compare the value for a packet that contains extensions including a
@@ -224,7 +224,7 @@ Table of Contents
    [SRVR1211]) and if this packet value is longer than this constant,
    the server will change the way it normally handles all of the
    extensions.  This constant could be easily modified in the
-   aformentioned TLS OpenSSL implementation.  The process of how the
+   aforementioned TLS OpenSSL implementation.  The process of how the
    server collects the extensions from a ClientHello message must also
    be modified, as the server must be able to process the new key share
    extension of Type 63 differently than the other extensions, should
@@ -278,7 +278,7 @@ Auth | {CertificateVerify*}
               [] Indicates messages protected using keys
                  derived from [sender]_application_traffic_secret_N.
 
-Figure 1: Full TLS Handshake with "key_share_pqc" extension
+Figure 1: Full TLS Handshake with "key_share_pqc" extension.
 
 4.  NamedGroup Addition for Classic McEliece and RLCE
 
@@ -561,6 +561,10 @@ Normative References
    [RFC8446]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
               Version 1.3", 2018,
               <https://datatracker.ietf.org/doc/html/rfc8446>.
+
+   [SJ25]     Josefsson, S., "Classic McEliece", 2025,
+              <https://datatracker.ietf.org/doc/draft-josefsson-
+              mceliece/>.
 
    [TLSE24]   Internet Assigned Numbers Authority, "Transport Layer
               Security (TLS) Extensions", 2024,
