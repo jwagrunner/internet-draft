@@ -130,8 +130,8 @@ Table of Contents
    If the opposite is true, where the key exchange algorithm does not
    belong to either group, then KeyShareEntryPQC is not constructed but
    KeyShareEntry is constructed.  Note that the "key_exchange" field is
-   expanded in KeyShareEntryPQC to accomodate a large public key that is
-   greater than 65,535 Bytes:
+   expanded in KeyShareEntryPQC to accommodate a large public key that
+   is greater than 65,535 Bytes:
 
     struct {
        NamedGroup group;
@@ -170,7 +170,7 @@ Table of Contents
           KeyShareEntryPQC client_shares<0..2^24-1>;
        } KeyShareClientHello;
 
-   Since the KeyShareClientHello needs to be expanded to accomodate for
+   Since the KeyShareClientHello needs to be expanded to accommodate for
    the KeyShareEntryPQC struct, the same applies to the existing
    Extension struct, originated as well from [RFC8446] but
    "extension_data" is now expanded:
@@ -180,7 +180,7 @@ Table of Contents
          opaque extension_data<0..2^24-1>;
        } Extension;
 
-   Since there is a new key share extension to accomodate keys larger
+   Since there is a new key share extension to accommodate keys larger
    than the 65,535 Byte limit (KeyShareEntryPQC), this is reflected in
    the existing ExtensionType structure from [RFC8446] where this is the
    new type that holds a value of 63, "key_share_pqc":
@@ -224,12 +224,12 @@ Table of Contents
    [SRVR1211]) and if this packet value is longer than this constant,
    the server will change the way it normally handles all of the
    extensions.  This constant could be easily modified in the
-   aforementioned TLS OpenSSL implementation.  The process of how the
-   server collects the extensions from a ClientHello message must also
-   be modified, as the server must be able to process the new key share
-   extension of Type 63 differently than the other extensions, should
-   the server see this inside a ClientHello message.  For example, see
-   [EXT652].
+   aforementioned TLS Open Secure Socket Layer (OpenSSL) implementation.
+   The process of how the server collects the extensions from a
+   ClientHello message must also be modified, as the server must be able
+   to process the new key share extension of Type 63 differently than
+   the other extensions, should the server see this inside a ClientHello
+   message.  For example, see [EXT652].
 
    The ServerHello message is modified as well where the
    KeyShareServerHello structure originates from [RFC8446]:
@@ -341,7 +341,7 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension.
    the Selected Identity of 0 shown in the pre-shared key extension in a
    ServerHello message in this Wireshark example: [RASHOK20]).  Overall,
    this is a new key exchange selecting a Classic McEliece algorithm
-   using a PSK, whether its external or resumption, and this is can be
+   using a PSK, whether its external or resumption, and this can be
    demonstrated in the TLS Implementation below.
 
    For the situation where a Classic McEliece is used for key exchange
@@ -355,8 +355,8 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension.
    As stated above, resumption PSK with a Classic McEliece algorithm
    chosen as a key exchange algorithm involves the use of the new
    "key_share_pqc" extension for both the ClientHello and ServerHello
-   messages.  Thus the Resumption and PSK Message Flow diagram, which
-   originates from Figure 3 of [RFC8446], is derived for this situation
+   messages.  Thus, the Resumption and PSK Message Flow diagram (which
+   originates from Figure 3 of [RFC8446]) is derived for this situation
    and has been tested with the TLS Implementation mentioned in this
    document:
 
@@ -395,13 +395,14 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension.
 
    In a Hello Retry Request scenario, the first ClientHello message will
    have two algorithms listed in its "supported_groups" extension, where
-   the NID for the algorithm that is no longer recognized by the server
-   as an acceptable algorithm (X448 for example as proven in the TLS
-   implementation), will first be listed in this extension, followed by
-   the NID for a Classic McEliece algorithm.  In this same ClientHello
-   message is where "02" will be listed in the "psk_key_exchange_modes"
-   extension, and the original "key_share" extension (value 51) is also
-   shown with its public key for the unacceptable algorithm.
+   the numerical identifier (NID) for the algorithm that is no longer
+   recognized by the server as an acceptable algorithm (X448 for example
+   as proven in the TLS implementation), will first be listed in this
+   extension, followed by the NID for a Classic McEliece algorithm.  In
+   this same ClientHello message is where "02" will be listed in the
+   "psk_key_exchange_modes" extension, and the original "key_share"
+   extension (value 51) is also shown with its public key for the
+   unacceptable algorithm.
 
    When the server responds with the HelloRetryRequest message, the
    random is the same special value for SHA-256 as indicated in
@@ -538,7 +539,7 @@ Acknowledgements
    Thank you to Martin Thomson and David Schinazi, as their Internet
    Draft template was used to generate this document, before the
    authors' information was added.  The authors also want to thank the
-   contributers of the kramdown-rfc GitHub repository, as their examples
+   contributors of the kramdown-rfc GitHub repository, as their examples
    helped with the format of the figures, references, and authors'
    information presented in this document.  Thank you also to Joyce
    Reynolds and Robert Braden, as their Internet Draft [JR04] was
