@@ -50,6 +50,13 @@ normative:
       ins: E. Rescorla
       name: Eric Rescorla
     date: 2018
+  SJ25:
+    target: https://datatracker.ietf.org/doc/draft-josefsson-mceliece/
+    title: "Classic McEliece"
+    author:
+      ins: S. Josefsson
+      name: Simon Josefsson
+    date: 2025
   TLSE24:
     target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
     title: "Transport Layer Security (TLS) Extensions"
@@ -249,7 +256,7 @@ informative:
 
 # Introduction
 
-Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [RJM78], [DJB25], and [OQS24] and the Random Linear Code-based Encryption (RLCE) algorithm group (see [RLCE17]), cannot be easily implemented in TLS 1.3 due to the current key share limitations of 65535 bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the NIST standardization process (see [PQC25]). Therefore, this document proposes a new key share that has a higher limit and is utilized in ClientHello and ServerHello messages, which is a modification of [RFC8446]. For example, if a large post-quantum algorithm is requested in a TLS 1.3 key exchange, this new key share extension will be constructed but the original key share extension will not be constructed. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed and this new key share extension will not be constructed. Thus enabling the use of large public key post-quantum algorithms to be used in TLS 1.3 key exchanges, and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
+Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [SJ25], [DJB25], [RJM78], and [OQS24]) and the Random Linear Code-based Encryption (RLCE) algorithm group (see [RLCE17]), cannot be easily implemented in TLS 1.3 due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the NIST standardization process (see [PQC25]). Therefore, this document proposes a new key share that has a higher limit and is utilized in ClientHello and ServerHello messages, which is a modification of [RFC8446]. For example, if a large post-quantum algorithm is requested in a TLS 1.3 key exchange, this new key share extension will be constructed but the original key share extension will not be constructed. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed and this new key share extension will not be constructed. Thus enabling the use of large public key post-quantum algorithms to be used in TLS 1.3 key exchanges, and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
 
 # Conventions and Definitions
 
@@ -257,7 +264,7 @@ Large public key algorithms, including the code-based cryptographic algorithm fa
 
 # New Key Share Extension
 
-Based on the key share extension from [RFC8446] is introduced a new key share extension in this document, "key_share_pqc". This is reflected in this document and is represented as KeyShareEntryPQC below, based off of the existing KeyShareEntry from [RFC8446]. However this is modified along with the existing KeyShareEntry structure to include case statements to test if the key exchange algorithm chosen in a TLS 1.3 connection belongs to either the Classic McEliece family or RLCE algorithm group, and if it is, then KeyShareEntryPQC is constructed and KeyShareEntry is not constructed. If the opposite is true, where the key exchange algorithm does not belong to either group, then KeyShareEntryPQC is not constructed but KeyShareEntry is constructed. Note that the "key_exchange" field is expanded in KeyShareEntryPQC to accomodate a large public key that is greater than 65535 bytes:
+Based on the key share extension from [RFC8446] is introduced a new key share extension in this document, "key_share_pqc". This is reflected in this document and is represented as KeyShareEntryPQC below, based off of the existing KeyShareEntry from [RFC8446]. However this is modified along with the existing KeyShareEntry structure to include case statements to test if the key exchange algorithm chosen in a TLS 1.3 connection belongs to either the Classic McEliece family or RLCE algorithm group, and if it is, then KeyShareEntryPQC is constructed and KeyShareEntry is not constructed. If the opposite is true, where the key exchange algorithm does not belong to either group, then KeyShareEntryPQC is not constructed but KeyShareEntry is constructed. Note that the "key_exchange" field is expanded in KeyShareEntryPQC to accomodate a large public key that is greater than 65,535 Bytes:
 
 <figure><artwork>
 
@@ -313,7 +320,7 @@ Since the KeyShareClientHello needs to be expanded to accomodate for the KeyShar
 
 </artwork></figure>
 
-Since there is a new key share extension to accomodate keys larger than the 65535 Byte limit (KeyShareEntryPQC), this is reflected in the existing ExtensionType structure from [RFC8446] where this is the new type that holds a value of 63, "key_share_pqc":
+Since there is a new key share extension to accomodate keys larger than the 65,535 Byte limit (KeyShareEntryPQC), this is reflected in the existing ExtensionType structure from [RFC8446] where this is the new type that holds a value of 63, "key_share_pqc":
 
 <figure><artwork>
 
@@ -346,7 +353,7 @@ Since there is a new key share extension to accomodate keys larger than the 6553
 
 </artwork></figure>
 
-Since the "extension_data" field will be much larger for a KeyShareClientHello that contains a large public key that is greater than the previously defined 65535 byte limit, an example being a Classic McEliece public key, the server must be able to handle this circumstance when receiving the ClientHello message. One way is to compare the value for a packet that contains extensions including a large public key from the ClientHello message to a macro constant (for example,  "CLIENT_HELLO_MIN_EXT_LENGTH" as defined in this introduced TLS implementation in this paper, see [SRVR1650] and [SRVR1211]) and if this packet value is longer than this constant, the server will change the way it normally handles all of the extensions. This constant could be easily modified in the aformentioned TLS OpenSSL implementation. The process of how the server collects the extensions from a ClientHello message must also be modified, as the server must be able to process the new key share extension of Type 63 differently than the other extensions, should the server see this inside a ClientHello message. For example, see [EXT652].
+Since the "extension_data" field will be much larger for a KeyShareClientHello that contains a large public key that is greater than the previously defined 65,535 Byte limit, an example being a Classic McEliece public key, the server must be able to handle this circumstance when receiving the ClientHello message. One way is to compare the value for a packet that contains extensions including a large public key from the ClientHello message to a macro constant (for example,  "CLIENT_HELLO_MIN_EXT_LENGTH" as defined in this introduced TLS implementation in this paper, see [SRVR1650] and [SRVR1211]) and if this packet value is longer than this constant, the server will change the way it normally handles all of the extensions. This constant could be easily modified in the aforementioned TLS OpenSSL implementation. The process of how the server collects the extensions from a ClientHello message must also be modified, as the server must be able to process the new key share extension of Type 63 differently than the other extensions, should the server see this inside a ClientHello message. For example, see [EXT652].
 
 The ServerHello message is modified as well where the KeyShareServerHello structure originates from [RFC8446]:
 
@@ -398,7 +405,7 @@ Auth | {CertificateVerify*}
               [] Indicates messages protected using keys
                  derived from [sender]_application_traffic_secret_N.
 
-Figure 1: Full TLS Handshake with "key_share_pqc" extension
+Figure 1: Full TLS Handshake with "key_share_pqc" extension.
 
 </artwork></figure>
 
