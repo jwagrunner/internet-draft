@@ -13,8 +13,8 @@ Expires: 13 November 2025                                    12 May 2025
 
 Abstract
 
-   RFC 8446 ([RFC8446]) is modified to where another key share extension
-   is introduced to accommodate both public keys and ciphertexts in
+   RFC 8446 is modified to where another key share extension is
+   introduced to accommodate both public keys and ciphertexts in
    ClientHello and ServerHello messages for post-quantum algorithms that
    have large public keys, including the code-based cryptographic
    schemes the Classic McEliece family and the Random Linear Code-based
