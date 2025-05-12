@@ -472,7 +472,7 @@ Initial Handshake
          key_share_pqc         --------->
                                              ServerHello
                                                key_share_pqc
-                                               EncryptedExtensions
+                                             EncryptedExtensions
                                              Certificate
                                              CertificateVerify
                               <---------     Finished
@@ -494,7 +494,7 @@ Subsequent Handshake
                               <---------       NewSessionTicket
 
 
-Figure 2: A Classic McEliece algorithm used with Resumption PSK
+Figure 2: A Classic McEliece algorithm used with Resumption PSK.
 
 </artwork></figure>
 
@@ -502,9 +502,9 @@ Figure 2: A Classic McEliece algorithm used with Resumption PSK
 
 In a Hello Retry Request scenario, the first ClientHello message will have two algorithms listed in its "supported_groups" extension, where the NID for the algorithm that is no longer recognized by the server as an acceptable algorithm (X448 for example as proven in the TLS implementation), will first be listed in this extension, followed by the NID for a Classic McEliece algorithm. In this same ClientHello message is where "02" will be listed in the "psk_key_exchange_modes" extension, and the original "key_share" extension (value 51) is also shown with its public key for the unacceptable algorithm.
 
-When the server responds with the HelloRetryRequest message, the random is the same special value for SHA-256 as indicated in Section 4.1.3 of [RFC8446], and all this has the same exact fields ("legacy_version", "random", "legacy_session_id_echo", "cipher_suite", "legacy_compression_method", and "extensions") as in the ServerHello structure indicated in [RFC8446] (see section 4.1.3). The extensions field consists of the "supported_versions" extension, but also the new "key_share_pqc" extension where the server offers the client the Classic McEliece algorithm NID it shares with the client. There is no "cookie" extension present in this same HelloRetryRequest.
+When the server responds with the HelloRetryRequest message, the random is the same special value for SHA-256 as indicated in Section 4.1.3 of [RFC8446], and has the same exact fields ("legacy_version", "random", "legacy_session_id_echo", "cipher_suite", "legacy_compression_method", and "extensions") as in the ServerHello structure indicated in [RFC8446] (see section 4.1.3). The extensions field not only consists of the "supported_versions" extension, but also the new "key_share_pqc" extension where the server offers the client the Classic McEliece algorithm NID it shares with the client. There is no "cookie" extension present in this same HelloRetryRequest.
 
-When the client sends a second ClientHello in response to the HelloRetryRequest, this will be the same message as the firstClientHello with one exception: the original "key_share" extension is replaced with the new "key_share_pqc" extension which contains the large public key of a Classic McEliece algorithm. Then ServerHello message will then respond containing the new "key_share_pqc" extension and not the original "key_share" extension.
+When the client sends a second ClientHello in response to the HelloRetryRequest, this will be the same message as the first ClientHello with one exception: the original "key_share" extension is replaced with the new "key_share_pqc" extension which contains the large public key of a Classic McEliece algorithm. Then the ServerHello message will then respond containing the new "key_share_pqc" extension and not the original "key_share" extension.
 
 Therefore, this Hello Retry Request scenario is reflected in Figure 3 below, which is a modification of Figure 2 in [RFC8446], and this can be demonstrated in the TLS Implementation mentioned in this documentation:
 
@@ -532,7 +532,7 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
 
 </artwork></figure>
 
-Note: When the client processes the HelloRetryRequest message, it must mark the new "key_share_pqc" extension as an unsolicited extension, which would be an additional exception to the rule noted in [RFC8446] regarding extension responses MUST NOT be sent if the corresponding extension requests were not sent by a remote endpoint (see section 4.2 in [RFC8446].
+Note: When the client processes the HelloRetryRequest message, it must mark the new "key_share_pqc" extension as an unsolicited extension, which would be an additional exception to the rule noted in [RFC8446] regarding extension responses MUST NOT be sent if the corresponding extension requests were not sent by a remote endpoint (see section 4.2 in [RFC8446]).
 
 The following structure would remain intact from [RFC8446], since support would already be provided for a Classic McEliece algorithm being in NamedGroup (see Section 4):
 
@@ -552,14 +552,14 @@ A TLS implementation exists that tests the use of a new key share extension for 
 
 # Summary of Changes from RFC 8446
 
-A new structure is introduced of KeyShareEntryPQC along with modifications of existing structures including KeyShareEntry, NamedGroup, Extension, ExtensionType, KeyShareClientHello, and KeyShareServerHello. Adding a new ExtensionType of "key_share_pqc" allows for the addition of this new structure of KeyShareEntryPQC, which is based on the existing KeyShareEntry, but "key_exchange" has been expanded and select statements are added to both structures which depend on the NamedGroup.group being called in a TLS connection for key exchange. This new KeyShareEntryPQC will now also appear in existing structures of KeyShareClientHello and KeyShareServerHello. Thus the "extension_data" is expanded in the existing Extension structure.
+A new structure is introduced of KeyShareEntryPQC along with modifications of existing structures including KeyShareEntry, NamedGroup, Extension, ExtensionType, KeyShareClientHello, and KeyShareServerHello. Adding a new ExtensionType of "key_share_pqc" allows for the addition of this new structure of KeyShareEntryPQC, which is based on the existing KeyShareEntry, but "key_exchange" has been expanded and select statements are added to both structures which depend on the NamedGroup.group being called in a TLS connection for key exchange. This new KeyShareEntryPQC will now also appear in existing structures of KeyShareClientHello and KeyShareServerHello. Thus, the "extension_data" is expanded in the existing Extension structure.
 
 
 # Security Considerations
 
-The new "key_share_pqc" extension MUST NOT be used with 0-RTT, as this subjects the server to replay attacks of multiple large ClientHello messages (see [RFC8446] and an example of a replay attack of several ClientHello messages in [HN23]). If this extension were to be used with 0-RTT, the server may receive duplicated ClientHello messages where each of them contain a large public key of a Classic McEliece algorithm in each ClientHello's "key_share_pqc" extension, which will not only cause resource exhaustion on the server (see Section 8.2 in [RFC8446]), but memory utlization will rise quickly than noted in [MEA23] and will cause the client-hello recording defense mechanism (see Section 8.2 in [RFC8446] and [MEA23]) to be used as a Denial-of-Service attack on the server. Therefore, 0-RTT and the use of the "early_data" extension MUST NOT be used with the "key_share_pqc" extension.
+The new "key_share_pqc" extension MUST NOT be used with 0-RTT, as this subjects the server to replay attacks of multiple large ClientHello messages (see [RFC8446] and an example of a replay attack of several ClientHello messages in [HN23]). If this extension were to be used with 0-RTT, the server may receive duplicated ClientHello messages where each of them contain a large public key of a Classic McEliece algorithm in each ClientHello's "key_share_pqc" extension, which will not only cause resource exhaustion on the server (see Section 8.2 in [RFC8446]), but memory utilization will rise quickly than noted in [MEA23] and will cause the client-hello recording defense mechanism (see Section 8.2 in [RFC8446] and [MEA23]) to be used as a Denial-of-Service attack on the server. Therefore, 0-RTT and the use of the "early_data" extension MUST NOT be used with the "key_share_pqc" extension.
 
-Larger ClientHello messages can cause TLS connections to be dropped and for TLS handshakes to be broken, as evidenced by the inclusion of post-quantum cryptography in applications of Google Chrome 124 and Microsoft Edge 124, specifically the use of Kyber768 for key agreement. See [SG24]. A possible workaround includes updating web servers if receiving an error with TLS/SSL if Kyber is utlized through Chrome or Firefox. See [SK24].
+Larger ClientHello messages can cause TLS connections to be dropped and for TLS handshakes to be broken, as evidenced by the inclusion of post-quantum cryptography in applications of Google Chrome 124 and Microsoft Edge 124, specifically the use of Kyber768 for key agreement. See [SG24]. A possible workaround includes updating web servers if receiving an error with TLS/SSL if Kyber is utilized through Chrome or Firefox. See [SK24].
 
 # IANA Considerations
 
