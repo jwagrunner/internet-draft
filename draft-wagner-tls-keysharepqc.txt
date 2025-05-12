@@ -404,8 +404,7 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension.
    The extensions field not only consists of the "supported_versions"
    extension, but also the new "key_share_pqc" extension where the
    server offers the client the Classic McEliece algorithm NID it shares
-   with the client.  There is no "cookie" extension present in this same
-   HelloRetryRequest.
+   with the client.
 
    When the client sends a second ClientHello in response to the
    HelloRetryRequest, this will be the same message as the first
@@ -413,7 +412,7 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension.
    replaced with the new "key_share_pqc" extension which contains the
    large public key of a Classic McEliece algorithm.  Then the
    ServerHello message will then respond containing the new
-   "key_share_pqc" extension and not the original "key_share" extension.
+   "key_share_pqc" extension.
 
    Therefore, this Hello Retry Request scenario is reflected in Figure 3
    below, which is a modification of Figure 2 in [RFC8446], and this can
@@ -464,8 +463,7 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
    extension.  Another exception includes different binders in both
    ClientHello messages' pre-shared key extensions.  This pre-shared key
    extension appears as the last extension in both ClientHello messages
-   as well in the ServerHello message.  However, this pre-shared key
-   extension is not present in the HelloRetryRequest message.
+   as well in the ServerHello message.
 
 7.  TLS Implementation
 
