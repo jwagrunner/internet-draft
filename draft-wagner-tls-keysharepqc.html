@@ -1426,9 +1426,8 @@ enum {
 </pre><a href="#section-5-2" class="pilcrow">¶</a>
 </div>
 <p id="section-5-3">When selecting a Classic McEliece algorithm and using an external PSK or a resumption PSK (using the cipher suites "TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256" listed from <span>[<a href="#MOZ25" class="cite xref">MOZ25</a>]</span> for TLS 1.3 "Modern Compatibility" configuration), "02" will then be listed for the "psk_key_exchange_modes" extension along with the new "key_share_pqc" extension in the ClientHello message. At the end of this ClientHello message is printed the "00 29" extension (pre-shared key extension), where the PSK identity should be printed and is mapped to the binder that should proceed it in this pre-shared key extension. The ServerHello message will also contain the new "key_share_pqc" extension, and will as well contain the pre-shared key extension, where it should contain "00 00" at the end which represents the server selecting the PSK identity of 0 (for example: the Selected Identity of 0 shown in the pre-shared key extension in a ServerHello message in this Wireshark example: <span>[<a href="#RASHOK20" class="cite xref">RASHOK20</a>]</span>). Overall, this is a new key exchange selecting a Classic McEliece algorithm using a PSK, whether its external or resumption, and this can be demonstrated in the TLS Implementation below.<a href="#section-5-3" class="pilcrow">¶</a></p>
-<p id="section-5-4">For the situation where a Classic McEliece is used for key exchange and a PSK is not chosen, then the value of "02" is printed for the "psk_key_exchange_modes" extension. But when choosing a Kyber post-quantum algorithm or X25519 and PSK is not chosen, then a value of "01" will be printed in this same extension (see TLS Implementation below), just as it is shown for the "psk_key_exchange_modes" extension listing "PSK with DHE" here: <span>[<a href="#JD19" class="cite xref">JD19</a>]</span>.<a href="#section-5-4" class="pilcrow">¶</a></p>
-<p id="section-5-5">As stated above, resumption PSK with a Classic McEliece algorithm chosen as a key exchange algorithm involves the use of the new "key_share_pqc" extension for both the ClientHello and ServerHello messages. Thus, the Resumption and PSK Message Flow diagram (which originates from Figure 3 of <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>) is derived for this situation and has been tested with the TLS Implementation mentioned in this document:<a href="#section-5-5" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-5-6">
+<p id="section-5-4">As stated above, resumption PSK with a Classic McEliece algorithm chosen as a key exchange algorithm involves the use of the new "key_share_pqc" extension for both the ClientHello and ServerHello messages. Thus, the Resumption and PSK Message Flow diagram (which originates from Figure 3 of <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>) is derived for this situation and has been tested with the TLS Implementation mentioned in this document:<a href="#section-5-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5-5">
 <pre>
 
       Client                                 Server
@@ -1462,7 +1461,7 @@ Subsequent Handshake
 
 Figure 2: A Classic McEliece algorithm used with Resumption PSK.
 
-</pre><a href="#section-5-6" class="pilcrow">¶</a>
+</pre><a href="#section-5-5" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -1610,10 +1609,6 @@ struct {
 <dt id="HN23">[HN23]</dt>
         <dd>
 <span class="refAuthor">Nasser, H.</span>, <span class="refTitle">"The danger of TLS Zero RTT"</span>, <time datetime="2023" class="refDate">2023</time>, <span>&lt;<a href="https://medium.com/@hnasr/the-danger-of-0-rtt-a815d2b99ac6">https://medium.com/@hnasr/the-danger-of-0-rtt-a815d2b99ac6</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="JD19">[JD19]</dt>
-        <dd>
-<span class="refAuthor">Davies, J.</span>, <span class="refTitle">"A walkthrough of a TLS 1.3 handshake"</span>, <time datetime="2019" class="refDate">2019</time>, <span>&lt;<a href="https://commandlinefanatic.com/cgi-bin/showarticle.cgi?article=art080">https://commandlinefanatic.com/cgi-bin/showarticle.cgi?article=art080</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="JR04">[JR04]</dt>
         <dd>
