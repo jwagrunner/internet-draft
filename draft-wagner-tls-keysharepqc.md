@@ -264,7 +264,7 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
     struct {
        NamedGroup group;
        select (NameGroup.group) {
-       case classicmceliece6688128 | classicmceliece6688128f | classicmceliece6960119 
+       case classicmceliece6688128 | classicmceliece6688128f | classicmceliece6960119
        | classicmceliece6960119f | classicmceliece8192128 | classicmceliece8192128f
        | rlcel5 :
              break;
@@ -276,7 +276,7 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
     struct {
        NamedGroup group;
        select (NamedGroup.group) {
-       case classicmceliece6688128 | classicmceliece6688128f | classicmceliece6960119 
+       case classicmceliece6688128 | classicmceliece6688128f | classicmceliece6960119
        | classicmceliece6960119f | classicmceliece8192128 | classicmceliece8192128f
        | rlcel5 :
              opaque key_exchange<1..2^24-1>;
