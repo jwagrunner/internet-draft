@@ -287,7 +287,7 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
 
 </artwork></figure>
 
-Note: An additional algorithm is included in the above case statements, "rlcel5", since it also has a large public key beyond the 65,535 Byte limit. See Section 6 for more information discussing this RLCE algorithm.
+Note: An additional algorithm is included in the above case statements, "rlcel5", since it also has a large public key beyond the 65,535 Byte limit. See Section 7 for more information discussing this RLCE algorithm.
 
 This is then applied to the existing KeyShareClientHello structure, which originates from [RFC8446], that now contains an additional field for KeyShareEntryPQC:
 
@@ -432,7 +432,7 @@ The values for Classic McEliece are added below in the NamedGroup struct that or
 
 </artwork></figure>
 
-Note: An RLCE algorithm is also added above. See Section 6 for more information discussing this RLCE algorithm.
+Note: An RLCE algorithm is also added above. See Section 7 for more information discussing this RLCE algorithm.
 
 # Modification to PskKeyExchangeMode structure
 
@@ -535,7 +535,7 @@ struct {
 
 When a Hello Retry Request involves either a resumption PSK or an external PSK in use with a Classic McEliece algorithm, both the first and second ClientHello messages (the second one being sent after a HelloRetryRequest message) will contain the exact same content except the first ClientHello will have the original "key_share" extension and the second ClientHello will have the new "key_share_pqc" extension. Another exception includes different binders in both ClientHello messages' pre-shared key extensions. This pre-shared key extension appears as the last extension in both ClientHello messages as well in the ServerHello message.
 
-# RLCE Algorithm
+# Other Use Case (RLCE Algorithm)
 
 The Random Linear Code-based Encryption (RLCE) algorithm group (see [RLCE17]) is another code-based cryptographic scheme. "rlcel5" is a RLCE algorithm from this group that can be used in the new key share extension, and can be demonstrated for use for TLS key exchange in the TLS Implementation mentioned in this document.
 
@@ -556,7 +556,7 @@ Larger ClientHello messages can cause TLS connections to be dropped and for TLS 
 
 # IANA Considerations
 
-The new key share proposed in this document "key_share_pqc", along with its value of 63, needs to be updated in the registry specified for TLS ExtensionType Values. See [TLSE24]. The registry for TLS Supported Groups will need to have the proper values assigned to the Classic McEliece family with the entries of 42-47 (and also for the RLCE algorithm with 48; see Section 6). See [TLSP25].
+The new key share proposed in this document "key_share_pqc", along with its value of 63, needs to be updated in the registry specified for TLS ExtensionType Values. See [TLSE24]. The registry for TLS Supported Groups will need to have the proper values assigned to the Classic McEliece family with the entries of 42-47 (and also for the RLCE algorithm with 48; see Section 7). See [TLSP25].
 
 # Acknowledgements
 {:numbered="false"}
