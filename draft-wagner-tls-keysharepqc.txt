@@ -75,7 +75,7 @@ Table of Contents
    4.  NamedGroup Addition for Classic McEliece
    5.  Modification to PskKeyExchangeMode structure
    6.  Hello Retry Request using New Key Share Extension
-   7.  RLCE Algorithm
+   7.  Other Use Case (RLCE Algorithm)
    8.  TLS Implementation
    9.  Summary of Changes from RFC 8446
    10. Security Considerations
@@ -157,7 +157,7 @@ Table of Contents
 
    Note: An additional algorithm is included in the above case
    statements, "rlcel5", since it also has a large public key beyond the
-   65,535 Byte limit.  See Section 6 for more information discussing
+   65,535 Byte limit.  See Section 7 for more information discussing
    this RLCE algorithm.
 
    This is then applied to the existing KeyShareClientHello structure,
@@ -307,7 +307,7 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension.
               rlcel5(0x0030)
           } NamedGroup;
 
-   Note: An RLCE algorithm is also added above.  See Section 6 for more
+   Note: An RLCE algorithm is also added above.  See Section 7 for more
    information discussing this RLCE algorithm.
 
 5.  Modification to PskKeyExchangeMode structure
@@ -465,7 +465,7 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
    extension appears as the last extension in both ClientHello messages
    as well in the ServerHello message.
 
-7.  RLCE Algorithm
+7.  Other Use Case (RLCE Algorithm)
 
    The Random Linear Code-based Encryption (RLCE) algorithm group (see
    [RLCE17]) is another code-based cryptographic scheme. "rlcel5" is a
@@ -528,7 +528,7 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
    for TLS ExtensionType Values.  See [TLSE24].  The registry for TLS
    Supported Groups will need to have the proper values assigned to the
    Classic McEliece family with the entries of 42-47 (and also for the
-   RLCE algorithm with 48; see Section 6).  See [TLSP25].
+   RLCE algorithm with 48; see Section 7).  See [TLSP25].
 
 Acknowledgements
 
