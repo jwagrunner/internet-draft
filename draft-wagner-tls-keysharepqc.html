@@ -8,7 +8,7 @@
 <meta content="Jonathan Wagner" name="author">
 <meta content="Yongge Wang" name="author">
 <meta content="
-       RFC 8446 is modified to where another key share extension is introduced to accommodate both public keys and ciphertexts in ClientHello and ServerHello messages for post-quantum algorithms that have large public keys, including the code-based cryptographic schemes the Classic McEliece family and the Random Linear Code-based Encryption (RLCE) algorithm group. 
+       RFC 8446 is modified to where another key share extension is introduced to accommodate both public keys and ciphertexts in ClientHello and ServerHello messages for post-quantum algorithms that have large public keys, including the code-based cryptographic scheme the Classic McEliece family. 
     " name="description">
 <meta content="xml2rfc 3.28.1" name="generator">
 <meta content="key share" name="keyword">
@@ -1050,7 +1050,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Wagner &amp; Wang</td>
-<td class="center">Expires 13 November 2025</td>
+<td class="center">Expires 14 November 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-wagner-tls-keysharepqc-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-12" class="published">12 May 2025</time>
+<time datetime="2025-05-13" class="published">13 May 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-13">13 November 2025</time></dd>
+<dd class="expires"><time datetime="2025-11-14">14 November 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1085,7 +1085,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">New Key Share Extension for Classic McEliece Algorithms</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">RFC 8446 is modified to where another key share extension is introduced to accommodate both public keys and ciphertexts in ClientHello and ServerHello messages for post-quantum algorithms that have large public keys, including the code-based cryptographic schemes the Classic McEliece family and the Random Linear Code-based Encryption (RLCE) algorithm group.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">RFC 8446 is modified to where another key share extension is introduced to accommodate both public keys and ciphertexts in ClientHello and ServerHello messages for post-quantum algorithms that have large public keys, including the code-based cryptographic scheme the Classic McEliece family.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1122,7 +1122,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 13 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 14 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1161,7 +1161,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-new-key-share-extension" class="internal xref">New Key Share Extension</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-namedgroup-addition-for-cla" class="internal xref">NamedGroup Addition for Classic McEliece and RLCE</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-namedgroup-addition-for-cla" class="internal xref">NamedGroup Addition for Classic McEliece</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-modification-to-pskkeyexcha" class="internal xref">Modification to PskKeyExchangeMode structure</a></p>
@@ -1170,33 +1170,36 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-hello-retry-request-using-n" class="internal xref">Hello Retry Request using New Key Share Extension</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-tls-implementation" class="internal xref">TLS Implementation</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-rlce-algorithm" class="internal xref">RLCE Algorithm</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-summary-of-changes-from-rfc" class="internal xref">Summary of Changes from RFC 8446</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-tls-implementation" class="internal xref">TLS Implementation</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-summary-of-changes-from-rfc" class="internal xref">Summary of Changes from RFC 8446</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref"></a><a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref"></a><a href="#name-references" class="internal xref">References</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.1">
-                <p id="section-toc.1-1.12.2.1.1"><a href="#section-12.1" class="auto internal xref"></a><a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref"></a><a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.2">
-                <p id="section-toc.1-1.12.2.2.1"><a href="#section-12.2" class="auto internal xref"></a><a href="#name-informative-references" class="internal xref">Informative References</a></p>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#section-13" class="auto internal xref"></a><a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
+                <p id="section-toc.1-1.13.2.1.1"><a href="#section-13.1" class="auto internal xref"></a><a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.2">
+                <p id="section-toc.1-1.13.2.2.1"><a href="#section-13.2" class="auto internal xref"></a><a href="#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
             </ul>
 </li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1207,7 +1210,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see <span>[<a href="#SJ25" class="cite xref">SJ25</a>]</span>, <span>[<a href="#DJB25" class="cite xref">DJB25</a>]</span>, <span>[<a href="#RJM78" class="cite xref">RJM78</a>]</span>, and <span>[<a href="#OQS24" class="cite xref">OQS24</a>]</span>) and the RLCE algorithm group (see <span>[<a href="#RLCE17" class="cite xref">RLCE17</a>]</span>), cannot be easily implemented in Transport Layer Security (TLS) Protocol Version 1.3 ([RF8446]) due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see <span>[<a href="#PQC25" class="cite xref">PQC25</a>]</span>). Therefore, this document proposes a new key share that has a higher limit and is utilized in ClientHello and ServerHello messages, which is a modification of <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>. For example, if a large post-quantum algorithm is requested in a TLS 1.3 key exchange, this new key share extension will be constructed. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed. Thus, enabling the use of large public key post-quantum algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see <span>[<a href="#SJ25" class="cite xref">SJ25</a>]</span>, <span>[<a href="#DJB25" class="cite xref">DJB25</a>]</span>, <span>[<a href="#RJM78" class="cite xref">RJM78</a>]</span>, and <span>[<a href="#OQS24" class="cite xref">OQS24</a>]</span>), cannot be easily implemented in Transport Layer Security (TLS) Protocol Version 1.3 ([RF8446]) due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see <span>[<a href="#PQC25" class="cite xref">PQC25</a>]</span>). Therefore, this document proposes a new key share that has a higher limit and is utilized in ClientHello and ServerHello messages, which is a modification of <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>. For example, if a Classic McEliece algorithm is requested in a TLS 1.3 key exchange, this new key share extension will be constructed. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed. Thus, enabling the use of Classic McEliece algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.<a href="#section-1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1226,18 +1229,16 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-new-key-share-extension">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-new-key-share-extension" class="section-name selfRef">New Key Share Extension</a>
       </h2>
-<p id="section-3-1">Based on the key share extension from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> is introduced a new key share extension in this document, "key_share_pqc". This is reflected in this document and is represented as KeyShareEntryPQC below, based on the existing KeyShareEntry from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>. However, this is modified along with the existing KeyShareEntry structure to include case statements to test if the key exchange algorithm chosen in a TLS 1.3 connection belongs to either the Classic McEliece family or RLCE algorithm group, and if it is, then KeyShareEntryPQC is constructed. If the opposite is true, where the key exchange algorithm does not belong to either group, then KeyShareEntry is constructed. Note that the "key_exchange" field is expanded in KeyShareEntryPQC to accommodate a large public key that is greater than 65,535 Bytes:<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">Based on the key share extension from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> is introduced a new key share extension in this document, "key_share_pqc". This is reflected in this document and is represented as KeyShareEntryPQC below, based on the existing KeyShareEntry from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>. However, this is modified along with the existing KeyShareEntry structure to include case statements to test if the key exchange algorithm chosen in a TLS 1.3 connection belongs from the Classic McEliece family, and if it is, then KeyShareEntryPQC is constructed. If the opposite is true, where the key exchange algorithm is not from the Classic McEliece family, then KeyShareEntry is constructed. Note that the "key_exchange" field is expanded in KeyShareEntryPQC to accommodate a large public key that is greater than 65,535 Bytes:<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3-2">
 <pre>
 
     struct {
        NamedGroup group;
        select (NameGroup.group) {
-       case classicmceliece348864 | classicmceliece348864f | classicmceliece460896
-       | classicmceliece460896f | classicmceliece6688128 | classicmceliece6688128f
-       | classicmceliece6960119 | classicmceliece6960119f | classicmceliece8192128
-       | classicmceliece8192128f
-       | rlcel1 | rlcel3 | rlcel5 :
+       case classicmceliece6688128 | classicmceliece6688128f | classicmceliece6960119
+       | classicmceliece6960119f | classicmceliece8192128 | classicmceliece8192128f
+       | rlcel5 :
              break;
        default :
              opaque key_exchange&lt;1..2^16-1&gt;;
@@ -1247,11 +1248,9 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
     struct {
        NamedGroup group;
        select (NamedGroup.group) {
-       case classicmceliece348864 | classicmceliece348864f | classicmceliece460896
-       | classicmceliece460896f | classicmceliece6688128 | classicmceliece6688128f
-       | classicmceliece6960119 | classicmceliece6960119f | classicmceliece8192128
-       | classicmceliece8192128f
-       | rlcel1 | rlcel3 | rlcel5 :
+       case classicmceliece6688128 | classicmceliece6688128f | classicmceliece6960119
+       | classicmceliece6960119f | classicmceliece8192128 | classicmceliece8192128f
+       | rlcel5 :
              opaque key_exchange&lt;1..2^24-1&gt;;
        default :
              break;
@@ -1260,8 +1259,9 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 
 </pre><a href="#section-3-2" class="pilcrow">¶</a>
 </div>
-<p id="section-3-3">This is then applied to the existing KeyShareClientHello structure, which originates from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>, that now contains an additional field for KeyShareEntryPQC:<a href="#section-3-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3-4">
+<p id="section-3-3">Note: An additional algorithm is included in the above case statements, "rlcel5", since it also has a large public key beyond the 65,535 Byte limit. See Section 6 for more information discussing this RLCE algorithm.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4">This is then applied to the existing KeyShareClientHello structure, which originates from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>, that now contains an additional field for KeyShareEntryPQC:<a href="#section-3-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3-5">
 <pre>
 
     struct {
@@ -1269,10 +1269,10 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
        KeyShareEntryPQC client_shares&lt;0..2^24-1&gt;;
     } KeyShareClientHello;
 
-</pre><a href="#section-3-4" class="pilcrow">¶</a>
+</pre><a href="#section-3-5" class="pilcrow">¶</a>
 </div>
-<p id="section-3-5">Since the KeyShareClientHello needs to be expanded to accommodate for the KeyShareEntryPQC struct, the same applies to the existing Extension struct, originated as well from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> but "extension_data" is now expanded:<a href="#section-3-5" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3-6">
+<p id="section-3-6">Since the KeyShareClientHello needs to be expanded to accommodate for the KeyShareEntryPQC struct, the same applies to the existing Extension struct, originated as well from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> but "extension_data" is now expanded:<a href="#section-3-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3-7">
 <pre>
 
     struct {
@@ -1280,10 +1280,10 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       opaque extension_data&lt;0..2^24-1&gt;;
     } Extension;
 
-</pre><a href="#section-3-6" class="pilcrow">¶</a>
+</pre><a href="#section-3-7" class="pilcrow">¶</a>
 </div>
-<p id="section-3-7">Since there is a new key share extension to accommodate keys larger than the 65,535 Byte limit (KeyShareEntryPQC), this is reflected in the existing ExtensionType structure from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> where this is the new type that holds a value of 63, "key_share_pqc":<a href="#section-3-7" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3-8">
+<p id="section-3-8">Since there is a new key share extension to accommodate keys larger than the 65,535 Byte limit (KeyShareEntryPQC), this is reflected in the existing ExtensionType structure from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> where this is the new type that holds a value of 63, "key_share_pqc":<a href="#section-3-8" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3-9">
 <pre>
 
     enum {
@@ -1313,11 +1313,11 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             (65535)
         } ExtensionType;
 
-</pre><a href="#section-3-8" class="pilcrow">¶</a>
+</pre><a href="#section-3-9" class="pilcrow">¶</a>
 </div>
-<p id="section-3-9">Since the "extension_data" field will be much larger for a KeyShareClientHello that contains a large public key that is greater than the previously defined 65,535 Byte limit, an example being a Classic McEliece public key, the server must be able to handle this circumstance when receiving the ClientHello message. One way is to compare the value for a packet that contains extensions including a large public key from the ClientHello message to a macro constant (for example,  "CLIENT_HELLO_MIN_EXT_LENGTH" as defined in this introduced TLS implementation in this paper, see <span>[<a href="#SRVR1650" class="cite xref">SRVR1650</a>]</span> and <span>[<a href="#SRVR1211" class="cite xref">SRVR1211</a>]</span>) and if this packet value is longer than this constant, the server will change the way it normally handles all of the extensions. This constant could be easily modified in the aforementioned TLS Open Secure Socket Layer (OpenSSL) implementation. The process of how the server collects the extensions from a ClientHello message must also be modified, as the server must be able to process the new key share extension of Type 63 differently than the other extensions, should the server see this inside a ClientHello message. For example, see <span>[<a href="#EXT652" class="cite xref">EXT652</a>]</span>.<a href="#section-3-9" class="pilcrow">¶</a></p>
-<p id="section-3-10">The ServerHello message is modified as well where the KeyShareServerHello structure originates from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>:<a href="#section-3-10" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3-11">
+<p id="section-3-10">Since the "extension_data" field will be much larger for a KeyShareClientHello that contains a large public key that is greater than the previously defined 65,535 Byte limit, an example being a Classic McEliece public key, the server must be able to handle this circumstance when receiving the ClientHello message. One way is to compare the value for a packet that contains extensions including a large public key from the ClientHello message to a macro constant (for example,  "CLIENT_HELLO_MIN_EXT_LENGTH" as defined in this introduced TLS implementation in this paper, see <span>[<a href="#SRVR1650" class="cite xref">SRVR1650</a>]</span> and <span>[<a href="#SRVR1211" class="cite xref">SRVR1211</a>]</span>) and if this packet value is longer than this constant, the server will change the way it normally handles all of the extensions. This constant could be easily modified in the aforementioned TLS Open Secure Socket Layer (OpenSSL) implementation. The process of how the server collects the extensions from a ClientHello message must also be modified, as the server must be able to process the new key share extension of Type 63 differently than the other extensions, should the server see this inside a ClientHello message. For example, see <span>[<a href="#EXT652" class="cite xref">EXT652</a>]</span>.<a href="#section-3-10" class="pilcrow">¶</a></p>
+<p id="section-3-11">The ServerHello message is modified as well where the KeyShareServerHello structure originates from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>:<a href="#section-3-11" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3-12">
 <pre>
 
 struct {
@@ -1325,10 +1325,10 @@ struct {
     KeyShareEntryPQC server_sharePQC;
 } KeyShareServerHello;
 
-</pre><a href="#section-3-11" class="pilcrow">¶</a>
+</pre><a href="#section-3-12" class="pilcrow">¶</a>
 </div>
-<p id="section-3-12">This new "key_share_pqc" extension is therefore can be implemented in the full TLS handshake, where Figure 1 from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> is modified to be the following:<a href="#section-3-12" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3-13">
+<p id="section-3-13">This new "key_share_pqc" extension is therefore can be implemented in the full TLS handshake, where Figure 1 from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> is modified to be the following:<a href="#section-3-13" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3-14">
 <pre>
 
        Client                                           Server
@@ -1368,16 +1368,16 @@ Auth | {CertificateVerify*}
 
 Figure 1: Full TLS Handshake with "key_share_pqc" extension.
 
-</pre><a href="#section-3-13" class="pilcrow">¶</a>
+</pre><a href="#section-3-14" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
-<div id="namedgroup-addition-for-classic-mceliece-and-rlce">
+<div id="namedgroup-addition-for-classic-mceliece">
 <section id="section-4">
       <h2 id="name-namedgroup-addition-for-cla">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-namedgroup-addition-for-cla" class="section-name selfRef">NamedGroup Addition for Classic McEliece and RLCE</a>
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-namedgroup-addition-for-cla" class="section-name selfRef">NamedGroup Addition for Classic McEliece</a>
       </h2>
-<p id="section-4-1">The values for Classic McEliece and RLCE algorithms are added below in the NamedGroup struct that originates from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>:<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">The values for Classic McEliece are added below in the NamedGroup struct that originates from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>:<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4-2">
 <pre>
 
@@ -1397,17 +1397,16 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension.
               (0xFFFF)
 
               /* Classic McEliece family */
-              classicmceliece348864(0x002A), classicmceliece348864f(0x002B), classicmceliece460896(0x002C),
-              classicmceliece460896f(0x002D), classicmceliece6688128(0x002E), classicmceliece6688128f(0x002F),
-              classicmceliece6960119(0x0030), classicmceliece6960119f(0x0031), classicmceliece8192128(0x0032),
-              classicmceliece8192128f(0x0033)
+              classicmceliece6688128(0x002A), classicmceliece6688128f(0x002B), classicmceliece6960119(0x002C),
+              classicmceliece6960119f(0x002D), classicmceliece8192128(0x002E), classicmceliece8192128f(0x002F)
 
-              /* RLCE algorithm group */
-              rlcel1(0x0034), rlcel3(0x0035), rlcel5(0x0036)
+              /* RLCE algorithm */
+              rlcel5(0x0030)
           } NamedGroup;
 
 </pre><a href="#section-4-2" class="pilcrow">¶</a>
 </div>
+<p id="section-4-3">Note: An RLCE algorithm is also added above. See Section 6 for more information discussing this RLCE algorithm.<a href="#section-4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="modification-to-pskkeyexchangemode-structure">
@@ -1513,54 +1512,63 @@ struct {
 <p id="section-6-9">When a Hello Retry Request involves either a resumption PSK or an external PSK in use with a Classic McEliece algorithm, both the first and second ClientHello messages (the second one being sent after a HelloRetryRequest message) will contain the exact same content except the first ClientHello will have the original "key_share" extension and the second ClientHello will have the new "key_share_pqc" extension. Another exception includes different binders in both ClientHello messages' pre-shared key extensions. This pre-shared key extension appears as the last extension in both ClientHello messages as well in the ServerHello message.<a href="#section-6-9" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="tls-implementation">
+<div id="rlce-algorithm">
 <section id="section-7">
-      <h2 id="name-tls-implementation">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-tls-implementation" class="section-name selfRef">TLS Implementation</a>
+      <h2 id="name-rlce-algorithm">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-rlce-algorithm" class="section-name selfRef">RLCE Algorithm</a>
       </h2>
-<p id="section-7-1">A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where the Classic McEliece algorithm family and the RLCE algorithm group can be chosen for key exchange when initiating TLS connections. It can be accessed here: <span>[<a href="#JWYW25" class="cite xref">JWYW25</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">The Random Linear Code-based Encryption (RLCE) algorithm group (see <span>[<a href="#RLCE17" class="cite xref">RLCE17</a>]</span>) is another code-based cryptographic scheme. "rlcel5" is a RLCE algorithm from this group that can be used in the new key share extension, and can be demonstrated for use for TLS key exchange in the TLS Implementation mentioned in this document.<a href="#section-7-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="tls-implementation">
+<section id="section-8">
+      <h2 id="name-tls-implementation">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-tls-implementation" class="section-name selfRef">TLS Implementation</a>
+      </h2>
+<p id="section-8-1">A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where the Classic McEliece algorithm family can be chosen for key exchange when initiating TLS connections. It can be accessed here: <span>[<a href="#JWYW25" class="cite xref">JWYW25</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="summary-of-changes-from-rfc-8446">
-<section id="section-8">
+<section id="section-9">
       <h2 id="name-summary-of-changes-from-rfc">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-summary-of-changes-from-rfc" class="section-name selfRef">Summary of Changes from RFC 8446</a>
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-summary-of-changes-from-rfc" class="section-name selfRef">Summary of Changes from RFC 8446</a>
       </h2>
-<p id="section-8-1">A new structure is introduced of KeyShareEntryPQC along with modifications of existing structures including KeyShareEntry, NamedGroup, Extension, ExtensionType, KeyShareClientHello, and KeyShareServerHello. Adding a new ExtensionType of "key_share_pqc" allows for the addition of this new structure of KeyShareEntryPQC, which is based on the existing KeyShareEntry, but "key_exchange" has been expanded and select statements are added to both structures which depend on the NamedGroup.group being called in a TLS connection for key exchange. This new KeyShareEntryPQC will now also appear in existing structures of KeyShareClientHello and KeyShareServerHello. Thus, the "extension_data" is expanded in the existing Extension structure.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-9-1">A new structure is introduced of KeyShareEntryPQC along with modifications of existing structures including KeyShareEntry, NamedGroup, Extension, ExtensionType, KeyShareClientHello, and KeyShareServerHello. Adding a new ExtensionType of "key_share_pqc" allows for the addition of this new structure of KeyShareEntryPQC, which is based on the existing KeyShareEntry, but "key_exchange" has been expanded and select statements are added to both structures which depend on the NamedGroup.group being called in a TLS connection for key exchange. This new KeyShareEntryPQC will now also appear in existing structures of KeyShareClientHello and KeyShareServerHello. Thus, the "extension_data" is expanded in the existing Extension structure.<a href="#section-9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
-<section id="section-9">
+<section id="section-10">
       <h2 id="name-security-considerations">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-9-1">The new "key_share_pqc" extension <span class="bcp14">MUST NOT</span> be used with 0-RTT, as this subjects the server to replay attacks of multiple large ClientHello messages (see <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> and an example of a replay attack of several ClientHello messages in <span>[<a href="#HN23" class="cite xref">HN23</a>]</span>). If this extension were to be used with 0-RTT, the server may receive duplicated ClientHello messages where each of them contain a large public key of a Classic McEliece algorithm in each ClientHello's "key_share_pqc" extension, which will not only cause resource exhaustion on the server (see Section 8.2 in <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>), but memory utilization will rise quickly than noted in <span>[<a href="#MEA23" class="cite xref">MEA23</a>]</span> and will cause the client-hello recording defense mechanism (see Section 8.2 in <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> and <span>[<a href="#MEA23" class="cite xref">MEA23</a>]</span>) to be used as a Denial-of-Service attack on the server. Therefore, 0-RTT and the use of the "early_data" extension <span class="bcp14">MUST NOT</span> be used with the "key_share_pqc" extension.<a href="#section-9-1" class="pilcrow">¶</a></p>
-<p id="section-9-2">Larger ClientHello messages can cause TLS connections to be dropped and for TLS handshakes to be broken, as evidenced by the inclusion of post-quantum cryptography in applications of Google Chrome 124 and Microsoft Edge 124, specifically the use of Kyber768 for key agreement. See <span>[<a href="#SG24" class="cite xref">SG24</a>]</span>. A possible workaround includes updating web servers if receiving an error with TLS/SSL if Kyber is utilized through Chrome or Firefox. See <span>[<a href="#SK24" class="cite xref">SK24</a>]</span>.<a href="#section-9-2" class="pilcrow">¶</a></p>
+<p id="section-10-1">The new "key_share_pqc" extension <span class="bcp14">MUST NOT</span> be used with 0-RTT, as this subjects the server to replay attacks of multiple large ClientHello messages (see <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> and an example of a replay attack of several ClientHello messages in <span>[<a href="#HN23" class="cite xref">HN23</a>]</span>). If this extension were to be used with 0-RTT, the server may receive duplicated ClientHello messages where each of them contain a large public key of a Classic McEliece algorithm in each ClientHello's "key_share_pqc" extension, which will not only cause resource exhaustion on the server (see Section 8.2 in <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>), but memory utilization will rise quickly than noted in <span>[<a href="#MEA23" class="cite xref">MEA23</a>]</span> and will cause the client-hello recording defense mechanism (see Section 8.2 in <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> and <span>[<a href="#MEA23" class="cite xref">MEA23</a>]</span>) to be used as a Denial-of-Service attack on the server. Therefore, 0-RTT and the use of the "early_data" extension <span class="bcp14">MUST NOT</span> be used with the "key_share_pqc" extension.<a href="#section-10-1" class="pilcrow">¶</a></p>
+<p id="section-10-2">Larger ClientHello messages can cause TLS connections to be dropped and for TLS handshakes to be broken, as evidenced by the inclusion of post-quantum cryptography in applications of Google Chrome 124 and Microsoft Edge 124, specifically the use of Kyber768 for key agreement. See <span>[<a href="#SG24" class="cite xref">SG24</a>]</span>. A possible workaround includes updating web servers if receiving an error with TLS/SSL if Kyber is utilized through Chrome or Firefox. See <span>[<a href="#SK24" class="cite xref">SK24</a>]</span>.<a href="#section-10-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-10">
+<section id="section-11">
       <h2 id="name-iana-considerations">
-<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-10-1">The new key share proposed in this document "key_share_pqc", along with its value of 63, needs to be updated in the registry specified for TLS ExtensionType Values. See <span>[<a href="#TLSE24" class="cite xref">TLSE24</a>]</span>. The registry for TLS Supported Groups will need to have the proper values assigned to the Classic McEliece family with the entries of 42-51 and the RLCE algorithm group with 52-54. See <span>[<a href="#TLSP25" class="cite xref">TLSP25</a>]</span>.<a href="#section-10-1" class="pilcrow">¶</a></p>
+<p id="section-11-1">The new key share proposed in this document "key_share_pqc", along with its value of 63, needs to be updated in the registry specified for TLS ExtensionType Values. See <span>[<a href="#TLSE24" class="cite xref">TLSE24</a>]</span>. The registry for TLS Supported Groups will need to have the proper values assigned to the Classic McEliece family with the entries of 42-47 (and also for the RLCE algorithm with 48; see Section 6). See <span>[<a href="#TLSP25" class="cite xref">TLSP25</a>]</span>.<a href="#section-11-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="acknowledgements">
-<section id="section-11">
+<section id="section-12">
       <h2 id="name-acknowledgements">
 <a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
-<p id="section-11-1">Thank you to Martin Thomson and David Schinazi, as their Internet Draft template was used to generate this document, before the authors' information was added. The authors also want to thank the contributors of the kramdown-rfc GitHub repository, as their examples helped with the format of the figures, references, and authors' information presented in this document. Thank you also to Joyce Reynolds and Robert Braden, as their Internet Draft <span>[<a href="#JR04" class="cite xref">JR04</a>]</span> was helpful as a guide on how to write the citations in this document (i.e., using citation brackets with author's initials, year, etc.).<a href="#section-11-1" class="pilcrow">¶</a></p>
+<p id="section-12-1">Thank you to D. J. Bernstein, as his expertise and feedback greatly improved the content of this document.<a href="#section-12-1" class="pilcrow">¶</a></p>
+<p id="section-12-2">Thank you also to Martin Thomson and David Schinazi, as their Internet Draft template was used to generate this document, before the authors' information was added. The authors also want to thank the contributors of the kramdown-rfc GitHub repository, as their examples helped with the format of the figures, references, and authors' information presented in this document. Thank you also to Joyce Reynolds and Robert Braden, as their Internet Draft <span>[<a href="#JR04" class="cite xref">JR04</a>]</span> was helpful as a guide on how to write the citations in this document (i.e., using citation brackets with author's initials, year, etc.).<a href="#section-12-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
-<section id="section-12">
+<section id="section-13">
       <h2 id="name-references">
 <a href="#name-references" class="section-name selfRef">References</a>
       </h2>
 <div id="sec-normative-references">
-<section id="section-12.1">
+<section id="section-13.1">
         <h3 id="name-normative-references">
 <a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
@@ -1593,7 +1601,7 @@ struct {
 </section>
 </div>
 <div id="sec-informative-references">
-<section id="section-12.2">
+<section id="section-13.2">
         <h3 id="name-informative-references">
 <a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
