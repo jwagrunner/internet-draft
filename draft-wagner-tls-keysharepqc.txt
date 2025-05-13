@@ -468,8 +468,9 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
 7.  Other Use Case (RLCE Algorithm)
 
    The Random Linear Code-based Encryption (RLCE) algorithm group (see
-   [RLCE17]) is another code-based cryptographic scheme. "rlcel5" is a
-   RLCE algorithm from this group that can be used in the new key share
+   [RLCE17]) is another code-based cryptographic scheme (NIST Round 1).
+   "rlcel5" is a RLCE algorithm from this group (where the public key
+   size is 1,232,001 Bytes) that can be used in the new key share
    extension, and can be demonstrated for use for TLS key exchange in
    the TLS Implementation mentioned in this document.
 
