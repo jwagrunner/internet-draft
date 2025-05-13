@@ -242,14 +242,14 @@ informative:
     date: 2004
 --- abstract
 
-RFC 8446 is modified to where another key share extension is introduced to accommodate both public keys and ciphertexts in ClientHello and ServerHello messages for post-quantum algorithms that have large public keys, including the code-based cryptographic schemes the Classic McEliece family and the Random Linear Code-based Encryption (RLCE) algorithm group.
+RFC 8446 is modified to where another key share extension is introduced to accommodate both public keys and ciphertexts in ClientHello and ServerHello messages for post-quantum algorithms that have large public keys, including the code-based cryptographic scheme the Classic McEliece family.
 
 --- middle
 
 
 # Introduction
 
-Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [SJ25], [DJB25], [RJM78], and [OQS24]) and the RLCE algorithm group (see [RLCE17]), cannot be easily implemented in Transport Layer Security (TLS) Protocol Version 1.3 ([RF8446]) due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see [PQC25]). Therefore, this document proposes a new key share that has a higher limit and is utilized in ClientHello and ServerHello messages, which is a modification of [RFC8446]. For example, if a large post-quantum algorithm is requested in a TLS 1.3 key exchange, this new key share extension will be constructed. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed. Thus, enabling the use of large public key post-quantum algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
+Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [SJ25], [DJB25], [RJM78], and [OQS24]), cannot be easily implemented in Transport Layer Security (TLS) Protocol Version 1.3 ([RF8446]) due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see [PQC25]). Therefore, this document proposes a new key share that has a higher limit and is utilized in ClientHello and ServerHello messages, which is a modification of [RFC8446]. For example, if a Classic McEliece algorithm is requested in a TLS 1.3 key exchange, this new key share extension will be constructed. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed. Thus, enabling the use of Classic McEliece algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
 
 # Conventions and Definitions
 
@@ -257,18 +257,16 @@ Large public key algorithms, including the code-based cryptographic algorithm fa
 
 # New Key Share Extension
 
-Based on the key share extension from [RFC8446] is introduced a new key share extension in this document, "key_share_pqc". This is reflected in this document and is represented as KeyShareEntryPQC below, based on the existing KeyShareEntry from [RFC8446]. However, this is modified along with the existing KeyShareEntry structure to include case statements to test if the key exchange algorithm chosen in a TLS 1.3 connection belongs to either the Classic McEliece family or RLCE algorithm group, and if it is, then KeyShareEntryPQC is constructed. If the opposite is true, where the key exchange algorithm does not belong to either group, then KeyShareEntry is constructed. Note that the "key_exchange" field is expanded in KeyShareEntryPQC to accommodate a large public key that is greater than 65,535 Bytes:
+Based on the key share extension from [RFC8446] is introduced a new key share extension in this document, "key_share_pqc". This is reflected in this document and is represented as KeyShareEntryPQC below, based on the existing KeyShareEntry from [RFC8446]. However, this is modified along with the existing KeyShareEntry structure to include case statements to test if the key exchange algorithm chosen in a TLS 1.3 connection belongs from the Classic McEliece family, and if it is, then KeyShareEntryPQC is constructed. If the opposite is true, where the key exchange algorithm is not from the Classic McEliece family, then KeyShareEntry is constructed. Note that the "key_exchange" field is expanded in KeyShareEntryPQC to accommodate a large public key that is greater than 65,535 Bytes:
 
 <figure><artwork>
 
     struct {
        NamedGroup group;
        select (NameGroup.group) {
-       case classicmceliece348864 | classicmceliece348864f | classicmceliece460896
-       | classicmceliece460896f | classicmceliece6688128 | classicmceliece6688128f
-       | classicmceliece6960119 | classicmceliece6960119f | classicmceliece8192128
-       | classicmceliece8192128f
-       | rlcel1 | rlcel3 | rlcel5 :
+       case classicmceliece6688128 | classicmceliece6688128f | classicmceliece6960119 
+       | classicmceliece6960119f | classicmceliece8192128 | classicmceliece8192128f
+       | rlcel5 :
              break;
        default :
              opaque key_exchange<1..2^16-1>;
@@ -278,11 +276,9 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
     struct {
        NamedGroup group;
        select (NamedGroup.group) {
-       case classicmceliece348864 | classicmceliece348864f | classicmceliece460896
-       | classicmceliece460896f | classicmceliece6688128 | classicmceliece6688128f
-       | classicmceliece6960119 | classicmceliece6960119f | classicmceliece8192128
-       | classicmceliece8192128f
-       | rlcel1 | rlcel3 | rlcel5 :
+       case classicmceliece6688128 | classicmceliece6688128f | classicmceliece6960119 
+       | classicmceliece6960119f | classicmceliece8192128 | classicmceliece8192128f
+       | rlcel5 :
              opaque key_exchange<1..2^24-1>;
        default :
              break;
@@ -290,6 +286,8 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
     } KeyShareEntryPQC
 
 </artwork></figure>
+
+Note: An additional algorithm is included in the above case statements, "rlcel5", since it also has a large public key beyond the 65,535 Byte limit. See Section 6 for more information discussing this RLCE algorithm.
 
 This is then applied to the existing KeyShareClientHello structure, which originates from [RFC8446], that now contains an additional field for KeyShareEntryPQC:
 
@@ -403,9 +401,9 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension.
 </artwork></figure>
 
 
-# NamedGroup Addition for Classic McEliece and RLCE
+# NamedGroup Addition for Classic McEliece
 
-The values for Classic McEliece and RLCE algorithms are added below in the NamedGroup struct that originates from [RFC8446]:
+The values for Classic McEliece are added below in the NamedGroup struct that originates from [RFC8446]:
 
 <figure><artwork>
 
@@ -425,16 +423,16 @@ The values for Classic McEliece and RLCE algorithms are added below in the Named
               (0xFFFF)
 
               /* Classic McEliece family */
-              classicmceliece348864(0x002A), classicmceliece348864f(0x002B), classicmceliece460896(0x002C),
-              classicmceliece460896f(0x002D), classicmceliece6688128(0x002E), classicmceliece6688128f(0x002F),
-              classicmceliece6960119(0x0030), classicmceliece6960119f(0x0031), classicmceliece8192128(0x0032),
-              classicmceliece8192128f(0x0033)
+              classicmceliece6688128(0x002A), classicmceliece6688128f(0x002B), classicmceliece6960119(0x002C),
+              classicmceliece6960119f(0x002D), classicmceliece8192128(0x002E), classicmceliece8192128f(0x002F)
 
-              /* RLCE algorithm group */
-              rlcel1(0x0034), rlcel3(0x0035), rlcel5(0x0036)
+              /* RLCE algorithm */
+              rlcel5(0x0030)
           } NamedGroup;
 
 </artwork></figure>
+
+Note: An RLCE algorithm is also added above. See Section 6 for more information discussing this RLCE algorithm.
 
 # Modification to PskKeyExchangeMode structure
 
@@ -537,9 +535,13 @@ struct {
 
 When a Hello Retry Request involves either a resumption PSK or an external PSK in use with a Classic McEliece algorithm, both the first and second ClientHello messages (the second one being sent after a HelloRetryRequest message) will contain the exact same content except the first ClientHello will have the original "key_share" extension and the second ClientHello will have the new "key_share_pqc" extension. Another exception includes different binders in both ClientHello messages' pre-shared key extensions. This pre-shared key extension appears as the last extension in both ClientHello messages as well in the ServerHello message.
 
+# RLCE Algorithm
+
+The Random Linear Code-based Encryption (RLCE) algorithm group (see [RLCE17]) is another code-based cryptographic scheme. "rlcel5" is a RLCE algorithm from this group that can be used in the new key share extension, and can be demonstrated for use for TLS key exchange in the TLS Implementation mentioned in this document.
+
 # TLS Implementation
 
-A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where the Classic McEliece algorithm family and the RLCE algorithm group can be chosen for key exchange when initiating TLS connections. It can be accessed here: [JWYW25].
+A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where the Classic McEliece algorithm family can be chosen for key exchange when initiating TLS connections. It can be accessed here: [JWYW25].
 
 # Summary of Changes from RFC 8446
 
@@ -554,11 +556,13 @@ Larger ClientHello messages can cause TLS connections to be dropped and for TLS 
 
 # IANA Considerations
 
-The new key share proposed in this document "key_share_pqc", along with its value of 63, needs to be updated in the registry specified for TLS ExtensionType Values. See [TLSE24]. The registry for TLS Supported Groups will need to have the proper values assigned to the Classic McEliece family with the entries of 42-51 and the RLCE algorithm group with 52-54. See [TLSP25].
+The new key share proposed in this document "key_share_pqc", along with its value of 63, needs to be updated in the registry specified for TLS ExtensionType Values. See [TLSE24]. The registry for TLS Supported Groups will need to have the proper values assigned to the Classic McEliece family with the entries of 42-47 (and also for the RLCE algorithm with 48; see Section 6). See [TLSP25].
 
 # Acknowledgements
 {:numbered="false"}
 
-Thank you to Martin Thomson and David Schinazi, as their Internet Draft template was used to generate this document, before the authors' information was added. The authors also want to thank the contributors of the kramdown-rfc GitHub repository, as their examples helped with the format of the figures, references, and authors' information presented in this document. Thank you also to Joyce Reynolds and Robert Braden, as their Internet Draft [JR04] was helpful as a guide on how to write the citations in this document (i.e., using citation brackets with author's initials, year, etc.).
+Thank you to D. J. Bernstein, as his expertise and feedback greatly improved the content of this document.
+
+Thank you also to Martin Thomson and David Schinazi, as their Internet Draft template was used to generate this document, before the authors' information was added. The authors also want to thank the contributors of the kramdown-rfc GitHub repository, as their examples helped with the format of the figures, references, and authors' information presented in this document. Thank you also to Joyce Reynolds and Robert Braden, as their Internet Draft [JR04] was helpful as a guide on how to write the citations in this document (i.e., using citation brackets with author's initials, year, etc.).
 
 --- back
