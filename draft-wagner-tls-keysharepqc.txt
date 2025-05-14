@@ -5,7 +5,7 @@
 Transport Layer Security                                       J. Wagner
 Internet-Draft                                                   Y. Wang
 Intended status: Standards Track                           UNC Charlotte
-Expires: 14 November 2025                                    13 May 2025
+Expires: 15 November 2025                                    14 May 2025
 
 
         New Key Share Extension for Classic McEliece Algorithms
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 November 2025.
+   This Internet-Draft will expire on 15 November 2025.
 
 Copyright Notice
 
@@ -325,23 +325,21 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension.
    } PskKeyExchangeMode;
 
    When selecting a Classic McEliece algorithm and using an external PSK
-   or a resumption PSK (using the cipher suites "TLS_AES_128_GCM_SHA256:
-   TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256" listed from
-   [MOZ25] for TLS 1.3 "Modern Compatibility" configuration), "02" will
-   then be listed for the "psk_key_exchange_modes" extension along with
-   the new "key_share_pqc" extension in the ClientHello message.  At the
-   end of this ClientHello message is printed the "00 29" extension
-   (pre-shared key extension), where the PSK identity should be printed
-   and is mapped to the binder that should proceed it in this pre-shared
-   key extension.  The ServerHello message will also contain the new
-   "key_share_pqc" extension, and will as well contain the pre-shared
-   key extension, where it should contain "00 00" at the end which
-   represents the server selecting the PSK identity of 0 (for example:
-   the Selected Identity of 0 shown in the pre-shared key extension in a
-   ServerHello message in this Wireshark example: [RASHOK20]).  Overall,
-   this is a new key exchange selecting a Classic McEliece algorithm
-   using a PSK, whether its external or resumption, and this can be
-   demonstrated in the TLS Implementation below.
+   or a resumption PSK, "02" will then be listed for the
+   "psk_key_exchange_modes" extension along with the new "key_share_pqc"
+   extension in the ClientHello message.  At the end of this ClientHello
+   message is printed the "00 29" extension (pre-shared key extension),
+   where the PSK identity should be printed and is mapped to the binder
+   that should proceed it in this pre-shared key extension.  The
+   ServerHello message will also contain the new "key_share_pqc"
+   extension, and will as well contain the pre-shared key extension,
+   where it should contain "00 00" at the end which represents the
+   server selecting the PSK identity of 0 (for example: the Selected
+   Identity of 0 shown in the pre-shared key extension in a ServerHello
+   message in this Wireshark example: [RASHOK20]).  Overall, this is a
+   new key exchange selecting a Classic McEliece algorithm using a PSK,
+   whether its external or resumption, and this can be demonstrated in
+   the TLS Implementation below.
 
    As stated above, resumption PSK with a Classic McEliece algorithm
    chosen as a key exchange algorithm involves the use of the new
@@ -605,9 +603,6 @@ Informative References
               "Replay Attack in TLS 1.3 0-RTT Handshake: Countermeasure
               Techniques", n.d.,
               <https://ieeexplore.ieee.org/document/10278190>.
-
-   [MOZ25]    Mozilla, "Security/Server Side TLS", 2025,
-              <https://wiki.mozilla.org/Security/Server_Side_TLS>.
 
    [OQS24]    Open Quantum Safe, "liboqs / Algorithms / Classic
               McEliece", 2024,
