@@ -198,12 +198,6 @@ informative:
       ins: S. Kaminsky
       name: Stan Kaminsky
     date: 2024
-  MOZ25:
-    target: https://wiki.mozilla.org/Security/Server_Side_TLS
-    title: "Security/Server Side TLS"
-    author:
-      name: Mozilla
-    date: 2025
   RASHOK20:
     target: https://stackoverflow.com/questions/58719595/how-to-do-tls-1-3-psk-using-openssl
     title: "How to do TLS 1.3 PSK using openssl?"
@@ -446,7 +440,7 @@ enum {
 
 </artwork></figure>
 
-When selecting a Classic McEliece algorithm and using an external PSK or a resumption PSK (using the cipher suites "TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256" listed from [MOZ25] for TLS 1.3 "Modern Compatibility" configuration), "02" will then be listed for the "psk_key_exchange_modes" extension along with the new "key_share_pqc" extension in the ClientHello message. At the end of this ClientHello message is printed the "00 29" extension (pre-shared key extension), where the PSK identity should be printed and is mapped to the binder that should proceed it in this pre-shared key extension. The ServerHello message will also contain the new "key_share_pqc" extension, and will as well contain the pre-shared key extension, where it should contain "00 00" at the end which represents the server selecting the PSK identity of 0 (for example: the Selected Identity of 0 shown in the pre-shared key extension in a ServerHello message in this Wireshark example: [RASHOK20]). Overall, this is a new key exchange selecting a Classic McEliece algorithm using a PSK, whether its external or resumption, and this can be demonstrated in the TLS Implementation below.
+When selecting a Classic McEliece algorithm and using an external PSK or a resumption PSK, "02" will then be listed for the "psk_key_exchange_modes" extension along with the new "key_share_pqc" extension in the ClientHello message. At the end of this ClientHello message is printed the "00 29" extension (pre-shared key extension), where the PSK identity should be printed and is mapped to the binder that should proceed it in this pre-shared key extension. The ServerHello message will also contain the new "key_share_pqc" extension, and will as well contain the pre-shared key extension, where it should contain "00 00" at the end which represents the server selecting the PSK identity of 0 (for example: the Selected Identity of 0 shown in the pre-shared key extension in a ServerHello message in this Wireshark example: [RASHOK20]). Overall, this is a new key exchange selecting a Classic McEliece algorithm using a PSK, whether its external or resumption, and this can be demonstrated in the TLS Implementation below.
 
 As stated above, resumption PSK with a Classic McEliece algorithm chosen as a key exchange algorithm involves the use of the new "key_share_pqc" extension for both the ClientHello and ServerHello messages. Thus, the Resumption and PSK Message Flow diagram (which originates from Figure 3 of [RFC8446]) is derived for this situation and has been tested with the TLS Implementation mentioned in this document:
 
