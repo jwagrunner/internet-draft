@@ -5,7 +5,7 @@
 Transport Layer Security                                       J. Wagner
 Internet-Draft                                                   Y. Wang
 Intended status: Standards Track                           UNC Charlotte
-Expires: 15 November 2025                                    14 May 2025
+Expires: 16 November 2025                                    15 May 2025
 
 
         New Key Share Extension for Classic McEliece Algorithms
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 November 2025.
+   This Internet-Draft will expire on 16 November 2025.
 
 Copyright Notice
 
@@ -452,16 +452,16 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
        NamedGroup selected_group;
    } KeyShareHelloRetryRequest;
 
-   When a Hello Retry Request involves either a resumption PSK or an
-   external PSK in use with a Classic McEliece algorithm, both the first
-   and second ClientHello messages (the second one being sent after a
-   HelloRetryRequest message) will contain the exact same content except
-   the first ClientHello will have the original "key_share" extension
-   and the second ClientHello will have the new "key_share_pqc"
-   extension.  Another exception includes different binders in both
-   ClientHello messages' pre-shared key extensions.  This pre-shared key
-   extension appears as the last extension in both ClientHello messages
-   as well in the ServerHello message.
+   When a Hello Retry Request involves a PSK in use with a Classic
+   McEliece algorithm, both the first and second ClientHello messages
+   (the second one being sent after a HelloRetryRequest message) will
+   contain the exact same content except the first ClientHello will have
+   the original "key_share" extension and the second ClientHello will
+   have the new "key_share_pqc" extension.  Another exception includes
+   different binders in both ClientHello messages' pre-shared key
+   extensions.  This pre-shared key extension appears as the last
+   extension in both ClientHello messages as well in the ServerHello
+   message.
 
 7.  Other Use Case (RLCE Algorithm)
 
