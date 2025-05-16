@@ -267,7 +267,7 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
 
 </artwork></figure>
 
-Special Note: "classicmceliece6688128" above represents the choice of choosing either classicmceliece6688128 or classicmceliece6688128f, as a party can choose either of the two (as similarly stated in Section 4 of [SJ25]). The same applies to "classicmceliece6960119" above (classicmceliece6960119 or classicmceliece6960119f) and also to "classicmceliece8192128" above (classicmceliece8192128 or classicmceliece8192128f).
+Special Note: "classicmceliece6688128" above (and in this document) represents the choice of choosing either classicmceliece6688128 or classicmceliece6688128f, as a party can choose either of the two (as similarly stated in Section 4 of [SJ25]). The same applies to "classicmceliece6960119" in this document (classicmceliece6960119 or classicmceliece6960119f) and also to "classicmceliece8192128" (classicmceliece8192128 or classicmceliece8192128f).
 
 Another Note: An additional algorithm is included in the above case statements, "rlcel5", since it also has a large public key beyond the 65,535 Byte limit. See Section 7 for more information discussing this RLCE algorithm.
 
@@ -385,7 +385,7 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension.
 
 # NamedGroup Addition for Classic McEliece
 
-The values for Classic McEliece are added below in the NamedGroup struct that originates from [RFC8446]:
+The values for Classic McEliece algorithms are added below in the NamedGroup struct that originates from [RFC8446]:
 
 <figure><artwork>
 
@@ -404,12 +404,13 @@ The values for Classic McEliece are added below in the NamedGroup struct that or
               ecdhe_private_use(0xFE00..0xFEFF),
               (0xFFFF)
 
-              /* Classic McEliece family */
-              classicmceliece6688128(0x002A), classicmceliece6688128f(0x002B), classicmceliece6960119(0x002C),
-              classicmceliece6960119f(0x002D), classicmceliece8192128(0x002E), classicmceliece8192128f(0x002F)
+              /* Classic McEliece Algorithms */
+              classicmceliece6688128(0x002A), 
+              classicmceliece6960119(0x002B), 
+              classicmceliece8192128(0x002C),
 
-              /* RLCE algorithm */
-              rlcel5(0x0030)
+              /* RLCE Algorithm */
+              rlcel5(0x002D),
           } NamedGroup;
 
 </artwork></figure>
@@ -523,7 +524,7 @@ The Random Linear Code-based Encryption (RLCE) algorithm group (see [RLCE17]) is
 
 # TLS Implementation
 
-A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where the Classic McEliece algorithm family can be chosen for key exchange when initiating TLS connections. It can be accessed here: [JWYW25].
+A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where Classic McEliece algorithms can be chosen for key exchange when initiating TLS connections. It can be accessed here: [JWYW25].
 
 # Summary of Changes from RFC 8446
 
@@ -536,7 +537,7 @@ The new "key_share_pqc" extension MUST NOT be used with 0-RTT, as this subjects 
 
 # IANA Considerations
 
-The new key share proposed in this document "key_share_pqc", along with its value of 63, needs to be updated in the registry specified for TLS ExtensionType Values. See [TLSE24]. The registry for TLS Supported Groups will need to have the proper values assigned to the Classic McEliece family with the entries of 42-47 (and also for the RLCE algorithm with 48; see Section 7). See [TLSP25].
+The new key share proposed in this document "key_share_pqc", along with its value of 63, needs to be updated in the registry specified for TLS ExtensionType Values. See [TLSE24]. The registry for TLS Supported Groups will need to have the proper values assigned to the Classic McEliece algorithms mentioned in this document with the entries of 42-44 (and also for the RLCE algorithm with 45; see Section 7). See [TLSP25].
 
 # Acknowledgements
 {:numbered="false"}
