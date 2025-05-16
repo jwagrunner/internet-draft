@@ -184,20 +184,6 @@ informative:
      -
       ins: M. S. M. Gismallab
       name: Mohammed S. M. Gismallab
-  SG24:
-    target: https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/
-    title: "Google Chrome's new post-quantum cryptography may break TLS connections"
-    author:
-      ins: S. Gatlan
-      name: Sergiu Gatlan
-    date: 2024
-  SK24:
-    target: https://www.kaspersky.com/blog/postquantum-cryptography-2024-implementation-issues/52095/
-    title: "Where and how post-quantum cryptography is being used in 2024"
-    author:
-      ins: S. Kaminsky
-      name: Stan Kaminsky
-    date: 2024
   RASHOK20:
     target: https://stackoverflow.com/questions/58719595/how-to-do-tls-1-3-psk-using-openssl
     title: "How to do TLS 1.3 PSK using openssl?"
@@ -545,8 +531,6 @@ A new structure is introduced of KeyShareEntryPQC along with modifications of ex
 # Security Considerations
 
 The new "key_share_pqc" extension MUST NOT be used with 0-RTT, as this subjects the server to replay attacks of multiple large ClientHello messages (see [RFC8446] and an example of a replay attack of several ClientHello messages in [HN23]). If this extension were to be used with 0-RTT, the server may receive duplicated ClientHello messages where each of them contain a large public key of a Classic McEliece algorithm in each ClientHello's "key_share_pqc" extension, which will not only cause resource exhaustion on the server (see Section 8.2 in [RFC8446]), but memory utilization will rise quickly than noted in [MEA23] and will cause the client-hello recording defense mechanism (see Section 8.2 in [RFC8446] and [MEA23]) to be used as a Denial-of-Service attack on the server. Therefore, 0-RTT and the use of the "early_data" extension MUST NOT be used with the "key_share_pqc" extension.
-
-Larger ClientHello messages can cause TLS connections to be dropped and for TLS handshakes to be broken, as evidenced by the inclusion of post-quantum cryptography in applications of Google Chrome 124 and Microsoft Edge 124, specifically the use of Kyber768 for key agreement. See [SG24]. A possible workaround includes updating web servers if receiving an error with TLS/SSL if Kyber is utilized through Chrome or Firefox. See [SK24].
 
 # IANA Considerations
 
