@@ -244,8 +244,8 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
     struct {
        NamedGroup group;
        select (NameGroup.group) {
-       case classicmceliece6688128 | classicmceliece6688128f | classicmceliece6960119
-       | classicmceliece6960119f | classicmceliece8192128 | classicmceliece8192128f
+       case classicmceliece6688128 | classicmceliece6960119
+       | classicmceliece8192128
        | rlcel5 :
              break;
        default :
@@ -256,8 +256,8 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
     struct {
        NamedGroup group;
        select (NamedGroup.group) {
-       case classicmceliece6688128 | classicmceliece6688128f | classicmceliece6960119
-       | classicmceliece6960119f | classicmceliece8192128 | classicmceliece8192128f
+       case classicmceliece6688128 | classicmceliece6960119
+       | classicmceliece8192128
        | rlcel5 :
              opaque key_exchange<1..2^24-1>;
        default :
@@ -267,7 +267,9 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
 
 </artwork></figure>
 
-Note: An additional algorithm is included in the above case statements, "rlcel5", since it also has a large public key beyond the 65,535 Byte limit. See Section 7 for more information discussing this RLCE algorithm.
+Special Note: "classicmceliece6688128" above represents the choice of choosing either classicmceliece6688128 or classicmceliece6688128f, as a party can choose either of the two (as similarly stated in Section 4 of [SJ25]). The same applies to "classicmceliece6960119" above (classicmceliece6960119 or classicmceliece6960119f) and also to "classicmceliece8192128" above (classicmceliece8192128 or classicmceliece8192128f). 
+
+Another Note: An additional algorithm is included in the above case statements, "rlcel5", since it also has a large public key beyond the 65,535 Byte limit. See Section 7 for more information discussing this RLCE algorithm.
 
 This is then applied to the existing KeyShareClientHello structure, which originates from [RFC8446], that now contains an additional field for KeyShareEntryPQC:
 
