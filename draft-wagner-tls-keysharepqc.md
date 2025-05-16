@@ -222,7 +222,7 @@ informative:
     date: 2004
 --- abstract
 
-RFC 8446 is modified to where another key share extension is introduced to accommodate both public keys and ciphertexts in ClientHello and ServerHello messages for post-quantum algorithms that have large public keys, including the code-based cryptographic scheme the Classic McEliece family.
+RFC 8446 is modified to where another key share extension is introduced to accommodate both public keys and ciphertexts in ClientHello and ServerHello messages for post-quantum algorithms that have large public keys, including algorithms of the code-based cryptographic scheme Classic McEliece.
 
 --- middle
 
