@@ -5,7 +5,7 @@
 Transport Layer Security                                       J. Wagner
 Internet-Draft                                                   Y. Wang
 Intended status: Standards Track                           UNC Charlotte
-Expires: 16 November 2025                                    15 May 2025
+Expires: 17 November 2025                                    16 May 2025
 
 
         New Key Share Extension for Classic McEliece Algorithms
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 November 2025.
+   This Internet-Draft will expire on 17 November 2025.
 
 Copyright Notice
 
@@ -563,7 +563,7 @@ Normative References
 
    [SJ25]     Josefsson, S., "Classic McEliece", 2025,
               <https://datatracker.ietf.org/doc/draft-josefsson-
-              mceliece/>.
+              mceliece/ (work in progress)>.
 
    [TLSE24]   Internet Assigned Numbers Authority, "Transport Layer
               Security (TLS) Extensions", 2024,
