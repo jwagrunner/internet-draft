@@ -533,10 +533,12 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
 
 Acknowledgements
 
-   Thank you to D.  J.  Bernstein, as his expertise and feedback greatly
-   improved the content of this document.
+   Thank you to D.  J.  Bernstein, as his advice on Classic McEliece
+   help improved the content of this document.  Thank you also to Simon
+   Josefsson since his feedback helped clarify and enhance understanding
+   of Classic McEliece in this record.
 
-   Thank you also to Martin Thomson and David Schinazi, as their
+   Thank you as well to Martin Thomson and David Schinazi, as their
    Internet Draft template was used to generate this document, before
    the authors' information was added.  The authors also want to thank
    the contributors of the kramdown-rfc GitHub repository, as their
