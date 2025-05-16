@@ -1542,7 +1542,6 @@ struct {
 <a href="#section-10" class="section-number selfRef">10. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
 <p id="section-10-1">The new "key_share_pqc" extension <span class="bcp14">MUST NOT</span> be used with 0-RTT, as this subjects the server to replay attacks of multiple large ClientHello messages (see <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> and an example of a replay attack of several ClientHello messages in <span>[<a href="#HN23" class="cite xref">HN23</a>]</span>). If this extension were to be used with 0-RTT, the server may receive duplicated ClientHello messages where each of them contain a large public key of a Classic McEliece algorithm in each ClientHello's "key_share_pqc" extension, which will not only cause resource exhaustion on the server (see Section 8.2 in <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>), but memory utilization will rise quickly than noted in <span>[<a href="#MEA23" class="cite xref">MEA23</a>]</span> and will cause the client-hello recording defense mechanism (see Section 8.2 in <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> and <span>[<a href="#MEA23" class="cite xref">MEA23</a>]</span>) to be used as a Denial-of-Service attack on the server. Therefore, 0-RTT and the use of the "early_data" extension <span class="bcp14">MUST NOT</span> be used with the "key_share_pqc" extension.<a href="#section-10-1" class="pilcrow">¶</a></p>
-<p id="section-10-2">Larger ClientHello messages can cause TLS connections to be dropped and for TLS handshakes to be broken, as evidenced by the inclusion of post-quantum cryptography in applications of Google Chrome 124 and Microsoft Edge 124, specifically the use of Kyber768 for key agreement. See <span>[<a href="#SG24" class="cite xref">SG24</a>]</span>. A possible workaround includes updating web servers if receiving an error with TLS/SSL if Kyber is utilized through Chrome or Firefox. See <span>[<a href="#SK24" class="cite xref">SK24</a>]</span>.<a href="#section-10-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -1649,14 +1648,6 @@ struct {
 <dt id="RLCE17">[RLCE17]</dt>
         <dd>
 <span class="refAuthor">Wang, Y.</span>, <span class="refTitle">"Quantum Resistant Public Key Encryption Scheme RLCE and IND-CCA2 Security for McEliece Schemes"</span>, <time datetime="2017" class="refDate">2017</time>, <span>&lt;<a href="https://eprint.iacr.org/2017/206.pdf">https://eprint.iacr.org/2017/206.pdf</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="SG24">[SG24]</dt>
-        <dd>
-<span class="refAuthor">Gatlan, S.</span>, <span class="refTitle">"Google Chrome's new post-quantum cryptography may break TLS connections"</span>, <time datetime="2024" class="refDate">2024</time>, <span>&lt;<a href="https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/">https://www.bleepingcomputer.com/news/security/google-chromes-new-post-quantum-cryptography-may-break-tls-connections/</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="SK24">[SK24]</dt>
-        <dd>
-<span class="refAuthor">Kaminsky, S.</span>, <span class="refTitle">"Where and how post-quantum cryptography is being used in 2024"</span>, <time datetime="2024" class="refDate">2024</time>, <span>&lt;<a href="https://www.kaspersky.com/blog/postquantum-cryptography-2024-implementation-issues/52095/">https://www.kaspersky.com/blog/postquantum-cryptography-2024-implementation-issues/52095/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="SRVR1211">[SRVR1211]</dt>
         <dd>

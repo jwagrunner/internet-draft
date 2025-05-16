@@ -512,14 +512,6 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
    and the use of the "early_data" extension MUST NOT be used with the
    "key_share_pqc" extension.
 
-   Larger ClientHello messages can cause TLS connections to be dropped
-   and for TLS handshakes to be broken, as evidenced by the inclusion of
-   post-quantum cryptography in applications of Google Chrome 124 and
-   Microsoft Edge 124, specifically the use of Kyber768 for key
-   agreement.  See [SG24].  A possible workaround includes updating web
-   servers if receiving an error with TLS/SSL if Kyber is utilized
-   through Chrome or Firefox.  See [SK24].
-
 11.  IANA Considerations
 
    The new key share proposed in this document "key_share_pqc", along
@@ -624,17 +616,6 @@ Informative References
    [RLCE17]   Wang, Y., "Quantum Resistant Public Key Encryption Scheme
               RLCE and IND-CCA2 Security for McEliece Schemes", 2017,
               <https://eprint.iacr.org/2017/206.pdf>.
-
-   [SG24]     Gatlan, S., "Google Chrome's new post-quantum cryptography
-              may break TLS connections", 2024,
-              <https://www.bleepingcomputer.com/news/security/google-
-              chromes-new-post-quantum-cryptography-may-break-tls-
-              connections/>.
-
-   [SK24]     Kaminsky, S., "Where and how post-quantum cryptography is
-              being used in 2024", 2024,
-              <https://www.kaspersky.com/blog/postquantum-cryptography-
-              2024-implementation-issues/52095/>.
 
    [SRVR1211] Wagner, J., "ssl/statem/statem_srvr.c#L1211", 2024,
               <https://github.com/jwagrunner/openssl/blob/master/ssl/
