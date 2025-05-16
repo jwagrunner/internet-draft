@@ -51,12 +51,12 @@ normative:
       name: Eric Rescorla
     date: 2018
   SJ25:
-    target: https://datatracker.ietf.org/doc/draft-josefsson-mceliece/
+    target: draft-josefsson-mceliece-02, (work in progress)
     title: "Classic McEliece"
     author:
       ins: S. Josefsson
       name: Simon Josefsson
-    date: draft-josefsson-mceliece-02 (work in progress) March 2025
+    date: March 2025
   TLSE24:
     target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
     title: "Transport Layer Security (TLS) Extensions"
