@@ -561,9 +561,8 @@ Normative References
               Version 1.3", 2018,
               <https://datatracker.ietf.org/doc/html/rfc8446>.
 
-   [SJ25]     Josefsson, S., "Classic McEliece", March 2025,
-              <https://datatracker.ietf.org/doc/draft-josefsson-
-              mceliece/>.
+   [SJ25]     Josefsson, S., "Classic McEliece", March 2025, <draft-
+              josefsson-mceliece-02, (work in progress)>.
 
    [TLSE24]   Internet Assigned Numbers Authority, "Transport Layer
               Security (TLS) Extensions", 2024,
