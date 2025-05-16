@@ -405,8 +405,8 @@ The values for Classic McEliece algorithms are added below in the NamedGroup str
               (0xFFFF)
 
               /* Classic McEliece Algorithms */
-              classicmceliece6688128(0x002A), 
-              classicmceliece6960119(0x002B), 
+              classicmceliece6688128(0x002A),
+              classicmceliece6960119(0x002B),
               classicmceliece8192128(0x002C),
 
               /* RLCE Algorithm */
