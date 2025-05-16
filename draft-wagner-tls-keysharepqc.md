@@ -51,7 +51,8 @@ normative:
       name: Eric Rescorla
     date: 2018
   SJ25:
-    title: "Classic McEliece" draft-josefsson-mceliece-02 (work in progress)
+    title: "Classic McEliece"
+    seriesInfo: draft-josefsson-mceliece-02 (work in progress)
     author:
       ins: S. Josefsson
       name: Simon Josefsson
