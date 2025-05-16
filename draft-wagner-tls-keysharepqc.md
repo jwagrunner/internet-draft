@@ -267,7 +267,7 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
 
 </artwork></figure>
 
-Special Note: "classicmceliece6688128" above represents the choice of choosing either classicmceliece6688128 or classicmceliece6688128f, as a party can choose either of the two (as similarly stated in Section 4 of [SJ25]). The same applies to "classicmceliece6960119" above (classicmceliece6960119 or classicmceliece6960119f) and also to "classicmceliece8192128" above (classicmceliece8192128 or classicmceliece8192128f). 
+Special Note: "classicmceliece6688128" above represents the choice of choosing either classicmceliece6688128 or classicmceliece6688128f, as a party can choose either of the two (as similarly stated in Section 4 of [SJ25]). The same applies to "classicmceliece6960119" above (classicmceliece6960119 or classicmceliece6960119f) and also to "classicmceliece8192128" above (classicmceliece8192128 or classicmceliece8192128f).
 
 Another Note: An additional algorithm is included in the above case statements, "rlcel5", since it also has a large public key beyond the 65,535 Byte limit. See Section 7 for more information discussing this RLCE algorithm.
 
