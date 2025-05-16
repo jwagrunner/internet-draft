@@ -1259,7 +1259,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 
 </pre><a href="#section-3-2" class="pilcrow">¶</a>
 </div>
-<p id="section-3-3">Special Note: "classicmceliece6688128" above represents the choice of choosing either classicmceliece6688128 or classicmceliece6688128f, as a party can choose either of the two (as similarly stated in Section 4 of <span>[<a href="#SJ25" class="cite xref">SJ25</a>]</span>). The same applies to "classicmceliece6960119" above (classicmceliece6960119 or classicmceliece6960119f) and also to "classicmceliece8192128" above (classicmceliece8192128 or classicmceliece8192128f).<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-3">Special Note: "classicmceliece6688128" above (and in this document) represents the choice of choosing either classicmceliece6688128 or classicmceliece6688128f, as a party can choose either of the two (as similarly stated in Section 4 of <span>[<a href="#SJ25" class="cite xref">SJ25</a>]</span>). The same applies to "classicmceliece6960119" in this document (classicmceliece6960119 or classicmceliece6960119f) and also to "classicmceliece8192128" (classicmceliece8192128 or classicmceliece8192128f).<a href="#section-3-3" class="pilcrow">¶</a></p>
 <p id="section-3-4">Another Note: An additional algorithm is included in the above case statements, "rlcel5", since it also has a large public key beyond the 65,535 Byte limit. See Section 7 for more information discussing this RLCE algorithm.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <p id="section-3-5">This is then applied to the existing KeyShareClientHello structure, which originates from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>, that now contains an additional field for KeyShareEntryPQC:<a href="#section-3-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3-6">
@@ -1378,7 +1378,7 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension.
       <h2 id="name-namedgroup-addition-for-cla">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-namedgroup-addition-for-cla" class="section-name selfRef">NamedGroup Addition for Classic McEliece</a>
       </h2>
-<p id="section-4-1">The values for Classic McEliece are added below in the NamedGroup struct that originates from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>:<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">The values for Classic McEliece algorithms are added below in the NamedGroup struct that originates from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>:<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4-2">
 <pre>
 
@@ -1397,12 +1397,13 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension.
               ecdhe_private_use(0xFE00..0xFEFF),
               (0xFFFF)
 
-              /* Classic McEliece family */
-              classicmceliece6688128(0x002A), classicmceliece6688128f(0x002B), classicmceliece6960119(0x002C),
-              classicmceliece6960119f(0x002D), classicmceliece8192128(0x002E), classicmceliece8192128f(0x002F)
+              /* Classic McEliece Algorithms */
+              classicmceliece6688128(0x002A),
+              classicmceliece6960119(0x002B),
+              classicmceliece8192128(0x002C),
 
-              /* RLCE algorithm */
-              rlcel5(0x0030)
+              /* RLCE Algorithm */
+              rlcel5(0x002D),
           } NamedGroup;
 
 </pre><a href="#section-4-2" class="pilcrow">¶</a>
@@ -1526,7 +1527,7 @@ struct {
       <h2 id="name-tls-implementation">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-tls-implementation" class="section-name selfRef">TLS Implementation</a>
       </h2>
-<p id="section-8-1">A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where the Classic McEliece algorithm family can be chosen for key exchange when initiating TLS connections. It can be accessed here: <span>[<a href="#JWYW25" class="cite xref">JWYW25</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where Classic McEliece algorithms can be chosen for key exchange when initiating TLS connections. It can be accessed here: <span>[<a href="#JWYW25" class="cite xref">JWYW25</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="summary-of-changes-from-rfc-8446">
@@ -1550,7 +1551,7 @@ struct {
       <h2 id="name-iana-considerations">
 <a href="#section-11" class="section-number selfRef">11. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-11-1">The new key share proposed in this document "key_share_pqc", along with its value of 63, needs to be updated in the registry specified for TLS ExtensionType Values. See <span>[<a href="#TLSE24" class="cite xref">TLSE24</a>]</span>. The registry for TLS Supported Groups will need to have the proper values assigned to the Classic McEliece family with the entries of 42-47 (and also for the RLCE algorithm with 48; see Section 7). See <span>[<a href="#TLSP25" class="cite xref">TLSP25</a>]</span>.<a href="#section-11-1" class="pilcrow">¶</a></p>
+<p id="section-11-1">The new key share proposed in this document "key_share_pqc", along with its value of 63, needs to be updated in the registry specified for TLS ExtensionType Values. See <span>[<a href="#TLSE24" class="cite xref">TLSE24</a>]</span>. The registry for TLS Supported Groups will need to have the proper values assigned to the Classic McEliece algorithms mentioned in this document with the entries of 42-44 (and also for the RLCE algorithm with 45; see Section 7). See <span>[<a href="#TLSP25" class="cite xref">TLSP25</a>]</span>.<a href="#section-11-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="acknowledgements">
