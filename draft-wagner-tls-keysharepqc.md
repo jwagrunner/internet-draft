@@ -1,7 +1,7 @@
 ---
 title: New Key Share Extension for Classic McEliece Algorithms
 abbrev: keyshare
-category: std
+category: info
 
 docname: draft-wagner-tls-keysharepqc-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
@@ -64,13 +64,13 @@ normative:
       ins: S. Josefsson
       name: Simon Josefsson
     date: March 2025
-  TLSE24:
+  TLSE:
     target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
     title: "Transport Layer Security (TLS) Extensions"
     author:
       org: Internet Assigned Numbers Authority
-    date: 2024
-  TLSP25:
+    date: 2025
+  TLSP:
     target: https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml
     title: "Transport Layer Security (TLS) Parameters"
     author:
@@ -412,12 +412,12 @@ The values for Classic McEliece algorithms are added below in the NamedGroup str
               (0xFFFF)
 
               /* Classic McEliece Algorithms */
-              classicmceliece6688128(0x002A),
-              classicmceliece6960119(0x002B),
-              classicmceliece8192128(0x002C),
+              classicmceliece6688128(0x0203),
+              classicmceliece6960119(0x0204),
+              classicmceliece8192128(0x0205),
 
               /* RLCE Algorithm */
-              rlcel5(0x002D),
+              rlcel5(0x0206),
           } NamedGroup;
 
 </artwork></figure>
@@ -544,7 +544,22 @@ The new "key_share_pqc" extension MUST NOT be used with 0-RTT, as this subjects 
 
 # IANA Considerations
 
-The new key share proposed in this document "key_share_pqc", along with its value of 63, needs to be updated in the registry specified for TLS ExtensionType Values. See [TLSE24]. The registry for TLS Supported Groups will need to have the proper values assigned to the Classic McEliece algorithms mentioned in this document with the entries of 42-44 (and also for the RLCE algorithm with 45; see Section 7). See [TLSP25].
+Probable request for the new key share proposed in this document "key_share_pqc" to have a value of 63 in the registry specified for TLS ExtensionType Values (see [TLSE]). 
+
+Probable request for the registry for TLS Supported Groups to have the proper values assigned to the Classic McEliece and the RLCE algorithms mentioned in this document (see [TLSP]):
+
+Description: classicmceliece6688128
+Value: 0x0203
+
+Description: classicmceliece6960119
+Value: 0x0204
+
+Description: classicmceliece8192128
+Value: 0x0205
+
+Description: rlcel5
+Value: 0x0206
+
 
 # Acknowledgements
 {:numbered="false"}
