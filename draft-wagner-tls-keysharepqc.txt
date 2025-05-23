@@ -531,13 +531,21 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
    the proper values assigned to the Classic McEliece and the RLCE
    algorithms mentioned in this document (see [TLSP]):
 
-   Description: classicmceliece6688128 Value: 0x0203
+   Description: classicmceliece6688128
 
-   Description: classicmceliece6960119 Value: 0x0204
+   Value: 0x0203
 
-   Description: classicmceliece8192128 Value: 0x0205
+   Description: classicmceliece6960119
 
-   Description: rlcel5 Value: 0x0206
+   Value: 0x0204
+
+   Description: classicmceliece8192128
+
+   Value: 0x0205
+
+   Description: rlcel5
+
+   Value: 0x0206
 
 Acknowledgements
 
