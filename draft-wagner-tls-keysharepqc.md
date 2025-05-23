@@ -57,6 +57,13 @@ normative:
       ins: S. Josefsson
       name: Simon Josefsson
     date: March 2025
+  SJ125:
+    target: draft-josefsson-ssh-mceliece-01, (work in progress)
+    title: "Secure Shell Key Exchange Method Using Chempat Hybrid of Classic McEliece and X25519 with SHA-512: mceliece6688128x25519-sha512"
+    author:
+      ins: S. Josefsson
+      name: Simon Josefsson
+    date: March 2025 
   TLSE24:
     target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
     title: "Transport Layer Security (TLS) Extensions"
@@ -267,7 +274,7 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
 
 </artwork></figure>
 
-Special Note: "classicmceliece6688128" above (and in this document) represents the choice of choosing either classicmceliece6688128 or classicmceliece6688128f, as a party can choose either of the two (as similarly stated in Section 4 of [SJ25]). The same applies to "classicmceliece6960119" in this document (classicmceliece6960119 or classicmceliece6960119f) and also to "classicmceliece8192128" (classicmceliece8192128 or classicmceliece8192128f).
+Special Note: "classicmceliece6688128" above (and in this document) represents the choice of choosing either classicmceliece6688128 or classicmceliece6688128f, as a party can choose either of the two (as similarly stated in Section 4 of [SJ125]). The same applies to "classicmceliece6960119" in this document (classicmceliece6960119 or classicmceliece6960119f) and also to "classicmceliece8192128" (classicmceliece8192128 or classicmceliece8192128f).
 
 Another Note: An additional algorithm is included in the above case statements, "rlcel5", since it also has a large public key beyond the 65,535 Byte limit. See Section 7 for more information discussing this RLCE algorithm.
 
