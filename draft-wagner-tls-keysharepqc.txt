@@ -5,7 +5,7 @@
 Transport Layer Security                                       J. Wagner
 Internet-Draft                                                   Y. Wang
 Intended status: Standards Track                           UNC Charlotte
-Expires: 17 November 2025                                    16 May 2025
+Expires: 24 November 2025                                    23 May 2025
 
 
         New Key Share Extension for Classic McEliece Algorithms
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 November 2025.
+   This Internet-Draft will expire on 24 November 2025.
 
 Copyright Notice
 
@@ -158,7 +158,7 @@ Table of Contents
    Special Note: "classicmceliece6688128" above (and in this document)
    represents the choice of choosing either classicmceliece6688128 or
    classicmceliece6688128f, as a party can choose either of the two (as
-   similarly stated in Section 4 of [SJ25]).  The same applies to
+   similarly stated in Section 4 of [SJ125]).  The same applies to
    "classicmceliece6960119" in this document (classicmceliece6960119 or
    classicmceliece6960119f) and also to "classicmceliece8192128"
    (classicmceliece8192128 or classicmceliece8192128f).
@@ -564,6 +564,11 @@ Normative References
    [RFC8446]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
               Version 1.3", 2018,
               <https://datatracker.ietf.org/doc/html/rfc8446>.
+
+   [SJ125]    Josefsson, S., "Secure Shell Key Exchange Method Using
+              Chempat Hybrid of Classic McEliece and X25519 with SHA-
+              512: mceliece6688128x25519-sha512", March 2025, <draft-
+              josefsson-ssh-mceliece-01, (work in progress)>.
 
    [SJ25]     Josefsson, S., "Classic McEliece", March 2025, <draft-
               josefsson-mceliece-02, (work in progress)>.
