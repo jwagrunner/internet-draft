@@ -1066,7 +1066,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <time datetime="2025-05-23" class="published">23 May 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
-<dd class="intended-status">Standards Track</dd>
+<dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
 <dd class="expires"><time datetime="2025-11-24">24 November 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
@@ -1398,12 +1398,12 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension.
               (0xFFFF)
 
               /* Classic McEliece Algorithms */
-              classicmceliece6688128(0x002A),
-              classicmceliece6960119(0x002B),
-              classicmceliece8192128(0x002C),
+              classicmceliece6688128(0x0203),
+              classicmceliece6960119(0x0204),
+              classicmceliece8192128(0x0205),
 
               /* RLCE Algorithm */
-              rlcel5(0x002D),
+              rlcel5(0x0206),
           } NamedGroup;
 
 </pre><a href="#section-4-2" class="pilcrow">¶</a>
@@ -1551,7 +1551,16 @@ struct {
       <h2 id="name-iana-considerations">
 <a href="#section-11" class="section-number selfRef">11. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-11-1">The new key share proposed in this document "key_share_pqc", along with its value of 63, needs to be updated in the registry specified for TLS ExtensionType Values. See <span>[<a href="#TLSE24" class="cite xref">TLSE24</a>]</span>. The registry for TLS Supported Groups will need to have the proper values assigned to the Classic McEliece algorithms mentioned in this document with the entries of 42-44 (and also for the RLCE algorithm with 45; see Section 7). See <span>[<a href="#TLSP25" class="cite xref">TLSP25</a>]</span>.<a href="#section-11-1" class="pilcrow">¶</a></p>
+<p id="section-11-1">Probable request for the new key share proposed in this document "key_share_pqc" to have a value of 63 in the registry specified for TLS ExtensionType Values (see <span>[<a href="#TLSE" class="cite xref">TLSE</a>]</span>).<a href="#section-11-1" class="pilcrow">¶</a></p>
+<p id="section-11-2">Probable request for the registry for TLS Supported Groups to have the proper values assigned to the Classic McEliece and the RLCE algorithms mentioned in this document (see <span>[<a href="#TLSP" class="cite xref">TLSP</a>]</span>):<a href="#section-11-2" class="pilcrow">¶</a></p>
+<p id="section-11-3">Description: classicmceliece6688128
+Value: 0x0203<a href="#section-11-3" class="pilcrow">¶</a></p>
+<p id="section-11-4">Description: classicmceliece6960119
+Value: 0x0204<a href="#section-11-4" class="pilcrow">¶</a></p>
+<p id="section-11-5">Description: classicmceliece8192128
+Value: 0x0205<a href="#section-11-5" class="pilcrow">¶</a></p>
+<p id="section-11-6">Description: rlcel5
+Value: 0x0206<a href="#section-11-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="acknowledgements">
@@ -1594,11 +1603,11 @@ struct {
         <dd>
 <span class="refAuthor">Josefsson, S.</span>, <span class="refTitle">"Classic McEliece"</span>, <time datetime="2025-03" class="refDate">March 2025</time>, <span>&lt;<a href="draft-josefsson-mceliece-02,%20(work%20in%20progress)">draft-josefsson-mceliece-02, (work in progress)</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="TLSE24">[TLSE24]</dt>
+<dt id="TLSE">[TLSE]</dt>
         <dd>
-<span class="refAuthor">Internet Assigned Numbers Authority</span>, <span class="refTitle">"Transport Layer Security (TLS) Extensions"</span>, <time datetime="2024" class="refDate">2024</time>, <span>&lt;<a href="https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml">https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml</a>&gt;</span>. </dd>
+<span class="refAuthor">Internet Assigned Numbers Authority</span>, <span class="refTitle">"Transport Layer Security (TLS) Extensions"</span>, <time datetime="2025" class="refDate">2025</time>, <span>&lt;<a href="https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml">https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="TLSP25">[TLSP25]</dt>
+<dt id="TLSP">[TLSP]</dt>
       <dd>
 <span class="refAuthor">Internet Assigned Numbers Authority</span>, <span class="refTitle">"Transport Layer Security (TLS) Parameters"</span>, <time datetime="2025" class="refDate">2025</time>, <span>&lt;<a href="https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml">https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml</a>&gt;</span>. </dd>
 <dd class="break"></dd>

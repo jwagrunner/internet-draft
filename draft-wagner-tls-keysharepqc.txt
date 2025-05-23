@@ -4,7 +4,7 @@
 
 Transport Layer Security                                       J. Wagner
 Internet-Draft                                                   Y. Wang
-Intended status: Standards Track                           UNC Charlotte
+Intended status: Informational                             UNC Charlotte
 Expires: 24 November 2025                                    23 May 2025
 
 
@@ -308,12 +308,12 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension.
                 (0xFFFF)
 
                 /* Classic McEliece Algorithms */
-                classicmceliece6688128(0x002A),
-                classicmceliece6960119(0x002B),
-                classicmceliece8192128(0x002C),
+                classicmceliece6688128(0x0203),
+                classicmceliece6960119(0x0204),
+                classicmceliece8192128(0x0205),
 
                 /* RLCE Algorithm */
-                rlcel5(0x002D),
+                rlcel5(0x0206),
             } NamedGroup;
 
    Note: An RLCE algorithm is also added above.  See Section 7 for more
@@ -523,13 +523,21 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
 
 11.  IANA Considerations
 
-   The new key share proposed in this document "key_share_pqc", along
-   with its value of 63, needs to be updated in the registry specified
-   for TLS ExtensionType Values.  See [TLSE24].  The registry for TLS
-   Supported Groups will need to have the proper values assigned to the
-   Classic McEliece algorithms mentioned in this document with the
-   entries of 42-44 (and also for the RLCE algorithm with 45; see
-   Section 7).  See [TLSP25].
+   Probable request for the new key share proposed in this document
+   "key_share_pqc" to have a value of 63 in the registry specified for
+   TLS ExtensionType Values (see [TLSE]).
+
+   Probable request for the registry for TLS Supported Groups to have
+   the proper values assigned to the Classic McEliece and the RLCE
+   algorithms mentioned in this document (see [TLSP]):
+
+   Description: classicmceliece6688128 Value: 0x0203
+
+   Description: classicmceliece6960119 Value: 0x0204
+
+   Description: classicmceliece8192128 Value: 0x0205
+
+   Description: rlcel5 Value: 0x0206
 
 Acknowledgements
 
@@ -573,12 +581,12 @@ Normative References
    [SJ25]     Josefsson, S., "Classic McEliece", March 2025, <draft-
               josefsson-mceliece-02, (work in progress)>.
 
-   [TLSE24]   Internet Assigned Numbers Authority, "Transport Layer
-              Security (TLS) Extensions", 2024,
+   [TLSE]     Internet Assigned Numbers Authority, "Transport Layer
+              Security (TLS) Extensions", 2025,
               <https://www.iana.org/assignments/tls-extensiontype-
               values/tls-extensiontype-values.xhtml>.
 
-   [TLSP25]   Internet Assigned Numbers Authority, "Transport Layer
+   [TLSP]     Internet Assigned Numbers Authority, "Transport Layer
               Security (TLS) Parameters", 2025,
               <https://www.iana.org/assignments/tls-parameters/tls-
               parameters.xhtml>.
