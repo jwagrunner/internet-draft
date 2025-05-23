@@ -63,7 +63,7 @@ normative:
     author:
       ins: S. Josefsson
       name: Simon Josefsson
-    date: March 2025 
+    date: March 2025
   TLSE24:
     target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
     title: "Transport Layer Security (TLS) Extensions"
