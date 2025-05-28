@@ -1050,7 +1050,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Wagner &amp; Wang</td>
-<td class="center">Expires 24 November 2025</td>
+<td class="center">Expires 29 November 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-wagner-tls-keysharepqc-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-23" class="published">23 May 2025</time>
+<time datetime="2025-05-28" class="published">28 May 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-24">24 November 2025</time></dd>
+<dd class="expires"><time datetime="2025-11-29">29 November 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1122,7 +1122,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 24 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 29 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1210,7 +1210,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see <span>[<a href="#SJ25" class="cite xref">SJ25</a>]</span>, <span>[<a href="#DJB25" class="cite xref">DJB25</a>]</span>, <span>[<a href="#RJM78" class="cite xref">RJM78</a>]</span>, and <span>[<a href="#OQS24" class="cite xref">OQS24</a>]</span>), cannot be easily implemented in Transport Layer Security (TLS) Protocol Version 1.3 ([RF8446]) due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see <span>[<a href="#PQC25" class="cite xref">PQC25</a>]</span>). Therefore, this document proposes a new key share that has a higher limit and is utilized in ClientHello and ServerHello messages, which is a modification of <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>. For example, if a Classic McEliece algorithm is requested in a TLS 1.3 key exchange, this new key share extension will be constructed. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed. Thus, enabling the use of Classic McEliece algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see <span>[<a href="#NIST" class="cite xref">NIST</a>]</span>, <span>[<a href="#DJB25" class="cite xref">DJB25</a>]</span>, <span>[<a href="#RJM78" class="cite xref">RJM78</a>]</span>, and <span>[<a href="#OQS24" class="cite xref">OQS24</a>]</span>), cannot be easily implemented in Transport Layer Security (TLS) Protocol Version 1.3 ([RF8446]) due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see <span>[<a href="#PQC25" class="cite xref">PQC25</a>]</span>). Therefore, this document proposes a new key share that has a higher limit and is utilized in ClientHello and ServerHello messages, which is a modification of <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>. For example, if a Classic McEliece algorithm is requested in a TLS 1.3 key exchange, this new key share extension will be constructed. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed. Thus, enabling the use of Classic McEliece algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.<a href="#section-1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1238,7 +1238,8 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
        select (NameGroup.group) {
        case classicmceliece6688128 | classicmceliece6960119
        | classicmceliece8192128
-       | rlcel5 :
+       | rlcel5 ( | (other large post-quantum algorithm1)
+       | (other large post-quantum algorithm2)  | (etc.)) :
              break;
        default :
              opaque key_exchange&lt;1..2^16-1&gt;;
@@ -1250,7 +1251,8 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
        select (NamedGroup.group) {
        case classicmceliece6688128 | classicmceliece6960119
        | classicmceliece8192128
-       | rlcel5 :
+       | rlcel5 ( | (other large post-quantum algorithm1)
+       | (other large post-quantum algorithm2)  | (etc.)) :
              opaque key_exchange&lt;1..2^24-1&gt;;
        default :
              break;
@@ -1259,7 +1261,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 
 </pre><a href="#section-3-2" class="pilcrow">¶</a>
 </div>
-<p id="section-3-3">Special Note: "classicmceliece6688128" above (and in this document) represents the choice of choosing either classicmceliece6688128 or classicmceliece6688128f, as a party can choose either of the two (as similarly stated in Section 4 of <span>[<a href="#SJ125" class="cite xref">SJ125</a>]</span>). The same applies to "classicmceliece6960119" in this document (classicmceliece6960119 or classicmceliece6960119f) and also to "classicmceliece8192128" (classicmceliece8192128 or classicmceliece8192128f).<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-3">Note: "other large post-quantum algorithm1" and "other large post-quantum algorithm2" and "etc." above indicates that one or more future post-quantum algorithms with large public key sizes can be added by just defining a constant for each of these post-quantum algorithms.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <p id="section-3-4">Another Note: An additional algorithm is included in the above case statements, "rlcel5", since it also has a large public key beyond the 65,535 Byte limit. See Section 7 for more information discussing this RLCE algorithm.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <p id="section-3-5">This is then applied to the existing KeyShareClientHello structure, which originates from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>, that now contains an additional field for KeyShareEntryPQC:<a href="#section-3-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3-6">
@@ -1595,14 +1597,6 @@ struct {
         <dd>
 <span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <time datetime="2018" class="refDate">2018</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc8446">https://datatracker.ietf.org/doc/html/rfc8446</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="SJ125">[SJ125]</dt>
-        <dd>
-<span class="refAuthor">Josefsson, S.</span>, <span class="refTitle">"Secure Shell Key Exchange Method Using Chempat Hybrid of Classic McEliece and X25519 with SHA-512: mceliece6688128x25519-sha512"</span>, <time datetime="2025-03" class="refDate">March 2025</time>, <span>&lt;<a href="draft-josefsson-ssh-mceliece-01,%20(work%20in%20progress)">draft-josefsson-ssh-mceliece-01, (work in progress)</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="SJ25">[SJ25]</dt>
-        <dd>
-<span class="refAuthor">Josefsson, S.</span>, <span class="refTitle">"Classic McEliece"</span>, <time datetime="2025-03" class="refDate">March 2025</time>, <span>&lt;<a href="draft-josefsson-mceliece-02,%20(work%20in%20progress)">draft-josefsson-mceliece-02, (work in progress)</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="TLSE">[TLSE]</dt>
         <dd>
 <span class="refAuthor">Internet Assigned Numbers Authority</span>, <span class="refTitle">"Transport Layer Security (TLS) Extensions"</span>, <time datetime="2025" class="refDate">2025</time>, <span>&lt;<a href="https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml">https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml</a>&gt;</span>. </dd>
@@ -1643,6 +1637,10 @@ struct {
 <dt id="MEA23">[MEA23]</dt>
         <dd>
 <span class="refAuthor">Abdelhafez, M. E.</span>, <span class="refAuthor">Ramadass, S.</span>, and <span class="refAuthor">M. S. M. Gismallab</span>, <span class="refTitle">"Replay Attack in TLS 1.3 0-RTT Handshake: Countermeasure Techniques"</span>, <span>n.d.</span>, <span>&lt;<a href="https://ieeexplore.ieee.org/document/10278190">https://ieeexplore.ieee.org/document/10278190</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="NIST">[NIST]</dt>
+        <dd>
+<span class="refAuthor">Bernstein, D.</span>, <span class="refAuthor">Chou, T.</span>, <span class="refAuthor">Cid, C.</span>, <span class="refAuthor">Gilcher, J.</span>, <span class="refAuthor">Lange, T.</span>, <span class="refAuthor">Maram, V.</span>, <span class="refAuthor">von Maurich, I.</span>, <span class="refAuthor">Misoczki, R.</span>, <span class="refAuthor">Niederhagen, R.</span>, <span class="refAuthor">Persichetti, E.</span>, <span class="refAuthor">Peters, C.</span>, <span class="refAuthor">Sendrier, N.</span>, <span class="refAuthor">Szefer, J.</span>, <span class="refAuthor">Tjhai, C.</span>, <span class="refAuthor">Tomlinson, M.</span>, and <span class="refAuthor">W. Wang</span>, <span class="refTitle">"Classic McEliece"</span>, <time datetime="2025" class="refDate">2025</time>, <span>&lt;<a href="https://csrc.nist.gov/projects/post-quantum-cryptography/round-4-submissions">https://csrc.nist.gov/projects/post-quantum-cryptography/round-4-submissions</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="OQS24">[OQS24]</dt>
         <dd>

@@ -5,7 +5,7 @@
 Transport Layer Security                                       J. Wagner
 Internet-Draft                                                   Y. Wang
 Intended status: Informational                             UNC Charlotte
-Expires: 24 November 2025                                    23 May 2025
+Expires: 29 November 2025                                    28 May 2025
 
 
         New Key Share Extension for Classic McEliece Algorithms
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 November 2025.
+   This Internet-Draft will expire on 29 November 2025.
 
 Copyright Notice
 
@@ -89,7 +89,7 @@ Table of Contents
 1.  Introduction
 
    Large public key algorithms, including the code-based cryptographic
-   algorithm family Classic McEliece (see [SJ25], [DJB25], [RJM78], and
+   algorithm family Classic McEliece (see [NIST], [DJB25], [RJM78], and
    [OQS24]), cannot be easily implemented in Transport Layer Security
    (TLS) Protocol Version 1.3 ([RF8446]) due to the current key share
    limitations of 65,535 Bytes.  It is important to consider such uses
@@ -136,7 +136,8 @@ Table of Contents
           select (NameGroup.group) {
           case classicmceliece6688128 | classicmceliece6960119
           | classicmceliece8192128
-          | rlcel5 :
+          | rlcel5 ( | (other large post-quantum algorithm1)
+          | (other large post-quantum algorithm2)  | (etc.)) :
                 break;
           default :
                 opaque key_exchange<1..2^16-1>;
@@ -148,20 +149,19 @@ Table of Contents
           select (NamedGroup.group) {
           case classicmceliece6688128 | classicmceliece6960119
           | classicmceliece8192128
-          | rlcel5 :
+          | rlcel5 ( | (other large post-quantum algorithm1)
+          | (other large post-quantum algorithm2)  | (etc.)) :
                 opaque key_exchange<1..2^24-1>;
           default :
                 break;
           }
        } KeyShareEntryPQC
 
-   Special Note: "classicmceliece6688128" above (and in this document)
-   represents the choice of choosing either classicmceliece6688128 or
-   classicmceliece6688128f, as a party can choose either of the two (as
-   similarly stated in Section 4 of [SJ125]).  The same applies to
-   "classicmceliece6960119" in this document (classicmceliece6960119 or
-   classicmceliece6960119f) and also to "classicmceliece8192128"
-   (classicmceliece8192128 or classicmceliece8192128f).
+   Note: "other large post-quantum algorithm1" and "other large post-
+   quantum algorithm2" and "etc." above indicates that one or more
+   future post-quantum algorithms with large public key sizes can be
+   added by just defining a constant for each of these post-quantum
+   algorithms.
 
    Another Note: An additional algorithm is included in the above case
    statements, "rlcel5", since it also has a large public key beyond the
@@ -581,14 +581,6 @@ Normative References
               Version 1.3", 2018,
               <https://datatracker.ietf.org/doc/html/rfc8446>.
 
-   [SJ125]    Josefsson, S., "Secure Shell Key Exchange Method Using
-              Chempat Hybrid of Classic McEliece and X25519 with SHA-
-              512: mceliece6688128x25519-sha512", March 2025, <draft-
-              josefsson-ssh-mceliece-01, (work in progress)>.
-
-   [SJ25]     Josefsson, S., "Classic McEliece", March 2025, <draft-
-              josefsson-mceliece-02, (work in progress)>.
-
    [TLSE]     Internet Assigned Numbers Authority, "Transport Layer
               Security (TLS) Extensions", 2025,
               <https://www.iana.org/assignments/tls-extensiontype-
@@ -627,6 +619,13 @@ Informative References
               "Replay Attack in TLS 1.3 0-RTT Handshake: Countermeasure
               Techniques", n.d.,
               <https://ieeexplore.ieee.org/document/10278190>.
+
+   [NIST]     Bernstein, D., Chou, T., Cid, C., Gilcher, J., Lange, T.,
+              Maram, V., von Maurich, I., Misoczki, R., Niederhagen, R.,
+              Persichetti, E., Peters, C., Sendrier, N., Szefer, J.,
+              Tjhai, C., Tomlinson, M., and W. Wang, "Classic McEliece",
+              2025, <https://csrc.nist.gov/projects/post-quantum-
+              cryptography/round-4-submissions>.
 
    [OQS24]    Open Quantum Safe, "liboqs / Algorithms / Classic
               McEliece", 2024,
