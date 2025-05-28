@@ -50,20 +50,6 @@ normative:
       ins: E. Rescorla
       name: Eric Rescorla
     date: 2018
-  SJ25:
-    target: draft-josefsson-mceliece-02, (work in progress)
-    title: "Classic McEliece"
-    author:
-      ins: S. Josefsson
-      name: Simon Josefsson
-    date: March 2025
-  SJ125:
-    target: draft-josefsson-ssh-mceliece-01, (work in progress)
-    title: "Secure Shell Key Exchange Method Using Chempat Hybrid of Classic McEliece and X25519 with SHA-512: mceliece6688128x25519-sha512"
-    author:
-      ins: S. Josefsson
-      name: Simon Josefsson
-    date: March 2025
   TLSE:
     target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
     title: "Transport Layer Security (TLS) Extensions"
@@ -78,6 +64,59 @@ normative:
     date: 2025
 
 informative:
+  NIST:
+    target: https://csrc.nist.gov/projects/post-quantum-cryptography/round-4-submissions
+    title: "Classic McEliece"
+    author:
+     -
+      ins: D. Bernstein
+      name: Daniel J. Bernstein
+     -
+      ins: T. Chou
+      name: Tung Chou
+     -
+      ins: C. Cid
+      name: Carlos Cid
+     -
+      ins: J. Gilcher
+      name: Jan Gilcher
+     -
+      ins: T. Lange
+      name: Tanja Lange
+     -
+      ins: V. Maram
+      name: Varun Maram
+     -
+      ins: I. von Maurich
+      name: Ingo von Maurich
+     -
+      ins: R. Misoczki
+      name: Rafael Misoczki
+     -
+      ins: R. Niederhagen
+      name: Ruben Niederhagen
+     -
+      ins: E. Persichetti
+      name: Edoardo Persichetti
+     -
+      ins: C. Peters
+      name: Christiane Peters
+     -
+      ins: N. Sendrier
+      name: Nicolas Sendrier
+     -
+      ins: J. Szefer
+      name: Jakub Szefer
+     -
+      ins: C. Tjhai
+      name: Cen Jung Tjhai
+     -
+      ins: M. Tomlinson
+      name: Martin Tomlinson
+     -
+      ins: W. Wang
+      name: Wen Wang
+    date: 2025
   RJM78:
     target: https://ipnpr.jpl.nasa.gov/progress_report2/42-44/44N.PDF
     title: "A Public-Key Cryptosystem Based On Algebraic Coding Theory"
@@ -236,7 +275,7 @@ RFC 8446 is modified to where another key share extension is introduced to accom
 
 # Introduction
 
-Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [SJ25], [DJB25], [RJM78], and [OQS24]), cannot be easily implemented in Transport Layer Security (TLS) Protocol Version 1.3 ([RF8446]) due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see [PQC25]). Therefore, this document proposes a new key share that has a higher limit and is utilized in ClientHello and ServerHello messages, which is a modification of [RFC8446]. For example, if a Classic McEliece algorithm is requested in a TLS 1.3 key exchange, this new key share extension will be constructed. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed. Thus, enabling the use of Classic McEliece algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
+Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [NIST], [DJB25], [RJM78], and [OQS24]), cannot be easily implemented in Transport Layer Security (TLS) Protocol Version 1.3 ([RF8446]) due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see [PQC25]). Therefore, this document proposes a new key share that has a higher limit and is utilized in ClientHello and ServerHello messages, which is a modification of [RFC8446]. For example, if a Classic McEliece algorithm is requested in a TLS 1.3 key exchange, this new key share extension will be constructed. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed. Thus, enabling the use of Classic McEliece algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
 
 # Conventions and Definitions
 
@@ -253,7 +292,8 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
        select (NameGroup.group) {
        case classicmceliece6688128 | classicmceliece6960119
        | classicmceliece8192128
-       | rlcel5 :
+       | rlcel5 ( | (other large post-quantum algorithm1) 
+       | (other large post-quantum algorithm2)  | (etc.)) :
              break;
        default :
              opaque key_exchange<1..2^16-1>;
@@ -265,7 +305,8 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
        select (NamedGroup.group) {
        case classicmceliece6688128 | classicmceliece6960119
        | classicmceliece8192128
-       | rlcel5 :
+       | rlcel5 ( | (other large post-quantum algorithm1) 
+       | (other large post-quantum algorithm2)  | (etc.)) :
              opaque key_exchange<1..2^24-1>;
        default :
              break;
@@ -274,7 +315,7 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
 
 </artwork></figure>
 
-Special Note: "classicmceliece6688128" above (and in this document) represents the choice of choosing either classicmceliece6688128 or classicmceliece6688128f, as a party can choose either of the two (as similarly stated in Section 4 of [SJ125]). The same applies to "classicmceliece6960119" in this document (classicmceliece6960119 or classicmceliece6960119f) and also to "classicmceliece8192128" (classicmceliece8192128 or classicmceliece8192128f).
+Note: "other large post-quantum algorithm1" and "other large post-quantum algorithm2" and "etc." above indicates that one or more future post-quantum algorithms with large public key sizes can be added by just defining a constant for each of these post-quantum algorithms.
 
 Another Note: An additional algorithm is included in the above case statements, "rlcel5", since it also has a large public key beyond the 65,535 Byte limit. See Section 7 for more information discussing this RLCE algorithm.
 
