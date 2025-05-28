@@ -292,7 +292,7 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
        select (NameGroup.group) {
        case classicmceliece6688128 | classicmceliece6960119
        | classicmceliece8192128
-       | rlcel5 ( | (other large post-quantum algorithm1) 
+       | rlcel5 ( | (other large post-quantum algorithm1)
        | (other large post-quantum algorithm2)  | (etc.)) :
              break;
        default :
@@ -305,7 +305,7 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
        select (NamedGroup.group) {
        case classicmceliece6688128 | classicmceliece6960119
        | classicmceliece8192128
-       | rlcel5 ( | (other large post-quantum algorithm1) 
+       | rlcel5 ( | (other large post-quantum algorithm1)
        | (other large post-quantum algorithm2)  | (etc.)) :
              opaque key_exchange<1..2^24-1>;
        default :
