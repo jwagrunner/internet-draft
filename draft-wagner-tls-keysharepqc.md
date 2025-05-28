@@ -616,7 +616,7 @@ Value: 0x0206
 # Acknowledgements
 {:numbered="false"}
 
-Thank you to D. J. Bernstein, as his advice on Classic McEliece help improved the content of this document. Thank you also to Simon Josefsson since his feedback helped clarify and enhance understanding of Classic McEliece in this record.
+Thank you D. J. Bernstein and Simon Josefsson as they advised to have at least one reference for the description of Classic McEliece. They named specific variants of Classic McEliece algorithms to refer to, and to limit the amount of variants for this record.
 
 Thank you as well to Martin Thomson and David Schinazi, as their Internet Draft template was used to generate this document, before the authors' information was added. The authors also want to thank the contributors of the kramdown-rfc GitHub repository, as their examples helped with the format of the figures, references, and authors' information presented in this document. Thank you also to Joyce Reynolds and Robert Braden, as their Internet Draft [JR04] was helpful as a guide on how to write the citations in this document (i.e., using citation brackets with author's initials, year, etc.).
 
