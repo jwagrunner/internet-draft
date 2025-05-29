@@ -117,6 +117,12 @@ informative:
       ins: W. Wang
       name: Wen Wang
     date: 2025
+  NIST1:
+    target: https://csrc.nist.gov/projects/post-quantum-cryptography/post-quantum-cryptography-standardization/round-1-submissions
+    title: "RLCE-KEM"
+    author:
+      ins: Y. Wang
+      name: Yongge Wang
   RJM78:
     target: https://ipnpr.jpl.nasa.gov/progress_report2/42-44/44N.PDF
     title: "A Public-Key Cryptosystem Based On Algebraic Coding Theory"
@@ -570,7 +576,7 @@ When a Hello Retry Request involves a PSK in use with a Classic McEliece algorit
 
 # Other Use Case (RLCE Algorithm)
 
-The Random Linear Code-based Encryption (RLCE) algorithm group (see [RLCE17]) is another code-based cryptographic scheme (NIST Round 1). "rlcel5" is a RLCE algorithm from this group (where the public key size is 1,232,001 Bytes) that can be used in the new key share extension, and can be demonstrated for use for TLS key exchange in the TLS Implementation mentioned in this document.
+The Random Linear Code-based Encryption (RLCE) algorithm group (see [RLCE17]) is another code-based cryptographic scheme (NIST Round 1 [NIST1]). "rlcel5" is a RLCE algorithm from this group (where the public key size is 1,232,001 Bytes) that can be used in the new key share extension, and can be demonstrated for use for TLS key exchange in the TLS Implementation mentioned in this document.
 
 # TLS Implementation
 
