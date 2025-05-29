@@ -1050,7 +1050,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Wagner &amp; Wang</td>
-<td class="center">Expires 29 November 2025</td>
+<td class="center">Expires 30 November 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-wagner-tls-keysharepqc-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-28" class="published">28 May 2025</time>
+<time datetime="2025-05-29" class="published">29 May 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-29">29 November 2025</time></dd>
+<dd class="expires"><time datetime="2025-11-30">30 November 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1122,7 +1122,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 29 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 30 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1229,40 +1229,42 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-new-key-share-extension">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-new-key-share-extension" class="section-name selfRef">New Key Share Extension</a>
       </h2>
-<p id="section-3-1">Based on the key share extension from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> is introduced a new key share extension in this document, "key_share_pqc". This is reflected in this document and is represented as KeyShareEntryPQC below, based on the existing KeyShareEntry from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>. However, this is modified along with the existing KeyShareEntry structure to include case statements to test if the key exchange algorithm chosen in a TLS 1.3 connection belongs from the Classic McEliece family, and if it is, then KeyShareEntryPQC is constructed. If the opposite is true, where the key exchange algorithm is not from the Classic McEliece family, then KeyShareEntry is constructed. Note that the "key_exchange" field is expanded in KeyShareEntryPQC to accommodate a large public key that is greater than 65,535 Bytes:<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">Based on the key share extension from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> is introduced a new key share extension in this document, "key_share_pqc". This is reflected in this document and is represented as KeyShareEntryPQC below, based on the existing KeyShareEntry from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>. However, this is modified along with the existing KeyShareEntry structure to test if the key exchange algorithm chosen in a TLS 1.3 connection belongs from the Classic McEliece family, and if it is, then KeyShareEntryPQC is constructed. If the opposite is true, where the key exchange algorithm is not from the Classic McEliece family, then KeyShareEntry is constructed. Note that the "key_exchange" fields are expanded in KeyShareEntryPQC to accommodate a large public key that is greater than 65,535 Bytes:<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3-2">
 <pre>
 
-    struct {
-       NamedGroup group;
-       select (NameGroup.group) {
-       case classicmceliece6688128 | classicmceliece6960119
-       | classicmceliece8192128
-       | rlcel5 ( | (other large post-quantum algorithm1)
-       | (other large post-quantum algorithm2)  | (etc.)) :
-             break;
-       default :
-             opaque key_exchange&lt;1..2^16-1&gt;;
-       }
-    } KeyShareEntry;
+       struct {
+          NamedGroup group;
+          select (KeyShareEntry.group) {
+          case classicmceliece6688128:      Empty;
+          case classicmceliece6960119:      Empty;
+          case classicmceliece8192128:      Empty;
+          case rlcel5:                      Empty;
+          case other large PQ algorithm1:   Empty;
+          case other large PQ algorithm2:   Empty;
+          case etc.:                        Empty;
+          default :                         opaque key_exchange&lt;1..2^16-1&gt;;
+          }
+       } KeyShareEntry;
 
-    struct {
-       NamedGroup group;
-       select (NamedGroup.group) {
-       case classicmceliece6688128 | classicmceliece6960119
-       | classicmceliece8192128
-       | rlcel5 ( | (other large post-quantum algorithm1)
-       | (other large post-quantum algorithm2)  | (etc.)) :
-             opaque key_exchange&lt;1..2^24-1&gt;;
-       default :
-             break;
-       }
-    } KeyShareEntryPQC
+      struct {
+          NamedGroup group;
+          select (KeyShareEntryPQC.group) {
+          case classicmceliece6688128:      opaque key_exchange&lt;1..2^24-1&gt;;
+          case classicmceliece6960119:      opaque key_exchange&lt;1..2^24-1&gt;;
+          case classicmceliece8192128:      opaque key_exchange&lt;1..2^24-1&gt;;
+          case rlcel5:                      opaque key_exchange&lt;1..2^24-1&gt;;
+          case other large PQ algorithm1:   opaque key_exchange&lt;1..2^24-1&gt;;
+          case other large PQ algorithm2:   opaque key_exchange&lt;1..2^24-1&gt;;
+          case etc.:                        opaque key_exchange&lt;1..2^24-1&gt;;
+          default :                         Empty;
+          }
+       } KeyShareEntryPQC;
 
 </pre><a href="#section-3-2" class="pilcrow">¶</a>
 </div>
-<p id="section-3-3">Note: "other large post-quantum algorithm1" and "other large post-quantum algorithm2" and "etc." above indicates that one or more future post-quantum algorithms with large public key sizes can be added by just defining a constant for each of these post-quantum algorithms.<a href="#section-3-3" class="pilcrow">¶</a></p>
-<p id="section-3-4">Another Note: An additional algorithm is included in the above case statements, "rlcel5", since it also has a large public key beyond the 65,535 Byte limit. See Section 7 for more information discussing this RLCE algorithm.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-3">Note: PQ (Post-Quantum) where "other large PQ algorithm1" and "other large PQ algorithm2" and "etc." above indicates that one or more future post-quantum algorithms with large public key sizes can be added by just defining a constant for each of these post-quantum algorithms.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4">Another Note: An additional algorithm is included in the above, "rlcel5", since it also has a large public key beyond the 65,535 Byte limit. See Section 7 for more information discussing this RLCE algorithm.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <p id="section-3-5">This is then applied to the existing KeyShareClientHello structure, which originates from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>, that now contains an additional field for KeyShareEntryPQC:<a href="#section-3-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3-6">
 <pre>
