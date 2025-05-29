@@ -585,7 +585,7 @@ A TLS implementation exists that tests the use of a new key share extension for 
 
 # Summary of Changes from RFC 8446
 
-A new structure is introduced of KeyShareEntryPQC along with modifications of existing structures including KeyShareEntry, NamedGroup, Extension, ExtensionType, KeyShareClientHello, and KeyShareServerHello. Adding a new ExtensionType of "key_share_pqc" allows for the addition of this new structure of KeyShareEntryPQC, which is based on the existing KeyShareEntry, but "key_exchange" has been expanded and select statements are added to both structures which depend on the NamedGroup.group being called in a TLS connection for key exchange. This new KeyShareEntryPQC will now also appear in existing structures of KeyShareClientHello and KeyShareServerHello. Thus, the "extension_data" is expanded in the existing Extension structure.
+A new structure is introduced of KeyShareEntryPQC along with modifications of existing structures including KeyShareEntry, NamedGroup, Extension, ExtensionType, KeyShareClientHello, and KeyShareServerHello. Adding a new ExtensionType of "key_share_pqc" allows for the addition of this new structure of KeyShareEntryPQC, which is based on the existing KeyShareEntry, but "key_exchange" has been expanded and select statements are added to both structures which depend on the KeyShareEntry.group or KeyShareEntryPQC.group being called in a TLS connection for key exchange. This new KeyShareEntryPQC will now also appear in existing structures of KeyShareClientHello and KeyShareServerHello. Thus, the "extension_data" is expanded in the existing Extension structure.
 
 
 # Security Considerations
