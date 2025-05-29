@@ -630,7 +630,7 @@ Informative References
               2025, <https://csrc.nist.gov/projects/post-quantum-
               cryptography/round-4-submissions>.
 
-   [NIST1]    Wang, Y., "RLCE-KEM", n.d.,
+   [NIST1]    Wang, Y., "RLCE-KEM", 2025,
               <https://csrc.nist.gov/projects/post-quantum-cryptography/
               post-quantum-cryptography-standardization/round-
               1-submissions>.
