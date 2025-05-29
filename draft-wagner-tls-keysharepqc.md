@@ -304,7 +304,7 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
           case other large PQ algorithm1:   Empty;
           case other large PQ algorithm2:   Empty;
           case etc.:                        Empty;
-          default :                         opaque key_exchange<1..2^16-1>;
+          default:                          opaque key_exchange<1..2^16-1>;
           }
        } KeyShareEntry;
 
@@ -318,7 +318,7 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
           case other large PQ algorithm1:   opaque key_exchange<1..2^24-1>;
           case other large PQ algorithm2:   opaque key_exchange<1..2^24-1>;
           case etc.:                        opaque key_exchange<1..2^24-1>;
-          default :                         Empty;
+          default:                          Empty;
           }
        } KeyShareEntryPQC;
 
