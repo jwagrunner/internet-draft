@@ -500,11 +500,11 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
    allows for the addition of this new structure of KeyShareEntryPQC,
    which is based on the existing KeyShareEntry, but "key_exchange" has
    been expanded and select statements are added to both structures
-   which depend on the NamedGroup.group being called in a TLS connection
-   for key exchange.  This new KeyShareEntryPQC will now also appear in
-   existing structures of KeyShareClientHello and KeyShareServerHello.
-   Thus, the "extension_data" is expanded in the existing Extension
-   structure.
+   which depend on the KeyShareEntry.group or KeyShareEntryPQC.group
+   being called in a TLS connection for key exchange.  This new
+   KeyShareEntryPQC will now also appear in existing structures of
+   KeyShareClientHello and KeyShareServerHello.  Thus, the
+   "extension_data" is expanded in the existing Extension structure.
 
 10.  Security Considerations
 
