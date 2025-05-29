@@ -123,6 +123,7 @@ informative:
     author:
       ins: Y. Wang
       name: Yongge Wang
+    date: 2025
   RJM78:
     target: https://ipnpr.jpl.nasa.gov/progress_report2/42-44/44N.PDF
     title: "A Public-Key Cryptosystem Based On Algebraic Coding Theory"
