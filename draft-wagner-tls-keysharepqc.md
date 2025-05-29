@@ -581,7 +581,7 @@ The Random Linear Code-based Encryption (RLCE) algorithm group (see [RLCE17]) is
 
 # TLS Implementation
 
-A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where Classic McEliece algorithms can be chosen for key exchange when initiating TLS connections. It can be accessed here: [JWYW25].
+A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where the mentioned Classic McEliece algorithms can be chosen for key exchange when initiating TLS connections. It can be accessed here: [JWYW25].
 
 # Summary of Changes from RFC 8446
 
