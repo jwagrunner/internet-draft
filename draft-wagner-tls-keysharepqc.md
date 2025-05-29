@@ -283,41 +283,43 @@ Large public key algorithms, including the code-based cryptographic algorithm fa
 
 # New Key Share Extension
 
-Based on the key share extension from [RFC8446] is introduced a new key share extension in this document, "key_share_pqc". This is reflected in this document and is represented as KeyShareEntryPQC below, based on the existing KeyShareEntry from [RFC8446]. However, this is modified along with the existing KeyShareEntry structure to include case statements to test if the key exchange algorithm chosen in a TLS 1.3 connection belongs from the Classic McEliece family, and if it is, then KeyShareEntryPQC is constructed. If the opposite is true, where the key exchange algorithm is not from the Classic McEliece family, then KeyShareEntry is constructed. Note that the "key_exchange" field is expanded in KeyShareEntryPQC to accommodate a large public key that is greater than 65,535 Bytes:
+Based on the key share extension from [RFC8446] is introduced a new key share extension in this document, "key_share_pqc". This is reflected in this document and is represented as KeyShareEntryPQC below, based on the existing KeyShareEntry from [RFC8446]. However, this is modified along with the existing KeyShareEntry structure to test if the key exchange algorithm chosen in a TLS 1.3 connection belongs from the Classic McEliece family, and if it is, then KeyShareEntryPQC is constructed. If the opposite is true, where the key exchange algorithm is not from the Classic McEliece family, then KeyShareEntry is constructed. Note that the "key_exchange" fields are expanded in KeyShareEntryPQC to accommodate a large public key that is greater than 65,535 Bytes:
 
 <figure><artwork>
 
-    struct {
-       NamedGroup group;
-       select (NameGroup.group) {
-       case classicmceliece6688128 | classicmceliece6960119
-       | classicmceliece8192128
-       | rlcel5 ( | (other large post-quantum algorithm1)
-       | (other large post-quantum algorithm2)  | (etc.)) :
-             break;
-       default :
-             opaque key_exchange<1..2^16-1>;
-       }
-    } KeyShareEntry;
+       struct {
+          NamedGroup group;
+          select (KeyShareEntry.group) {
+          case classicmceliece6688128:      Empty;
+          case classicmceliece6960119:      Empty;
+          case classicmceliece8192128:      Empty;
+          case rlcel5:                      Empty;
+          case other large PQ algorithm1:   Empty;
+          case other large PQ algorithm2:   Empty;
+          case etc.:                        Empty;
+          default :                         opaque key_exchange<1..2^16-1>;
+          }
+       } KeyShareEntry;
 
-    struct {
-       NamedGroup group;
-       select (NamedGroup.group) {
-       case classicmceliece6688128 | classicmceliece6960119
-       | classicmceliece8192128
-       | rlcel5 ( | (other large post-quantum algorithm1)
-       | (other large post-quantum algorithm2)  | (etc.)) :
-             opaque key_exchange<1..2^24-1>;
-       default :
-             break;
-       }
-    } KeyShareEntryPQC
+      struct {
+          NamedGroup group;
+          select (KeyShareEntryPQC.group) {
+          case classicmceliece6688128:      opaque key_exchange<1..2^24-1>;
+          case classicmceliece6960119:      opaque key_exchange<1..2^24-1>;
+          case classicmceliece8192128:      opaque key_exchange<1..2^24-1>;
+          case rlcel5:                      opaque key_exchange<1..2^24-1>;
+          case other large PQ algorithm1:   opaque key_exchange<1..2^24-1>;
+          case other large PQ algorithm2:   opaque key_exchange<1..2^24-1>;
+          case etc.:                        opaque key_exchange<1..2^24-1>;
+          default :                         Empty;
+          }
+       } KeyShareEntryPQC;
 
 </artwork></figure>
 
-Note: "other large post-quantum algorithm1" and "other large post-quantum algorithm2" and "etc." above indicates that one or more future post-quantum algorithms with large public key sizes can be added by just defining a constant for each of these post-quantum algorithms.
+Note: PQ (Post-Quantum) where "other large PQ algorithm1" and "other large PQ algorithm2" and "etc." above indicates that one or more future post-quantum algorithms with large public key sizes can be added by just defining a constant for each of these post-quantum algorithms.
 
-Another Note: An additional algorithm is included in the above case statements, "rlcel5", since it also has a large public key beyond the 65,535 Byte limit. See Section 7 for more information discussing this RLCE algorithm.
+Another Note: An additional algorithm is included in the above, "rlcel5", since it also has a large public key beyond the 65,535 Byte limit. See Section 7 for more information discussing this RLCE algorithm.
 
 This is then applied to the existing KeyShareClientHello structure, which originates from [RFC8446], that now contains an additional field for KeyShareEntryPQC:
 
