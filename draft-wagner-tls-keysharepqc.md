@@ -594,31 +594,37 @@ The new "key_share_pqc" extension MUST NOT be used with 0-RTT, as this subjects 
 
 # IANA Considerations
 
-Probable request for the new key share proposed in this document "key_share_pqc" to have a value of 63 in the registry specified for TLS ExtensionType Values (see [TLSE]).
+Probable request for the new key share proposed in this document "key_share_pqc" to have a value in the registry specified for TLS ExtensionType Values (see [TLSE]):
+
+Extension Name: key_share_pqc
+
+Value: TBD
+
+
 
 Probable request for the registry for TLS Supported Groups to have the proper values assigned to the Classic McEliece and the RLCE algorithms mentioned in this document (see [TLSP]):
 
 Description: classicmceliece6688128
 
-Value: 0x0203
+Value: TBD
 
 
 
 Description: classicmceliece6960119
 
-Value: 0x0204
+Value: TBD
 
 
 
 Description: classicmceliece8192128
 
-Value: 0x0205
+Value: TBD
 
 
 
 Description: rlcel5
 
-Value: 0x0206
+Value: TBD
 
 
 
