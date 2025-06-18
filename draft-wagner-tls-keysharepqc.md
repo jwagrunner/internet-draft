@@ -350,7 +350,7 @@ Since the KeyShareClientHello needs to be expanded to accommodate for the KeySha
 
 </artwork></figure>
 
-Since there is a new key share extension to accommodate keys larger than the 65,535 Byte limit (KeyShareEntryPQC), this is reflected in the existing ExtensionType structure from [RFC8446] where this is the new type that holds a value of 63, "key_share_pqc":
+Since there is a new key share extension to accommodate keys larger than the 65,535 Byte limit (KeyShareEntryPQC), this is reflected in the existing ExtensionType structure from [RFC8446] where this is the new type that holds a value of TBD, "key_share_pqc":
 
 <figure><artwork>
 
@@ -377,13 +377,13 @@ Since there is a new key share extension to accommodate keys larger than the 65,
             post_handshake_auth(49),                    /* RFC 8446 */
             signature_algorithms_cert(50),              /* RFC 8446 */
             key_share(51),                              /* RFC 8446 */
-            key_share_pqc(63),
+            key_share_pqc(TBD),
             (65535)
         } ExtensionType;
 
 </artwork></figure>
 
-Since the "extension_data" field will be much larger for a KeyShareClientHello that contains a large public key that is greater than the previously defined 65,535 Byte limit, an example being a Classic McEliece public key, the server must be able to handle this circumstance when receiving the ClientHello message. One way is to compare the value for a packet that contains extensions including a large public key from the ClientHello message to a macro constant (for example,  "CLIENT_HELLO_MIN_EXT_LENGTH" as defined in this introduced TLS implementation in this paper, see [SRVR1650] and [SRVR1211]) and if this packet value is longer than this constant, the server will change the way it normally handles all of the extensions. This constant could be easily modified in the aforementioned TLS Open Secure Socket Layer (OpenSSL) implementation. The process of how the server collects the extensions from a ClientHello message must also be modified, as the server must be able to process the new key share extension of Type 63 differently than the other extensions, should the server see this inside a ClientHello message. For example, see [EXT652].
+Since the "extension_data" field will be much larger for a KeyShareClientHello that contains a large public key that is greater than the previously defined 65,535 Byte limit, an example being a Classic McEliece public key, the server must be able to handle this circumstance when receiving the ClientHello message. One way is to compare the value for a packet that contains extensions including a large public key from the ClientHello message to a macro constant (for example,  "CLIENT_HELLO_MIN_EXT_LENGTH" as defined in this introduced TLS implementation in this paper, see [SRVR1650] and [SRVR1211]) and if this packet value is longer than this constant, the server will change the way it normally handles all of the extensions. This constant could be easily modified in the aforementioned TLS Open Secure Socket Layer (OpenSSL) implementation. The process of how the server collects the extensions from a ClientHello message must also be modified, as the server must be able to process the new key share extension differently than the other extensions, should the server see this inside a ClientHello message. For example, see [EXT652].
 
 The ServerHello message is modified as well where the KeyShareServerHello structure originates from [RFC8446]:
 
@@ -462,12 +462,12 @@ The values for Classic McEliece algorithms are added below in the NamedGroup str
               (0xFFFF)
 
               /* Classic McEliece Algorithms */
-              classicmceliece6688128(0x0203),
-              classicmceliece6960119(0x0204),
-              classicmceliece8192128(0x0205),
+              classicmceliece6688128(TBD),
+              classicmceliece6960119(TBD),
+              classicmceliece8192128(TBD),
 
               /* RLCE Algorithm */
-              rlcel5(0x0206),
+              rlcel5(TBD),
           } NamedGroup;
 
 </artwork></figure>
