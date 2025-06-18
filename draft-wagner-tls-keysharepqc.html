@@ -1287,7 +1287,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 
 </pre><a href="#section-3-8" class="pilcrow">¶</a>
 </div>
-<p id="section-3-9">Since there is a new key share extension to accommodate keys larger than the 65,535 Byte limit (KeyShareEntryPQC), this is reflected in the existing ExtensionType structure from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> where this is the new type that holds a value of 63, "key_share_pqc":<a href="#section-3-9" class="pilcrow">¶</a></p>
+<p id="section-3-9">Since there is a new key share extension to accommodate keys larger than the 65,535 Byte limit (KeyShareEntryPQC), this is reflected in the existing ExtensionType structure from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> where this is the new type that holds a value of TBD, "key_share_pqc":<a href="#section-3-9" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3-10">
 <pre>
 
@@ -1314,13 +1314,13 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             post_handshake_auth(49),                    /* RFC 8446 */
             signature_algorithms_cert(50),              /* RFC 8446 */
             key_share(51),                              /* RFC 8446 */
-            key_share_pqc(63),
+            key_share_pqc(TBD),
             (65535)
         } ExtensionType;
 
 </pre><a href="#section-3-10" class="pilcrow">¶</a>
 </div>
-<p id="section-3-11">Since the "extension_data" field will be much larger for a KeyShareClientHello that contains a large public key that is greater than the previously defined 65,535 Byte limit, an example being a Classic McEliece public key, the server must be able to handle this circumstance when receiving the ClientHello message. One way is to compare the value for a packet that contains extensions including a large public key from the ClientHello message to a macro constant (for example,  "CLIENT_HELLO_MIN_EXT_LENGTH" as defined in this introduced TLS implementation in this paper, see <span>[<a href="#SRVR1650" class="cite xref">SRVR1650</a>]</span> and <span>[<a href="#SRVR1211" class="cite xref">SRVR1211</a>]</span>) and if this packet value is longer than this constant, the server will change the way it normally handles all of the extensions. This constant could be easily modified in the aforementioned TLS Open Secure Socket Layer (OpenSSL) implementation. The process of how the server collects the extensions from a ClientHello message must also be modified, as the server must be able to process the new key share extension of Type 63 differently than the other extensions, should the server see this inside a ClientHello message. For example, see <span>[<a href="#EXT652" class="cite xref">EXT652</a>]</span>.<a href="#section-3-11" class="pilcrow">¶</a></p>
+<p id="section-3-11">Since the "extension_data" field will be much larger for a KeyShareClientHello that contains a large public key that is greater than the previously defined 65,535 Byte limit, an example being a Classic McEliece public key, the server must be able to handle this circumstance when receiving the ClientHello message. One way is to compare the value for a packet that contains extensions including a large public key from the ClientHello message to a macro constant (for example,  "CLIENT_HELLO_MIN_EXT_LENGTH" as defined in this introduced TLS implementation in this paper, see <span>[<a href="#SRVR1650" class="cite xref">SRVR1650</a>]</span> and <span>[<a href="#SRVR1211" class="cite xref">SRVR1211</a>]</span>) and if this packet value is longer than this constant, the server will change the way it normally handles all of the extensions. This constant could be easily modified in the aforementioned TLS Open Secure Socket Layer (OpenSSL) implementation. The process of how the server collects the extensions from a ClientHello message must also be modified, as the server must be able to process the new key share extension differently than the other extensions, should the server see this inside a ClientHello message. For example, see <span>[<a href="#EXT652" class="cite xref">EXT652</a>]</span>.<a href="#section-3-11" class="pilcrow">¶</a></p>
 <p id="section-3-12">The ServerHello message is modified as well where the KeyShareServerHello structure originates from <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>:<a href="#section-3-12" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3-13">
 <pre>
@@ -1402,12 +1402,12 @@ Figure 1: Full TLS Handshake with "key_share_pqc" extension.
               (0xFFFF)
 
               /* Classic McEliece Algorithms */
-              classicmceliece6688128(0x0203),
-              classicmceliece6960119(0x0204),
-              classicmceliece8192128(0x0205),
+              classicmceliece6688128(TBD),
+              classicmceliece6960119(TBD),
+              classicmceliece8192128(TBD),
 
               /* RLCE Algorithm */
-              rlcel5(0x0206),
+              rlcel5(TBD),
           } NamedGroup;
 
 </pre><a href="#section-4-2" class="pilcrow">¶</a>
