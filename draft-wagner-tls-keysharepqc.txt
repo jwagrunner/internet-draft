@@ -5,7 +5,7 @@
 Transport Layer Security                                       J. Wagner
 Internet-Draft                                                   Y. Wang
 Intended status: Informational                             UNC Charlotte
-Expires: 30 November 2025                                    29 May 2025
+Expires: 20 December 2025                                   18 June 2025
 
 
         New Key Share Extension for Classic McEliece Algorithms
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 November 2025.
+   This Internet-Draft will expire on 20 December 2025.
 
 Copyright Notice
 
@@ -526,8 +526,12 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
 11.  IANA Considerations
 
    Probable request for the new key share proposed in this document
-   "key_share_pqc" to have a value of 63 in the registry specified for
-   TLS ExtensionType Values (see [TLSE]).
+   "key_share_pqc" to have a value in the registry specified for TLS
+   ExtensionType Values (see [TLSE]):
+
+   Extension Name: key_share_pqc
+
+   Value: TBD
 
    Probable request for the registry for TLS Supported Groups to have
    the proper values assigned to the Classic McEliece and the RLCE
@@ -535,19 +539,19 @@ Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
 
    Description: classicmceliece6688128
 
-   Value: 0x0203
+   Value: TBD
 
    Description: classicmceliece6960119
 
-   Value: 0x0204
+   Value: TBD
 
    Description: classicmceliece8192128
 
-   Value: 0x0205
+   Value: TBD
 
    Description: rlcel5
 
-   Value: 0x0206
+   Value: TBD
 
 Acknowledgements
 
