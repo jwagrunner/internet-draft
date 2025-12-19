@@ -1,7 +1,7 @@
 ---
 title: New Key Share Extension for Classic McEliece Algorithms
 abbrev: keyshare
-category: info
+category: std
 
 docname: draft-wagner-tls-keysharepqc-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
