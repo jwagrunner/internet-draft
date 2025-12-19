@@ -319,7 +319,7 @@ RFC 8446 is modified to where another key share extension is introduced to accom
 
 # Introduction
 
-Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [CLASSICMC], [NIST], [DJB25], [RJM78], and [OQS24]), cannot be easily implemented in Transport Layer Security (TLS) Protocol Version 1.3 ([RF8446]) due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see [PQC25]). Therefore, this document proposes a new key share that has a higher limit and is utilized in ClientHello and ServerHello messages, which is a modification of [RFC8446]. For example, if a Classic McEliece algorithm is requested in a TLS 1.3 key exchange, this new key share extension will be constructed. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed. Thus, enabling the use of Classic McEliece algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
+Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [CLASSICMC], [NIST], [DJB25], [RJM78], and [OQS24]), cannot be easily implemented in Transport Layer Security (TLS) Protocol Version 1.3 ([RFC8446]) due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see [PQC25]). Therefore, this document proposes a new key share that has a higher limit and is utilized in ClientHello and ServerHello messages, which is a modification of [RFC8446]. For example, if a Classic McEliece algorithm is requested in a TLS 1.3 key exchange, this new key share extension will be constructed. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed. Thus, enabling the use of Classic McEliece algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
 
 # Conventions and Definitions
 
@@ -356,7 +356,7 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
           case classicmceliece6688128:      opaque key_exchange<1..2^24-1>;
           case classicmceliece6960119:      opaque key_exchange<1..2^24-1>;
           case classicmceliece8192128:      opaque key_exchange<1..2^24-1>;
-          case x25519classicmceliece348864: opaque key_exchange<1..2^24-1>; 
+          case x25519classicmceliece348864: opaque key_exchange<1..2^24-1>;
           case rlcel5:                      opaque key_exchange<1..2^24-1>;
           case other large PQ algorithm1:   opaque key_exchange<1..2^24-1>;
           case other large PQ algorithm2:   opaque key_exchange<1..2^24-1>;
