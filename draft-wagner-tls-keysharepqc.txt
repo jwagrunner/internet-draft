@@ -4,7 +4,7 @@
 
 Transport Layer Security                                       J. Wagner
 Internet-Draft                                                   Y. Wang
-Intended status: Informational                             UNC Charlotte
+Intended status: Standards Track                           UNC Charlotte
 Expires: 22 June 2026                                   19 December 2025
 
 
