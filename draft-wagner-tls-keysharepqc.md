@@ -236,25 +236,29 @@ informative:
       ins: J. Wagner
       name: Jonathan Wagner
     date: 2024
-  MEA23:
-    target: https://ieeexplore.ieee.org/document/10278190
-    title: "Replay Attack in TLS 1.3 0-RTT Handshake: Countermeasure Techniques"
-    author:
-     -
-      ins: M.E Abdelhafez
-      name: M.E Abdelhafez
-     -
-      ins: S. Ramadass
-      name: Sureswaran Ramadass
-     -
-      ins: M. S. M. Gismallab
-      name: Mohammed S. M. Gismallab
   RASHOK20:
     target: https://stackoverflow.com/questions/58719595/how-to-do-tls-1-3-psk-using-openssl
     title: "How to do TLS 1.3 PSK using openssl?"
     author:
       name: rashok
     date: 2020
+  JWYWPROV:
+    target: https://github.com/jwagrunner/oqs-provider
+    title : "oqs-provider"
+    author:
+     -
+      ins: J. Wagner
+      name: Jonathan Wagner
+     -
+      ins: Y. Wang
+      name: Yongge Wang
+    date: 2025
+  OQSPROV:
+    target: https://github.com/open-quantum-safe/oqs-provider/
+    title : "OQS Provider for OpenSSL 3"
+    author:
+      name: Open Quantum Safe Project
+    date: July 2023
   JWYW25:
     target: https://github.com/jwagrunner/openssl
     title : "openssl"
@@ -266,14 +270,6 @@ informative:
       ins: Y. Wang
       name: Yongge Wang
     date: 2025
-  HN23:
-    target: https://medium.com/@hnasr/the-danger-of-0-rtt-a815d2b99ac6
-    title: "The danger of TLS Zero RTT"
-    author:
-     -
-      ins: H. Nasser
-      name: Hussein Nasser
-    date: 2023
   JR04:
     target: https://www.rfc-editor.org/old/instructions2authors.txt
     title: "Instructions to Request for Comments (RFC) Authors"
@@ -465,7 +461,7 @@ Auth | {CertificateVerify*}
 <!--
 ## NamedGroup Addition for Classic McEliece
 
-The values for Classic McEliece algorithms are added below in the NamedGroup struct that originates from [RFC8446]:
+The values for Classic McEliece algorithms and the hybrid combination "x25519classicmceliece348864" (see Section 8 for more information) are added below in the NamedGroup struct that originates from [RFC8446]:
 
 <figure><artwork>
 
@@ -552,7 +548,7 @@ Subsequent Handshake
 
 ### Hello Retry Request using New Key Share Extension
 
-In a Hello Retry Request scenario, the first ClientHello message will have two algorithms listed in its "supported_groups" extension, where the numerical identifier (NID) for the algorithm that is no longer recognized by the server as an acceptable algorithm (X448 for example as proven in the TLS implementation), will first be listed in this extension, followed by the NID for a Classic McEliece algorithm. In this same ClientHello message is where "02" will be listed in the "psk_key_exchange_modes" extension, and the original "key_share" extension (value 51) is also shown with its public key for the unacceptable algorithm.
+In a Hello Retry Request scenario, the first ClientHello message will have two algorithms listed in its "supported_groups" extension, where the numerical identifier (NID) for the algorithm that is no longer recognized by the server as an acceptable algorithm will first be listed in this extension, followed by the NID for a Classic McEliece algorithm. In this same ClientHello message is where "02" will be listed in the "psk_key_exchange_modes" extension, and the original "key_share" extension (value 51) is also shown with its public key for the unacceptable algorithm.
 
 When the server responds with the HelloRetryRequest message, the random is the same special value for SHA-256 as indicated in Section 4.1.3 of [RFC8446], and has the same exact fields ("legacy_version", "random", "legacy_session_id_echo", "cipher_suite", "legacy_compression_method", and "extensions") as in the ServerHello structure indicated in [RFC8446] (see section 4.1.3). The extensions field not only consists of the "supported_versions" extension, but also the new "key_share_pqc" extension where the server offers the client the Classic McEliece algorithm NID it shares with the client.
 
@@ -842,7 +838,25 @@ Value: TBD
 
 
 
-Probable request for the registry for TLS Supported Groups to have the proper values assigned to the Classic McEliece and the RLCE algorithms mentioned in this document (see [TLSP]):
+Probable request for the registry for TLS Supported Groups to have the proper values assigned to the Classic McEliece and the RLCE algorithms mentioned in this document; also requested is the hybrid combination "x25519classicmceliece348864" (see [TLSP]):
+
+Description: x25519classicmceliece348864
+
+Value: TBD
+
+
+
+Description: classicmceliece348864
+
+Value: TBD
+
+
+
+Description: classicmceliece460896
+
+Value: TBD
+
+
 
 Description: classicmceliece6688128
 
@@ -870,7 +884,7 @@ Value: TBD
 # Acknowledgements
 {:numbered="false"}
 
-Thank you D. J. Bernstein and Simon Josefsson as they advised to have at least one reference for the description of Classic McEliece, and to limit the amount of Classic McEliece variants for this record. Thank you also to Eliot Lear for his feedback on other fields regarding the next algorithm needed.
+Thank you D. J. Bernstein and Simon Josefsson as they advised to have at least one reference for the description of Classic McEliece. Thank you also to Eliot Lear for his feedback on other fields regarding the next algorithm needed.
 
 Thank you as well to Martin Thomson and David Schinazi, as their Internet Draft template was used to generate this document, before the authors' information was added. The authors also want to thank the contributors of the kramdown-rfc GitHub repository, as their examples helped with the format of the figures, references, and authors' information presented in this document. Thank you also to Joyce Reynolds and Robert Braden, as their Internet Draft [JR04] was helpful as a guide on how to write the citations in this document (i.e., using citation brackets with author's initials, year, etc.).
 
