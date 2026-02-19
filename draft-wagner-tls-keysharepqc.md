@@ -295,7 +295,7 @@ One possible application for this feature is to allow using post-quantum Key Enc
 
 # Introduction
 
-The Transport Layer Security (TLS) Protocol Version 1.3 ([RFC8446]) is widely used to protect network traffic. To establish secure connection client and server first perhorm a "handshake" during which they negotiate cipher suites, compute shared session key and perform one-side or mutual authentication. TLS1.3 handshake protocol consists of several messages, and while the size of each handshake message can be up to 2^24 bytesm the size of some individual data blocks inside these messages is limited to 2^16 bytes. This limitation makes it impossible to transfer larger data blocks in TLS 1.3 handshake. 
+The Transport Layer Security (TLS) Protocol Version 1.3 ([RFC8446]) is widely used to protect network traffic. To establish secure connection client and server first perhorm a "handshake" during which they negotiate cipher suites, compute shared session key and perform one-side or mutual authentication. TLS1.3 handshake protocol consists of several messages, and while the size of each handshake message can be up to 2^24 bytesm the size of some individual data blocks inside these messages is limited to 2^16 bytes. This limitation makes it impossible to transfer larger data blocks in TLS 1.3 handshake.
 
 One possible application for larger data in TLS 1.3 handshake is post-quantum Key Encapsulation Mechanisms (KEM). Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [NIST], [DJB25], [RJM78], and [OQS24]), cannot be easily implemented in Transport Layer Security (TLS) Protocol Version 1.3 ([RFC8446]) due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see [PQC25]). Thus, enabling the use of Classic McEliece algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
 
@@ -608,14 +608,14 @@ A new structure is introduced of KeyShareEntryPQC along with modifications of ex
 ## Post-handshake Key Exchange with Extended Key Update
 
 Extended Key Update [I-D.ietf-tls-extended-key-update] is a TLS 1.3 extension that allows to perform post-handshake key exchange
-in order to update session keys. This mechanism defines new TLS 1.3 handshake message type - ExtendedKeyUpdate. 
+in order to update session keys. This mechanism defines new TLS 1.3 handshake message type - ExtendedKeyUpdate.
 Since TLS 1.3 handshake messages can be up to 2^24 bytes long, this allows to transfer large key shares using this message.
 
-Currently, the functionality of Extended Key Update is limited to only allow 
+Currently, the functionality of Extended Key Update is limited to only allow
 using exactly the same key exchange mechanism as was negotiated and used during the handshake. However, the mechanism can be
 extended to also allow performing a different key exchange mechanism, that could be additionally negotiated during the handshake.
-In this case a modified Extended Key Update must be run immediately after the initial handshake and before 
-any application data sent over the connection. Thus, the resulting key exchange will always be non-composite hybrid key exchange, similar to what 
+In this case a modified Extended Key Update must be run immediately after the initial handshake and before
+any application data sent over the connection. Thus, the resulting key exchange will always be non-composite hybrid key exchange, similar to what
 IKEv2 does (see [RFC9370]).
 
 <figure><artwork>
@@ -782,7 +782,7 @@ This document proposes three possible solutions for transferring large amounts o
 
 1. New Key Share Extension
 
-    This is a straightforward solution to the problem, it changes the format of the ClientHello and the ServerHello messages in a non-backward compatible way. 
+    This is a straightforward solution to the problem, it changes the format of the ClientHello and the ServerHello messages in a non-backward compatible way.
 
     Advantages:
 
@@ -790,7 +790,7 @@ This document proposes three possible solutions for transferring large amounts o
 
     Disadvantages:
 
-    * It can only be used in environments when clients know beforehand that servers they contact support this extension. 
+    * It can only be used in environments when clients know beforehand that servers they contact support this extension.
     * It deals only with key shares, thus it is not a generic solution to transferring large data in handshake.
     * Since the format of the ClientHello is changed, it is unclear how this extension will interact with Encrypted ClientHello extension.
     * It is not clear how middleboxes will handle modified ClientHello and ServerHello
