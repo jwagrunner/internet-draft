@@ -289,7 +289,7 @@ informative:
 
 --- abstract
 
-This memo discusses possible modifications of TLS 1.3, aimed to allow trasferring data larger than 64 Kbytes in andshake messages.
+This memo discusses possible modifications of TLS 1.3, aimed to allow trasferring data larger than 64 Kbytes in handshake messages.
 One possible application for this feature is to allow using post-quantum Key Encapsulation Method that have large public key or ciphertext size
 (like Classic McEliece).
 
@@ -298,11 +298,11 @@ One possible application for this feature is to allow using post-quantum Key Enc
 
 # Introduction
 
-The Transport Layer Security (TLS) Protocol Version 1.3 ([RFC8446]) is widely used to protect network traffic. To establish secure connection client and server first perhorm a "handshake" during which they negotiate cipher suites, compute shared session key and perform one-side or mutual authentication. TLS1.3 handshake protocol consists of several messages, and while the size of each handshake message can be up to 2^24 bytesm the size of some individual data blocks inside these messages is limited to 2^16 bytes. This limitation makes it impossible to transfer larger data blocks in TLS 1.3 handshake.
+The Transport Layer Security (TLS) Protocol Version 1.3 ([RFC8446]) is widely used to protect network traffic. To establish secure connection client and server first perform a "handshake" during which they negotiate cipher suites, compute shared session key and perform one-side or mutual authentication. TLS 1.3 handshake protocol consists of several messages, and while the size of each handshake message can be up to 2^24 bytes the size of some individual data blocks inside these messages is limited to 2^16 bytes. This limitation makes it impossible to transfer larger data blocks in TLS 1.3 handshake.
 
-One possible application for larger data in TLS 1.3 handshake is post-quantum Key Encapsulation Mechanisms (KEM). Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [I-D.josefsson-mceliece], [NIST], [DJB25], [RJM78], and [OQS24]), cannot be easily implemented in Transport Layer Security (TLS) Protocol Version 1.3 ([RFC8446]) due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see [PQC25]). Thus, enabling the use of Classic McEliece algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
+One possible application for larger data in TLS 1.3 handshake is post-quantum Key Encapsulation Mechanisms (KEM). Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [I-D.josefsson-mceliece], [NIST], [DJB25], [RJM78], and [OQS24]), cannot be easily implemented in TLS 1.3 due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see [PQC25]). Thus, enabling the use of Classic McEliece algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
 
-This document discusses the possible ways how TLS 1.3 handshake can accommodate data larger than 64 Kbytes with immediate goal to be able to run Large public key KEMs, but not limited to.
+This document discusses the possible ways how the TLS 1.3 handshake can accommodate data larger than 64 Kbytes with an immediate goal to be able to run large public key KEMs, but not limited to.
 
 # Conventions and Definitions
 
@@ -675,8 +675,8 @@ IKEv2 does (see [RFC9370]).
 ## New AuxHandshakeData Handshake Message
 
 If there is a need to send large pieces of data that do not fit into
-the existing TLS 1.3 handshake messages during handshare (e.g. in
-case PQ KEM with large public keys, like Classic NcEliece) then the
+the existing TLS 1.3 handshake messages during the handshake (e.g. in the
+case of PQ KEM with large public keys, like Classic McEliece) then the
 client indicates this with new extension of type aux_data (Figure 7)
 in the ClientHello message.  This extension contains no data.
 
@@ -684,25 +684,25 @@ If the server supports this extension, it replies with the
 HelloRetryRequest that also includes the aux_data extension.
 
 Once HelloRetryRequest has been received, the client repeats
-ClienHello and immediately after that sends a new message
-AuxHandshakeData (Figure 5)wich actually contains large data.  The
+ClientHello and immediately after that sends a new message
+AuxHandshakeData (Figure 5) which actually contains large data.  The
 server then responds with ServerHello that also is immediately
-followed by AuxHandshakeData message, preceeding all other other
+followed by AuxHandshakeData message, preceding all other other
 handshake messages (e.g. EncryptedExtensions, etc.).
 
 The data in the AuxHandshakeData message is organized as an array of
-AuxHandshakeDataEntry (Figure 4)structures.  When large piece of data
+AuxHandshakeDataEntry (Figure 4) structures.  When a large piece of data
 should be used in the protocol, it is referenced from the
 corresponding item in the ClientHello or ServerHello by its index in
 the AuxHandshakeData message.
 
 For example, with large public keys for some PQ KEMs (like Classic
 McEliece) the key_share representation would be
-LargeKeyShareRepresentation (Figure 6), which contains type of
+LargeKeyShareRepresentation (Figure 6), which contains the type of
 representation and, depending on that type, either the key share
 itself (e.g. for Classic McEliece ciphertext, which is small) or the
 index of AuxHandshakeDataEntry data elements in the AuxHandshakeData
-message, which will contain the large key share (e.g. Classic
+message, which will contain the large key share (e.g. a Classic
 McEliece public key).
 
 
@@ -818,20 +818,20 @@ This document proposes three possible solutions for transferring large amounts o
 
     * The number of round trips needed before application data can be sent increases.
     * It complicates the TLS state machine - application data should not be sent once the initial handshake is complete, instead it can only be sent after the modified Extended Key Update immediately following the initial handshake completes.
-    * It deals only with key shares, thus it is not a generic solution to transferring large data in handshake.
-    * It is unclear how this would interact with regular Extended Key Update extension^ either only initial key exchange algorithm is used for rekey using Extended Key Update, or this extension neede to be modified to be able to perform several successive key exchanges (similar to [RFC9370]).
+    * It deals only with key shares, thus it is not a generic solution to transferring large data in a handshake.
+    * It is unclear how this would interact with regular Extended Key Update extension either only initial key exchange algorithm is used for rekey using Extended Key Update, or this extension neede to be modified to be able to perform several successive key exchanges (similar to [RFC9370]).
 
 3. New AuxHandshakeData Handshake Message
 
     Advantages:
 
     * This solution keeps the current ClientHello and ServerHello messages intact, but adds a new handshake message following them. It seems that this is more friendly to middleboxes than modifying the format of CH and SH, but this is not for sure.
-    * This is a generic solution, allowing to transfer large data of any kind in TLS handshake.
+    * This is a generic solution, allowing to transfer large data of any kind in a TLS handshake.
     * Since the ClientHello format remains the same, it seems that this solution can be used with ECH (requires more investigations).
 
     Disadvantages:
 
-    * The solution relies on HelloRetryRequest, thus the number of round trips needed to complete handshake increases.
+    * The solution relies on HelloRetryRequest, thus the number of round trips needed to complete a handshake increases.
 
 <!--
 # IANA Considerations
@@ -894,6 +894,6 @@ Thank you D. J. Bernstein and Simon Josefsson as they advised to have at least o
 
 Thank you as well to Martin Thomson and David Schinazi, as their Internet Draft template was used to generate this document, before the authors' information was added. The authors also want to thank the contributors of the kramdown-rfc GitHub repository, as their examples helped with the format of the figures, references, and authors' information presented in this document. Thank you also to Joyce Reynolds and Robert Braden, as their Internet Draft [JR04] was helpful as a guide on how to write the citations in this document (i.e., using citation brackets with author's initials, year, etc.).
 
-Using Extended Key Update mechanism for transferring large key shares was proposed by Johm Mattsson.
+Using Extended Key Update mechanism for transferring large key shares was proposed by John Mattsson.
 
 --- back
