@@ -10,7 +10,7 @@
 <meta content="Valery Smyslov" name="author">
 <meta content="Yoav Nir" name="author">
 <meta content="
-       This memo discusses possible modifications of TLS 1.3, aimed to allow trasferring data larger than 64 Kbytes in andshake messages.
+       This memo discusses possible modifications of TLS 1.3, aimed to allow trasferring data larger than 64 Kbytes in handshake messages.
 One possible application for this feature is to allow using post-quantum Key Encapsulation Method that have large public key or ciphertext size
 (like Classic McEliece). 
     " name="description">
@@ -1098,7 +1098,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Larger Data in TLS 1.3 Handshake</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This memo discusses possible modifications of TLS 1.3, aimed to allow trasferring data larger than 64 Kbytes in andshake messages.
+<p id="section-abstract-1">This memo discusses possible modifications of TLS 1.3, aimed to allow trasferring data larger than 64 Kbytes in handshake messages.
 One possible application for this feature is to allow using post-quantum Key Encapsulation Method that have large public key or ciphertext size
 (like Classic McEliece).<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
@@ -1235,9 +1235,9 @@ One possible application for this feature is to allow using post-quantum Key Enc
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">The Transport Layer Security (TLS) Protocol Version 1.3 (<span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>) is widely used to protect network traffic. To establish secure connection client and server first perhorm a "handshake" during which they negotiate cipher suites, compute shared session key and perform one-side or mutual authentication. TLS1.3 handshake protocol consists of several messages, and while the size of each handshake message can be up to 2^24 bytesm the size of some individual data blocks inside these messages is limited to 2^16 bytes. This limitation makes it impossible to transfer larger data blocks in TLS 1.3 handshake.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">One possible application for larger data in TLS 1.3 handshake is post-quantum Key Encapsulation Mechanisms (KEM). Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see <span>[<a href="#I-D.josefsson-mceliece" class="cite xref">I-D.josefsson-mceliece</a>]</span>, <span>[<a href="#NIST" class="cite xref">NIST</a>]</span>, <span>[<a href="#DJB25" class="cite xref">DJB25</a>]</span>, <span>[<a href="#RJM78" class="cite xref">RJM78</a>]</span>, and <span>[<a href="#OQS24" class="cite xref">OQS24</a>]</span>), cannot be easily implemented in Transport Layer Security (TLS) Protocol Version 1.3 (<span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>) due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see <span>[<a href="#PQC25" class="cite xref">PQC25</a>]</span>). Thus, enabling the use of Classic McEliece algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">This document discusses the possible ways how TLS 1.3 handshake can accommodate data larger than 64 Kbytes with immediate goal to be able to run Large public key KEMs, but not limited to.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-1">The Transport Layer Security (TLS) Protocol Version 1.3 (<span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>) is widely used to protect network traffic. To establish secure connection client and server first perform a "handshake" during which they negotiate cipher suites, compute shared session key and perform one-side or mutual authentication. TLS 1.3 handshake protocol consists of several messages, and while the size of each handshake message can be up to 2^24 bytes the size of some individual data blocks inside these messages is limited to 2^16 bytes. This limitation makes it impossible to transfer larger data blocks in TLS 1.3 handshake.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">One possible application for larger data in TLS 1.3 handshake is post-quantum Key Encapsulation Mechanisms (KEM). Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see <span>[<a href="#I-D.josefsson-mceliece" class="cite xref">I-D.josefsson-mceliece</a>]</span>, <span>[<a href="#NIST" class="cite xref">NIST</a>]</span>, <span>[<a href="#DJB25" class="cite xref">DJB25</a>]</span>, <span>[<a href="#RJM78" class="cite xref">RJM78</a>]</span>, and <span>[<a href="#OQS24" class="cite xref">OQS24</a>]</span>), cannot be easily implemented in TLS 1.3 due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see <span>[<a href="#PQC25" class="cite xref">PQC25</a>]</span>). Thus, enabling the use of Classic McEliece algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">This document discusses the possible ways how the TLS 1.3 handshake can accommodate data larger than 64 Kbytes with an immediate goal to be able to run large public key KEMs, but not limited to.<a href="#section-1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1622,30 +1622,30 @@ IKEv2 does (see <span>[<a href="#RFC9370" class="cite xref">RFC9370</a>]</span>)
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-new-auxhandshakedata-handsh" class="section-name selfRef">New AuxHandshakeData Handshake Message</a>
         </h3>
 <p id="section-3.3-1">If there is a need to send large pieces of data that do not fit into
-the existing TLS 1.3 handshake messages during handshare (e.g. in
-case PQ KEM with large public keys, like Classic NcEliece) then the
+the existing TLS 1.3 handshake messages during the handshake (e.g. in the
+case of PQ KEM with large public keys, like Classic McEliece) then the
 client indicates this with new extension of type aux_data (Figure 7)
 in the ClientHello message.  This extension contains no data.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <p id="section-3.3-2">If the server supports this extension, it replies with the
 HelloRetryRequest that also includes the aux_data extension.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 <p id="section-3.3-3">Once HelloRetryRequest has been received, the client repeats
-ClienHello and immediately after that sends a new message
-AuxHandshakeData (Figure 5)wich actually contains large data.  The
+ClientHello and immediately after that sends a new message
+AuxHandshakeData (Figure 5) which actually contains large data.  The
 server then responds with ServerHello that also is immediately
-followed by AuxHandshakeData message, preceeding all other other
+followed by AuxHandshakeData message, preceding all other other
 handshake messages (e.g. EncryptedExtensions, etc.).<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 <p id="section-3.3-4">The data in the AuxHandshakeData message is organized as an array of
-AuxHandshakeDataEntry (Figure 4)structures.  When large piece of data
+AuxHandshakeDataEntry (Figure 4) structures.  When a large piece of data
 should be used in the protocol, it is referenced from the
 corresponding item in the ClientHello or ServerHello by its index in
 the AuxHandshakeData message.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
 <p id="section-3.3-5">For example, with large public keys for some PQ KEMs (like Classic
 McEliece) the key_share representation would be
-LargeKeyShareRepresentation (Figure 6), which contains type of
+LargeKeyShareRepresentation (Figure 6), which contains the type of
 representation and, depending on that type, either the key share
 itself (e.g. for Classic McEliece ciphertext, which is small) or the
 index of AuxHandshakeDataEntry data elements in the AuxHandshakeData
-message, which will contain the large key share (e.g. Classic
+message, which will contain the large key share (e.g. a Classic
 McEliece public key).<a href="#section-3.3-5" class="pilcrow">¶</a></p>
 <span id="name-using-the-auxhandshakedata-"></span><figure id="figure-5">
           <div class="alignLeft art-text artwork" id="section-3.3-6.1">
@@ -1799,10 +1799,10 @@ Disadvantages:<a href="#section-4-2.2.4" class="pilcrow">¶</a></p>
               <p id="section-4-2.2.5.2.1">It complicates the TLS state machine - application data should not be sent once the initial handshake is complete, instead it can only be sent after the modified Extended Key Update immediately following the initial handshake completes.<a href="#section-4-2.2.5.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4-2.2.5.3">
-              <p id="section-4-2.2.5.3.1">It deals only with key shares, thus it is not a generic solution to transferring large data in handshake.<a href="#section-4-2.2.5.3.1" class="pilcrow">¶</a></p>
+              <p id="section-4-2.2.5.3.1">It deals only with key shares, thus it is not a generic solution to transferring large data in a handshake.<a href="#section-4-2.2.5.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4-2.2.5.4">
-              <p id="section-4-2.2.5.4.1">It is unclear how this would interact with regular Extended Key Update extension^ either only initial key exchange algorithm is used for rekey using Extended Key Update, or this extension neede to be modified to be able to perform several successive key exchanges (similar to <span>[<a href="#RFC9370" class="cite xref">RFC9370</a>]</span>).<a href="#section-4-2.2.5.4.1" class="pilcrow">¶</a></p>
+              <p id="section-4-2.2.5.4.1">It is unclear how this would interact with regular Extended Key Update extension either only initial key exchange algorithm is used for rekey using Extended Key Update, or this extension neede to be modified to be able to perform several successive key exchanges (similar to <span>[<a href="#RFC9370" class="cite xref">RFC9370</a>]</span>).<a href="#section-4-2.2.5.4.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </li>
@@ -1815,7 +1815,7 @@ Advantages:<a href="#section-4-2.3.2" class="pilcrow">¶</a></p>
               <p id="section-4-2.3.3.1.1">This solution keeps the current ClientHello and ServerHello messages intact, but adds a new handshake message following them. It seems that this is more friendly to middleboxes than modifying the format of CH and SH, but this is not for sure.<a href="#section-4-2.3.3.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4-2.3.3.2">
-              <p id="section-4-2.3.3.2.1">This is a generic solution, allowing to transfer large data of any kind in TLS handshake.<a href="#section-4-2.3.3.2.1" class="pilcrow">¶</a></p>
+              <p id="section-4-2.3.3.2.1">This is a generic solution, allowing to transfer large data of any kind in a TLS handshake.<a href="#section-4-2.3.3.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4-2.3.3.3">
               <p id="section-4-2.3.3.3.1">Since the ClientHello format remains the same, it seems that this solution can be used with ECH (requires more investigations).<a href="#section-4-2.3.3.3.1" class="pilcrow">¶</a></p>
@@ -1825,7 +1825,7 @@ Advantages:<a href="#section-4-2.3.2" class="pilcrow">¶</a></p>
 Disadvantages:<a href="#section-4-2.3.4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4-2.3.5.1">
-              <p id="section-4-2.3.5.1.1">The solution relies on HelloRetryRequest, thus the number of round trips needed to complete handshake increases.<a href="#section-4-2.3.5.1.1" class="pilcrow">¶</a></p>
+              <p id="section-4-2.3.5.1.1">The solution relies on HelloRetryRequest, thus the number of round trips needed to complete a handshake increases.<a href="#section-4-2.3.5.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </li>
@@ -1839,7 +1839,7 @@ Disadvantages:<a href="#section-4-2.3.4" class="pilcrow">¶</a></p>
       </h2>
 <p id="section-5-1">Thank you D. J. Bernstein and Simon Josefsson as they advised to have at least one reference for the description of Classic McEliece. Thank you also to Eliot Lear for his feedback on other fields regarding the next algorithm needed.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">Thank you as well to Martin Thomson and David Schinazi, as their Internet Draft template was used to generate this document, before the authors' information was added. The authors also want to thank the contributors of the kramdown-rfc GitHub repository, as their examples helped with the format of the figures, references, and authors' information presented in this document. Thank you also to Joyce Reynolds and Robert Braden, as their Internet Draft <span>[<a href="#JR04" class="cite xref">JR04</a>]</span> was helpful as a guide on how to write the citations in this document (i.e., using citation brackets with author's initials, year, etc.).<a href="#section-5-2" class="pilcrow">¶</a></p>
-<p id="section-5-3">Using Extended Key Update mechanism for transferring large key shares was proposed by Johm Mattsson.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-3">Using Extended Key Update mechanism for transferring large key shares was proposed by John Mattsson.<a href="#section-5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
