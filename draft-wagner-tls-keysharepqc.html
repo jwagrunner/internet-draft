@@ -1071,7 +1071,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <time datetime="2026-02-19" class="published">19 February 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
-<dd class="intended-status">Informational</dd>
+<dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
 <dd class="expires"><time datetime="2026-08-23">23 August 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
@@ -1188,10 +1188,13 @@ One possible application for this feature is to allow using post-quantum Key Enc
                     <p id="section-toc.1-1.3.2.1.2.3.1"><a href="#section-3.1.3" class="auto internal xref">3.1.3</a>.  <a href="#name-other-use-case-rlce-algorit" class="internal xref">Other Use Case (RLCE Algorithm)</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.4">
-                    <p id="section-toc.1-1.3.2.1.2.4.1"><a href="#section-3.1.4" class="auto internal xref">3.1.4</a>.  <a href="#name-tls-implementation" class="internal xref">TLS Implementation</a></p>
+                    <p id="section-toc.1-1.3.2.1.2.4.1"><a href="#section-3.1.4" class="auto internal xref">3.1.4</a>.  <a href="#name-hybrid-combination-x25519cl" class="internal xref">Hybrid Combination "x25519classicmceliece348864"</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.5">
-                    <p id="section-toc.1-1.3.2.1.2.5.1"><a href="#section-3.1.5" class="auto internal xref">3.1.5</a>.  <a href="#name-summary-of-changes-from-rfc" class="internal xref">Summary of Changes from RFC 8446</a></p>
+                    <p id="section-toc.1-1.3.2.1.2.5.1"><a href="#section-3.1.5" class="auto internal xref">3.1.5</a>.  <a href="#name-tls-implementation" class="internal xref">TLS Implementation</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.6">
+                    <p id="section-toc.1-1.3.2.1.2.6.1"><a href="#section-3.1.6" class="auto internal xref">3.1.6</a>.  <a href="#name-summary-of-changes-from-rfc" class="internal xref">Summary of Changes from RFC 8446</a></p>
 </li>
                 </ul>
 </li>
@@ -1207,29 +1210,21 @@ One possible application for this feature is to allow using post-quantum Key Enc
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-analyzing-of-the-proposed-s" class="internal xref">Analyzing of the Proposed Solutions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
-                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-security-considerations-for" class="internal xref">Security Considerations for New Key Share Extension</a></p>
-</li>
-            </ul>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref"></a><a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref"></a><a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref"></a><a href="#name-references" class="internal xref">References</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref"></a><a href="#name-references" class="internal xref">References</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref"></a><a href="#name-normative-references" class="internal xref">Normative References</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref"></a><a href="#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref"></a><a href="#name-informative-references" class="internal xref">Informative References</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref"></a><a href="#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
             </ul>
 </li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1241,7 +1236,7 @@ One possible application for this feature is to allow using post-quantum Key Enc
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">The Transport Layer Security (TLS) Protocol Version 1.3 (<span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>) is widely used to protect network traffic. To establish secure connection client and server first perhorm a "handshake" during which they negotiate cipher suites, compute shared session key and perform one-side or mutual authentication. TLS1.3 handshake protocol consists of several messages, and while the size of each handshake message can be up to 2^24 bytesm the size of some individual data blocks inside these messages is limited to 2^16 bytes. This limitation makes it impossible to transfer larger data blocks in TLS 1.3 handshake.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">One possible application for larger data in TLS 1.3 handshake is post-quantum Key Encapsulation Mechanisms (KEM). Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see <span>[<a href="#NIST" class="cite xref">NIST</a>]</span>, <span>[<a href="#DJB25" class="cite xref">DJB25</a>]</span>, <span>[<a href="#RJM78" class="cite xref">RJM78</a>]</span>, and <span>[<a href="#OQS24" class="cite xref">OQS24</a>]</span>), cannot be easily implemented in Transport Layer Security (TLS) Protocol Version 1.3 (<span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>) due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see <span>[<a href="#PQC25" class="cite xref">PQC25</a>]</span>). Thus, enabling the use of Classic McEliece algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-2">One possible application for larger data in TLS 1.3 handshake is post-quantum Key Encapsulation Mechanisms (KEM). Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see <span>[<a href="#I-D.josefsson-mceliece" class="cite xref">I-D.josefsson-mceliece</a>]</span>, <span>[<a href="#NIST" class="cite xref">NIST</a>]</span>, <span>[<a href="#DJB25" class="cite xref">DJB25</a>]</span>, <span>[<a href="#RJM78" class="cite xref">RJM78</a>]</span>, and <span>[<a href="#OQS24" class="cite xref">OQS24</a>]</span>), cannot be easily implemented in Transport Layer Security (TLS) Protocol Version 1.3 (<span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>) due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see <span>[<a href="#PQC25" class="cite xref">PQC25</a>]</span>). Thus, enabling the use of Classic McEliece algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">This document discusses the possible ways how TLS 1.3 handshake can accommodate data larger than 64 Kbytes with immediate goal to be able to run Large public key KEMs, but not limited to.<a href="#section-1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1273,9 +1268,12 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 struct {
   NamedGroup group;
   select (KeyShareEntry.group) {
+  case classicmceliece348864:       Empty;
+  case classicmceliece460896:       Empty;
   case classicmceliece6688128:      Empty;
   case classicmceliece6960119:      Empty;
   case classicmceliece8192128:      Empty;
+  case x25519classicmceliece348864: Empty;
   case rlcel5:                      Empty;
   case other large PQ algorithm1:   Empty;
   case other large PQ algorithm2:   Empty;
@@ -1287,9 +1285,12 @@ struct {
 struct {
   NamedGroup group;
   select (KeyShareEntryPQC.group) {
+  case classicmceliece348864:       opaque key_exchange&lt;1..2^24-1&gt;;
+  case classicmceliece460896:       opaque key_exchange&lt;1..2^24-1&gt;;
   case classicmceliece6688128:      opaque key_exchange&lt;1..2^24-1&gt;;
   case classicmceliece6960119:      opaque key_exchange&lt;1..2^24-1&gt;;
   case classicmceliece8192128:      opaque key_exchange&lt;1..2^24-1&gt;;
+  case x25519classicmceliece348864: opaque key_exchange&lt;1..2^24-1&gt;;
   case rlcel5:                      opaque key_exchange&lt;1..2^24-1&gt;;
   case other large PQ algorithm1:   opaque key_exchange&lt;1..2^24-1&gt;;
   case other large PQ algorithm2:   opaque key_exchange&lt;1..2^24-1&gt;;
@@ -1530,20 +1531,28 @@ struct {
 <p id="section-3.1.3-1">The Random Linear Code-based Encryption (RLCE) algorithm group (see <span>[<a href="#RLCE17" class="cite xref">RLCE17</a>]</span>) is another code-based cryptographic scheme (NIST Round 1 <span>[<a href="#NIST1" class="cite xref">NIST1</a>]</span>). "rlcel5" is a RLCE algorithm from this group (where the public key size is 1,232,001 Bytes) that can be used in the new key share extension, and can be demonstrated for use for TLS key exchange in the TLS Implementation mentioned in this document.<a href="#section-3.1.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="tls-implementation">
+<div id="hybrid-combination-x25519classicmceliece348864">
 <section id="section-3.1.4">
-          <h4 id="name-tls-implementation">
-<a href="#section-3.1.4" class="section-number selfRef">3.1.4. </a><a href="#name-tls-implementation" class="section-name selfRef">TLS Implementation</a>
+          <h4 id="name-hybrid-combination-x25519cl">
+<a href="#section-3.1.4" class="section-number selfRef">3.1.4. </a><a href="#name-hybrid-combination-x25519cl" class="section-name selfRef">Hybrid Combination "x25519classicmceliece348864"</a>
           </h4>
-<p id="section-3.1.4-1">A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where the mentioned Classic McEliece algorithms can be chosen for key exchange when initiating TLS connections. It can be accessed here: <span>[<a href="#JWYW25" class="cite xref">JWYW25</a>]</span>.<a href="#section-3.1.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.4-1">"x25519classicmceliece348864" is a hybrid mechanism introduced in this document that combines both classicmceliece348864 and x25519 <span>[<a href="#RFC7748" class="cite xref">RFC7748</a>]</span> in TLS key exchanges. The experiment TLS implementation presented in this document, which uses the fork <span>[<a href="#JWYWPROV" class="cite xref">JWYWPROV</a>]</span> of the oqs-provider <span>[<a href="#OQSPROV" class="cite xref">OQSPROV</a>]</span>, is one example of using x25519classicmceliece348864 in a hybrid key exchange; when x25519classicmceliece348864 is chosen in this circumstance, it uses the "concatenating" method mentioned in <span>[<a href="#I-D.ietf-tls-hybrid-design" class="cite xref">I-D.ietf-tls-hybrid-design</a>]</span> in the new key_share_pqc extension. In the ClientHello message, this new key share extension contains both the Classic McEliece public key and X25519 key concatenated together. In the ServerHello message, this new key share extension then contains the classicmceliece348864 ciphertext and X25519 key concatenated together.<a href="#section-3.1.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="tls-implementation">
+<section id="section-3.1.5">
+          <h4 id="name-tls-implementation">
+<a href="#section-3.1.5" class="section-number selfRef">3.1.5. </a><a href="#name-tls-implementation" class="section-name selfRef">TLS Implementation</a>
+          </h4>
+<p id="section-3.1.5-1">A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where the mentioned Classic McEliece algorithms can be chosen for key exchange when initiating TLS connections. It can be accessed here: <span>[<a href="#JWYW25" class="cite xref">JWYW25</a>]</span>.<a href="#section-3.1.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="summary-of-changes-from-rfc-8446">
-<section id="section-3.1.5">
+<section id="section-3.1.6">
           <h4 id="name-summary-of-changes-from-rfc">
-<a href="#section-3.1.5" class="section-number selfRef">3.1.5. </a><a href="#name-summary-of-changes-from-rfc" class="section-name selfRef">Summary of Changes from RFC 8446</a>
+<a href="#section-3.1.6" class="section-number selfRef">3.1.6. </a><a href="#name-summary-of-changes-from-rfc" class="section-name selfRef">Summary of Changes from RFC 8446</a>
           </h4>
-<p id="section-3.1.5-1">A new structure is introduced of KeyShareEntryPQC along with modifications of existing structures including KeyShareEntry, NamedGroup, Extension, ExtensionType, KeyShareClientHello, and KeyShareServerHello. Adding a new ExtensionType of "key_share_pqc" allows for the addition of this new structure of KeyShareEntryPQC, which is based on the existing KeyShareEntry, but "key_exchange" has been expanded and select statements are added to both structures which depend on the KeyShareEntry.group or KeyShareEntryPQC.group being called in a TLS connection for key exchange. This new KeyShareEntryPQC will now also appear in existing structures of KeyShareClientHello and KeyShareServerHello. Thus, the "extension_data" is expanded in the existing Extension structure.<a href="#section-3.1.5-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.6-1">A new structure is introduced of KeyShareEntryPQC along with modifications of existing structures including KeyShareEntry, NamedGroup, Extension, ExtensionType, KeyShareClientHello, and KeyShareServerHello. Adding a new ExtensionType of "key_share_pqc" allows for the addition of this new structure of KeyShareEntryPQC, which is based on the existing KeyShareEntry, but "key_exchange" has been expanded and select statements are added to both structures which depend on the KeyShareEntry.group or KeyShareEntryPQC.group being called in a TLS connection for key exchange. This new KeyShareEntryPQC will now also appear in existing structures of KeyShareClientHello and KeyShareServerHello. Thus, the "extension_data" is expanded in the existing Extension structure.<a href="#section-3.1.6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1823,42 +1832,31 @@ Disadvantages:<a href="#section-4-2.3.4" class="pilcrow">¶</a></p>
       </ol>
 </section>
 </div>
-<div id="security-considerations">
-<section id="section-5">
-      <h2 id="name-security-considerations">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
-      </h2>
-<div id="security-considerations-for-new-key-share-extension">
-<section id="section-5.1">
-        <h3 id="name-security-considerations-for">
-<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-security-considerations-for" class="section-name selfRef">Security Considerations for New Key Share Extension</a>
-        </h3>
-<p id="section-5.1-1">The new "key_share_pqc" extension <span class="bcp14">MUST NOT</span> be used with 0-RTT, as this subjects the server to replay attacks of multiple large ClientHello messages (see <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> and an example of a replay attack of several ClientHello messages in [HN23]). If this extension were to be used with 0-RTT, the server may receive duplicated ClientHello messages where each of them contain a large public key of a Classic McEliece algorithm in each ClientHello's "key_share_pqc" extension, which will not only cause resource exhaustion on the server (see Section 8.2 in <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>), but memory utilization will rise quickly than noted in [MEA23] and will cause the client-hello recording defense mechanism (see Section 8.2 in <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> and [MEA23]) to be used as a Denial-of-Service attack on the server. Therefore, 0-RTT and the use of the "early_data" extension <span class="bcp14">MUST NOT</span> be used with the "key_share_pqc" extension.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-</section>
-</div>
 <div id="acknowledgements">
-<section id="section-6">
+<section id="section-5">
       <h2 id="name-acknowledgements">
 <a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
-<p id="section-6-1">Thank you D. J. Bernstein and Simon Josefsson as they advised to have at least one reference for the description of Classic McEliece. Thank you also to Eliot Lear for his feedback on other fields regarding the next algorithm needed.<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">Thank you as well to Martin Thomson and David Schinazi, as their Internet Draft template was used to generate this document, before the authors' information was added. The authors also want to thank the contributors of the kramdown-rfc GitHub repository, as their examples helped with the format of the figures, references, and authors' information presented in this document. Thank you also to Joyce Reynolds and Robert Braden, as their Internet Draft <span>[<a href="#JR04" class="cite xref">JR04</a>]</span> was helpful as a guide on how to write the citations in this document (i.e., using citation brackets with author's initials, year, etc.).<a href="#section-6-2" class="pilcrow">¶</a></p>
-<p id="section-6-3">Using Extended Key Update mechanism for transferring large key shares was proposed by Johm Mattsson.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-5-1">Thank you D. J. Bernstein and Simon Josefsson as they advised to have at least one reference for the description of Classic McEliece. Thank you also to Eliot Lear for his feedback on other fields regarding the next algorithm needed.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">Thank you as well to Martin Thomson and David Schinazi, as their Internet Draft template was used to generate this document, before the authors' information was added. The authors also want to thank the contributors of the kramdown-rfc GitHub repository, as their examples helped with the format of the figures, references, and authors' information presented in this document. Thank you also to Joyce Reynolds and Robert Braden, as their Internet Draft <span>[<a href="#JR04" class="cite xref">JR04</a>]</span> was helpful as a guide on how to write the citations in this document (i.e., using citation brackets with author's initials, year, etc.).<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">Using Extended Key Update mechanism for transferring large key shares was proposed by Johm Mattsson.<a href="#section-5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
-<section id="section-7">
+<section id="section-6">
       <h2 id="name-references">
 <a href="#name-references" class="section-name selfRef">References</a>
       </h2>
 <div id="sec-normative-references">
-<section id="section-7.1">
+<section id="section-6.1">
         <h3 id="name-normative-references">
 <a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
+<dt id="I-D.josefsson-mceliece">[I-D.josefsson-mceliece]</dt>
+        <dd>
+<span class="refAuthor">Josefsson, S.</span>, <span class="refTitle">"Classic McEliece"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-josefsson-mceliece-03</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-josefsson-mceliece-03">https://datatracker.ietf.org/doc/html/draft-josefsson-mceliece-03</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
@@ -1875,7 +1873,7 @@ Disadvantages:<a href="#section-4-2.3.4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-informative-references">
-<section id="section-7.2">
+<section id="section-6.2">
         <h3 id="name-informative-references">
 <a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
@@ -1891,6 +1889,10 @@ Disadvantages:<a href="#section-4-2.3.4" class="pilcrow">¶</a></p>
 <dt id="I-D.ietf-tls-extended-key-update">[I-D.ietf-tls-extended-key-update]</dt>
         <dd>
 <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Tüxen, M.</span>, <span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Fries, S.</span>, and <span class="refAuthor">Y. Rosomakho</span>, <span class="refTitle">"Extended Key Update for Transport Layer Security (TLS) 1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-extended-key-update-09</span>, <time datetime="2026-02-18" class="refDate">18 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-extended-key-update-09">https://datatracker.ietf.org/doc/html/draft-ietf-tls-extended-key-update-09</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-tls-hybrid-design">[I-D.ietf-tls-hybrid-design]</dt>
+        <dd>
+<span class="refAuthor">Stebila, D.</span>, <span class="refAuthor">Fluhrer, S.</span>, and <span class="refAuthor">S. Gueron</span>, <span class="refTitle">"Hybrid key exchange in TLS 1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-hybrid-design-16</span>, <time datetime="2025-09-07" class="refDate">7 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-hybrid-design-16">https://datatracker.ietf.org/doc/html/draft-ietf-tls-hybrid-design-16</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="JR04">[JR04]</dt>
         <dd>
@@ -1927,6 +1929,10 @@ Disadvantages:<a href="#section-4-2.3.4" class="pilcrow">¶</a></p>
 <dt id="RASHOK20">[RASHOK20]</dt>
         <dd>
 <span class="refAuthor">rashok</span>, <span class="refTitle">"How to do TLS 1.3 PSK using openssl?"</span>, <time datetime="2020" class="refDate">2020</time>, <span>&lt;<a href="https://stackoverflow.com/questions/58719595/how-to-do-tls-1-3-psk-using-openssl">https://stackoverflow.com/questions/58719595/how-to-do-tls-1-3-psk-using-openssl</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7748">[RFC7748]</dt>
+        <dd>
+<span class="refAuthor">Langley, A.</span>, <span class="refAuthor">Hamburg, M.</span>, and <span class="refAuthor">S. Turner</span>, <span class="refTitle">"Elliptic Curves for Security"</span>, <span class="seriesInfo">RFC 7748</span>, <span class="seriesInfo">DOI 10.17487/RFC7748</span>, <time datetime="2016-01" class="refDate">January 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7748">https://www.rfc-editor.org/rfc/rfc7748</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9370">[RFC9370]</dt>
         <dd>
