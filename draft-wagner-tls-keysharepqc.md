@@ -1,7 +1,7 @@
 ---
 title: Larger Data in TLS 1.3 Handshake
 abbrev: Larger Data in TLS 1.3 Handshake
-category: info
+category: std
 
 docname: draft-wagner-tls-keysharepqc-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
@@ -62,6 +62,7 @@ author:
 
 normative:
   RFC8446:
+  I-D.josefsson-mceliece:
 <!--   TLSE:
     target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
     title: "Transport Layer Security (TLS) Extensions"
@@ -283,6 +284,8 @@ informative:
     date: 2004
   I-D.ietf-tls-extended-key-update:
   RFC9370:
+  RFC7748:
+  I-D.ietf-tls-hybrid-design:
 
 --- abstract
 
@@ -297,7 +300,7 @@ One possible application for this feature is to allow using post-quantum Key Enc
 
 The Transport Layer Security (TLS) Protocol Version 1.3 ([RFC8446]) is widely used to protect network traffic. To establish secure connection client and server first perhorm a "handshake" during which they negotiate cipher suites, compute shared session key and perform one-side or mutual authentication. TLS1.3 handshake protocol consists of several messages, and while the size of each handshake message can be up to 2^24 bytesm the size of some individual data blocks inside these messages is limited to 2^16 bytes. This limitation makes it impossible to transfer larger data blocks in TLS 1.3 handshake.
 
-One possible application for larger data in TLS 1.3 handshake is post-quantum Key Encapsulation Mechanisms (KEM). Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [NIST], [DJB25], [RJM78], and [OQS24]), cannot be easily implemented in Transport Layer Security (TLS) Protocol Version 1.3 ([RFC8446]) due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see [PQC25]). Thus, enabling the use of Classic McEliece algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
+One possible application for larger data in TLS 1.3 handshake is post-quantum Key Encapsulation Mechanisms (KEM). Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [I-D.josefsson-mceliece], [NIST], [DJB25], [RJM78], and [OQS24]), cannot be easily implemented in Transport Layer Security (TLS) Protocol Version 1.3 ([RFC8446]) due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see [PQC25]). Thus, enabling the use of Classic McEliece algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
 
 This document discusses the possible ways how TLS 1.3 handshake can accommodate data larger than 64 Kbytes with immediate goal to be able to run Large public key KEMs, but not limited to.
 
@@ -316,9 +319,12 @@ Based on the key share extension from [RFC8446] is introduced a new key share ex
 struct {
   NamedGroup group;
   select (KeyShareEntry.group) {
+  case classicmceliece348864:       Empty;
+  case classicmceliece460896:       Empty;
   case classicmceliece6688128:      Empty;
   case classicmceliece6960119:      Empty;
   case classicmceliece8192128:      Empty;
+  case x25519classicmceliece348864: Empty;
   case rlcel5:                      Empty;
   case other large PQ algorithm1:   Empty;
   case other large PQ algorithm2:   Empty;
@@ -330,9 +336,12 @@ struct {
 struct {
   NamedGroup group;
   select (KeyShareEntryPQC.group) {
+  case classicmceliece348864:       opaque key_exchange<1..2^24-1>;
+  case classicmceliece460896:       opaque key_exchange<1..2^24-1>;
   case classicmceliece6688128:      opaque key_exchange<1..2^24-1>;
   case classicmceliece6960119:      opaque key_exchange<1..2^24-1>;
   case classicmceliece8192128:      opaque key_exchange<1..2^24-1>;
+  case x25519classicmceliece348864: opaque key_exchange<1..2^24-1>;
   case rlcel5:                      opaque key_exchange<1..2^24-1>;
   case other large PQ algorithm1:   opaque key_exchange<1..2^24-1>;
   case other large PQ algorithm2:   opaque key_exchange<1..2^24-1>;
@@ -597,6 +606,10 @@ When a Hello Retry Request involves a PSK in use with a Classic McEliece algorit
 
 The Random Linear Code-based Encryption (RLCE) algorithm group (see [RLCE17]) is another code-based cryptographic scheme (NIST Round 1 [NIST1]). "rlcel5" is a RLCE algorithm from this group (where the public key size is 1,232,001 Bytes) that can be used in the new key share extension, and can be demonstrated for use for TLS key exchange in the TLS Implementation mentioned in this document.
 
+### Hybrid Combination "x25519classicmceliece348864"
+
+"x25519classicmceliece348864" is a hybrid mechanism introduced in this document that combines both classicmceliece348864 and x25519 [RFC7748] in TLS key exchanges. The experiment TLS implementation presented in this document, which uses the fork [JWYWPROV] of the oqs-provider [OQSPROV], is one example of using x25519classicmceliece348864 in a hybrid key exchange; when x25519classicmceliece348864 is chosen in this circumstance, it uses the "concatenating" method mentioned in [I-D.ietf-tls-hybrid-design] in the new key_share_pqc extension. In the ClientHello message, this new key share extension contains both the Classic McEliece public key and X25519 key concatenated together. In the ServerHello message, this new key share extension then contains the classicmceliece348864 ciphertext and X25519 key concatenated together.
+
 ### TLS Implementation
 
 A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where the mentioned Classic McEliece algorithms can be chosen for key exchange when initiating TLS connections. It can be accessed here: [JWYW25].
@@ -819,13 +832,6 @@ This document proposes three possible solutions for transferring large amounts o
     Disadvantages:
 
     * The solution relies on HelloRetryRequest, thus the number of round trips needed to complete handshake increases.
-
-
-# Security Considerations
-
-## Security Considerations for New Key Share Extension
-
-The new "key_share_pqc" extension MUST NOT be used with 0-RTT, as this subjects the server to replay attacks of multiple large ClientHello messages (see [RFC8446] and an example of a replay attack of several ClientHello messages in [HN23]). If this extension were to be used with 0-RTT, the server may receive duplicated ClientHello messages where each of them contain a large public key of a Classic McEliece algorithm in each ClientHello's "key_share_pqc" extension, which will not only cause resource exhaustion on the server (see Section 8.2 in [RFC8446]), but memory utilization will rise quickly than noted in [MEA23] and will cause the client-hello recording defense mechanism (see Section 8.2 in [RFC8446] and [MEA23]) to be used as a Denial-of-Service attack on the server. Therefore, 0-RTT and the use of the "early_data" extension MUST NOT be used with the "key_share_pqc" extension.
 
 <!--
 # IANA Considerations
