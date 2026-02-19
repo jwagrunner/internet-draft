@@ -1,7 +1,7 @@
 ---
-title: New Key Share Extension for Classic McEliece Algorithms
-abbrev: keyshare
-category: std
+title: Larger Data in TLS 1.3 Handshake
+abbrev: Larger Data in TLS 1.3 Handshake
+category: info
 
 docname: draft-wagner-tls-keysharepqc-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
@@ -41,68 +41,39 @@ author:
     code: 28223
     country: USA
     email: yongge.wang@charlotte.edu
+  -
+    ins: V.Smyslov
+    name: Valery Smyslov
+    org: ELVIS-PLUS
+    street: PO Box 81
+    city: Moscow (Zelenograd)
+    code: 124460
+    country: Russian Federation
+    email: svan@elvis.ru
+  -
+    ins: Y. Nir
+    name: Yoav Nir
+    org: Dell Technologies
+    street: 9 Andrei Sakharov St
+    city: Haifa
+    code: 3190500
+    country: Israel
+    email: ynir.ietf@gmail.com
 
 normative:
   RFC8446:
-    target: https://datatracker.ietf.org/doc/html/rfc8446
-    title: "The Transport Layer Security (TLS) Protocol Version 1.3"
-    author:
-      ins: E. Rescorla
-      name: Eric Rescorla
-    date: 2018
-  CLASSICMC:
-    target: https://datatracker.ietf.org/doc/draft-josefsson-mceliece/
-    title: "Classic McEliece"
-    author:
-      ins: S. Josefsson
-      name: Simon Josefsson
-    date: draft-josefsson-mceliece-03 (work in progress) July 2025
-  curve25519:
-    target: https://www.iacr.org/cryptodb/archive/2006/PKC/3351/3351.pdf
-    title: "Curve25519: new Diffie-Hellman speed records"
-    author:
-      ins: D. J. Bernstein
-      name: Daniel J. Bernstein
-    date: 2006
-  RFC7748:
-    target: https://datatracker.ietf.org/doc/html/rfc7748
-    title: "Elliptic Curves for Security"
-    author:
-     -
-      ins: A. Langley
-      name: Adam Langley
-     -
-      ins: M. Hamburg
-      name: Mike Hamburg
-     -
-      ins: S. Turner
-      name: Sean Turner
-  HYBRIDTLS:
-    target: https://datatracker.ietf.org/doc/draft-ietf-tls-hybrid-design/
-    title: "Hybrid key exchange in TLS 1.3"
-    author:
-     -
-      ins: D. Stebila
-      name: Douglas Stebila
-     -
-      ins: S. Fluhrer
-      name: Scott Fluhrer
-     -
-      ins: S. Gueron
-      name: Shay Gueron
-    date: draft-ietf-tls-hybrid-design-16 (work in progress) Sept. 2025
-  TLSE:
+<!--   TLSE:
     target: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml
     title: "Transport Layer Security (TLS) Extensions"
     author:
       org: Internet Assigned Numbers Authority
-    date: 2025
-  TLSP:
+    date: 2025 -->
+<!--  TLSP:
     target: https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml
     title: "Transport Layer Security (TLS) Parameters"
     author:
       org: Internet Assigned Numbers Authority
-    date: 2025
+    date: 2025 -->
 
 informative:
   NIST:
@@ -310,60 +281,65 @@ informative:
       ins: R. Braden
       name: Robert Braden
     date: 2004
+  I-D.ietf-tls-extended-key-update:
+  RFC9370:
+
 --- abstract
 
-RFC 8446 is modified to where another key share extension is introduced to accommodate both public keys and ciphertexts in ClientHello and ServerHello messages for post-quantum algorithms that have large public keys, including algorithms of the code-based cryptographic scheme Classic McEliece.
+This memo discusses possible modifications of TLS 1.3, aimed to allow trasferring data larger than 64 Kbytes in andshake messages.
+One possible application for this feature is to allow using post-quantum Key Encapsulation Method that have large public key or ciphertext size
+(like Classic McEliece).
 
 --- middle
 
 
 # Introduction
 
-Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [CLASSICMC], [NIST], [DJB25], [RJM78], and [OQS24]), cannot be easily implemented in Transport Layer Security (TLS) Protocol Version 1.3 ([RFC8446]) due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see [PQC25]). Therefore, this document proposes a new key share that has a higher limit and is utilized in ClientHello and ServerHello messages, which is a modification of [RFC8446]. For example, if a Classic McEliece algorithm is requested in a TLS 1.3 key exchange, this new key share extension will be constructed. However, if a classical algorithm is requested for key exchange, a normal key share extension is constructed. Thus, enabling the use of Classic McEliece algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
+The Transport Layer Security (TLS) Protocol Version 1.3 ([RFC8446]) is widely used to protect network traffic. To establish secure connection client and server first perhorm a "handshake" during which they negotiate cipher suites, compute shared session key and perform one-side or mutual authentication. TLS1.3 handshake protocol consists of several messages, and while the size of each handshake message can be up to 2^24 bytesm the size of some individual data blocks inside these messages is limited to 2^16 bytes. This limitation makes it impossible to transfer larger data blocks in TLS 1.3 handshake. 
+
+One possible application for larger data in TLS 1.3 handshake is post-quantum Key Encapsulation Mechanisms (KEM). Large public key algorithms, including the code-based cryptographic algorithm family Classic McEliece (see [NIST], [DJB25], [RJM78], and [OQS24]), cannot be easily implemented in Transport Layer Security (TLS) Protocol Version 1.3 ([RFC8446]) due to the current key share limitations of 65,535 Bytes. It is important to consider such uses of algorithms given that Classic McEliece is a Round 4 algorithm submitted in the National Institute of Standards and Technology (NIST) standardization process (see [PQC25]). Thus, enabling the use of Classic McEliece algorithms to be used in TLS 1.3 key exchanges and also presenting them as an alternative option to replace classical algorithms for future protection against the threat of attackers in possession of powerful quantum computers that will break classical encryption.
+
+This document discusses the possible ways how TLS 1.3 handshake can accommodate data larger than 64 Kbytes with immediate goal to be able to run Large public key KEMs, but not limited to.
 
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
 
-# New Key Share Extension
+# Possible Solutions to the Problem
+
+## New Key Share Extension
 
 Based on the key share extension from [RFC8446] is introduced a new key share extension in this document, "key_share_pqc". This is reflected in this document and is represented as KeyShareEntryPQC below, based on the existing KeyShareEntry from [RFC8446]. However, this is modified along with the existing KeyShareEntry structure to test if the key exchange algorithm chosen in a TLS 1.3 connection belongs from the Classic McEliece family, and if it is, then KeyShareEntryPQC is constructed. If the opposite is true, where the key exchange algorithm is not from the Classic McEliece family, then KeyShareEntry is constructed. Note that the "key_exchange" fields are expanded in KeyShareEntryPQC to accommodate a large public key that is greater than 65,535 Bytes:
 
 <figure><artwork>
 
-       struct {
-          NamedGroup group;
-          select (KeyShareEntry.group) {
-          case classicmceliece348864:       Empty;
-          case classicmceliece460896:       Empty;
-          case classicmceliece6688128:      Empty;
-          case classicmceliece6960119:      Empty;
-          case classicmceliece8192128:      Empty;
-          case x25519classicmceliece348864: Empty;
-          case rlcel5:                      Empty;
-          case other large PQ algorithm1:   Empty;
-          case other large PQ algorithm2:   Empty;
-          case etc.:                        Empty;
-          default:                          opaque key_exchange<1..2^16-1>;
-          }
-       } KeyShareEntry;
+struct {
+  NamedGroup group;
+  select (KeyShareEntry.group) {
+  case classicmceliece6688128:      Empty;
+  case classicmceliece6960119:      Empty;
+  case classicmceliece8192128:      Empty;
+  case rlcel5:                      Empty;
+  case other large PQ algorithm1:   Empty;
+  case other large PQ algorithm2:   Empty;
+  case etc.:                        Empty;
+  default:                          opaque key_exchange<1..2^16-1>;
+  }
+} KeyShareEntry;
 
-      struct {
-          NamedGroup group;
-          select (KeyShareEntryPQC.group) {
-          case classicmceliece348864:       opaque key_exchange<1..2^24-1>;
-          case classicmceliece460896:       opaque key_exchange<1..2^24-1>;
-          case classicmceliece6688128:      opaque key_exchange<1..2^24-1>;
-          case classicmceliece6960119:      opaque key_exchange<1..2^24-1>;
-          case classicmceliece8192128:      opaque key_exchange<1..2^24-1>;
-          case x25519classicmceliece348864: opaque key_exchange<1..2^24-1>;
-          case rlcel5:                      opaque key_exchange<1..2^24-1>;
-          case other large PQ algorithm1:   opaque key_exchange<1..2^24-1>;
-          case other large PQ algorithm2:   opaque key_exchange<1..2^24-1>;
-          case etc.:                        opaque key_exchange<1..2^24-1>;
-          default:                          Empty;
-          }
-       } KeyShareEntryPQC;
+struct {
+  NamedGroup group;
+  select (KeyShareEntryPQC.group) {
+  case classicmceliece6688128:      opaque key_exchange<1..2^24-1>;
+  case classicmceliece6960119:      opaque key_exchange<1..2^24-1>;
+  case classicmceliece8192128:      opaque key_exchange<1..2^24-1>;
+  case rlcel5:                      opaque key_exchange<1..2^24-1>;
+  case other large PQ algorithm1:   opaque key_exchange<1..2^24-1>;
+  case other large PQ algorithm2:   opaque key_exchange<1..2^24-1>;
+  case etc.:                        opaque key_exchange<1..2^24-1>;
+  default:                          Empty;
+  }
+} KeyShareEntryPQC;
 
 </artwork></figure>
 
@@ -397,32 +373,32 @@ Since there is a new key share extension to accommodate keys larger than the 65,
 
 <figure><artwork>
 
-    enum {
-            server_name(0),                             /* RFC 6066 */
-            max_fragment_length(1),                     /* RFC 6066 */
-            status_request(5),                          /* RFC 6066 */
-            supported_groups(10),                       /* RFC 8422, 7919 */
-            signature_algorithms(13),                   /* RFC 8446 */
-            use_srtp(14),                               /* RFC 5764 */
-            heartbeat(15),                              /* RFC 6520 */
-            application_layer_protocol_negotiation(16), /* RFC 7301 */
-            signed_certificate_timestamp(18),           /* RFC 6962 */
-            client_certificate_type(19),                /* RFC 7250 */
-            server_certificate_type(20),                /* RFC 7250 */
-            padding(21),                                /* RFC 7685 */
-            pre_shared_key(41),                         /* RFC 8446 */
-            early_data(42),                             /* RFC 8446 */
-            supported_versions(43),                     /* RFC 8446 */
-            cookie(44),                                 /* RFC 8446 */
-            psk_key_exchange_modes(45),                 /* RFC 8446 */
-            certificate_authorities(47),                /* RFC 8446 */
-            oid_filters(48),                            /* RFC 8446 */
-            post_handshake_auth(49),                    /* RFC 8446 */
-            signature_algorithms_cert(50),              /* RFC 8446 */
-            key_share(51),                              /* RFC 8446 */
-            key_share_pqc(TBD),
-            (65535)
-        } ExtensionType;
+enum {
+    server_name(0),                             /* RFC 6066 */
+    max_fragment_length(1),                     /* RFC 6066 */
+    status_request(5),                          /* RFC 6066 */
+    supported_groups(10),                       /* RFC 8422, 7919 */
+    signature_algorithms(13),                   /* RFC 8446 */
+    use_srtp(14),                               /* RFC 5764 */
+    heartbeat(15),                              /* RFC 6520 */
+    application_layer_protocol_negotiation(16), /* RFC 7301 */
+    signed_certificate_timestamp(18),           /* RFC 6962 */
+    client_certificate_type(19),                /* RFC 7250 */
+    server_certificate_type(20),                /* RFC 7250 */
+    padding(21),                                /* RFC 7685 */
+    pre_shared_key(41),                         /* RFC 8446 */
+    early_data(42),                             /* RFC 8446 */
+    supported_versions(43),                     /* RFC 8446 */
+    cookie(44),                                 /* RFC 8446 */
+    psk_key_exchange_modes(45),                 /* RFC 8446 */
+    certificate_authorities(47),                /* RFC 8446 */
+    oid_filters(48),                            /* RFC 8446 */
+    post_handshake_auth(49),                    /* RFC 8446 */
+    signature_algorithms_cert(50),              /* RFC 8446 */
+    key_share(51),                              /* RFC 8446 */
+    key_share_pqc(TBD),
+    (65535)
+} ExtensionType;
 
 </artwork></figure>
 
@@ -451,20 +427,20 @@ Exch | + key_share*
      | + signature_algorithms*
      | + psk_key_exchange_modes*
      v + pre_shared_key*       -------->
-                                                  ServerHello  ^ Key
-                                                 + key_share*  | Exch
-                                             + key_share_pqc*  |
-                                            + pre_shared_key*  v
-                                        {EncryptedExtensions}  ^  Server
-                                        {CertificateRequest*}  v  Params
-                                               {Certificate*}  ^
-                                         {CertificateVerify*}  | Auth
-                                                   {Finished}  v
-                               <--------  [Application Data*]
+                                              ServerHello  ^ Key
+                                             + key_share*  | Exch
+                                         + key_share_pqc*  |
+                                        + pre_shared_key*  v
+                                    {EncryptedExtensions}  ^  Server
+                                    {CertificateRequest*}  v  Params
+                                           {Certificate*}  ^
+                                     {CertificateVerify*}  | Auth
+                                               {Finished}  v
+                           <--------  [Application Data*]
      ^ {Certificate*}
 Auth | {CertificateVerify*}
-     v {Finished}              -------->
-       [Application Data]      <------->  [Application Data]
+     v {Finished}          -------->
+       [Application Data]  <------->  [Application Data]
 
               +  Indicates noteworthy extensions sent in the
                  previously noted message.
@@ -478,51 +454,48 @@ Auth | {CertificateVerify*}
               [] Indicates messages protected using keys
                  derived from [sender]_application_traffic_secret_N.
 
-Figure 1: Full TLS Handshake with "key_share_pqc" extension.
 
 </artwork></figure>
+{: title="Full TLS Handshake with &quot;key_share_pqc&quot; extension"}
 
-
-# NamedGroup Addition for Classic McEliece
+<!--
+## NamedGroup Addition for Classic McEliece
 
 The values for Classic McEliece algorithms and the hybrid combination "x25519classicmceliece348864" (see Section 8 for more information) are added below in the NamedGroup struct that originates from [RFC8446]:
 
 <figure><artwork>
 
-    enum {
+enum {
 
-              /* Elliptic Curve Groups (ECDHE) */
-              secp256r1(0x0017), secp384r1(0x0018), secp521r1(0x0019),
-              x25519(0x001D), x448(0x001E),
+      /* Elliptic Curve Groups (ECDHE) */
+      secp256r1(0x0017), secp384r1(0x0018), secp521r1(0x0019),
+      x25519(0x001D), x448(0x001E),
 
-              /* Finite Field Groups (DHE) */
-              ffdhe2048(0x0100), ffdhe3072(0x0101), ffdhe4096(0x0102),
-              ffdhe6144(0x0103), ffdhe8192(0x0104),
+      /* Finite Field Groups (DHE) */
+      ffdhe2048(0x0100), ffdhe3072(0x0101), ffdhe4096(0x0102),
+      ffdhe6144(0x0103), ffdhe8192(0x0104),
 
-              /* Reserved Code Points */
-              ffdhe_private_use(0x01FC..0x01FF),
-              ecdhe_private_use(0xFE00..0xFEFF),
-              (0xFFFF)
+      /* Reserved Code Points */
+      ffdhe_private_use(0x01FC..0x01FF),
+      ecdhe_private_use(0xFE00..0xFEFF),
+      (0xFFFF)
 
-              /* Classic McEliece Algorithms */
-              classicmceliece348864(TBD),
-              classicmceliece460896(TBD),
-              classicmceliece6688128(TBD),
-              classicmceliece6960119(TBD),
-              classicmceliece8192128(TBD),
+      /* Classic McEliece Algorithms */
+      classicmceliece6688128(TBD),
+      classicmceliece6960119(TBD),
+      classicmceliece8192128(TBD),
 
-              /* Hybrid Combination */
-              x25519classicmceliece348864(TBD),
-
-              /* RLCE Algorithm */
-              rlcel5(TBD),
-          } NamedGroup;
+      /* RLCE Algorithm */
+      rlcel5(TBD),
+  } NamedGroup;
 
 </artwork></figure>
 
 Note: An RLCE algorithm is also added above. See Section 7 for more information discussing this RLCE algorithm.
 
-# Modification to PskKeyExchangeMode structure
+-->
+
+### Modification to PskKeyExchangeMode structure
 
 There are two key establishments that are considered when examining the structure of PskKeyExchangeMode from [RFC8446]. Since there is no Diffie Hellman algorithm in use with a pre-shared key (PSK) when considering the use of a Classic McEliece algorithm for key exchange, then there must be another key exchange mode to utilize in this case. Therefore, this is reflected in the existing [RFC8446] PskKeyExchangeMode structure below where "psk_pqc_ke(2)" is added:
 
@@ -537,8 +510,6 @@ enum {
 When selecting a Classic McEliece algorithm and using an external PSK or a resumption PSK, "02" will then be listed for the "psk_key_exchange_modes" extension along with the new "key_share_pqc" extension in the ClientHello message. At the end of this ClientHello message is printed the "00 29" extension (pre-shared key extension), where the PSK identity should be printed and is mapped to the binder that should proceed it in this pre-shared key extension. The ServerHello message will also contain the new "key_share_pqc" extension, and will as well contain the pre-shared key extension, where it should contain "00 00" at the end which represents the server selecting the PSK identity of 0 (for example: the Selected Identity of 0 shown in the pre-shared key extension in a ServerHello message in this Wireshark example: [RASHOK20]). Overall, this is a new key exchange selecting a Classic McEliece algorithm using a PSK, whether its external or resumption, and this can be demonstrated in the TLS Implementation below.
 
 As stated above, resumption PSK with a Classic McEliece algorithm chosen as a key exchange algorithm involves the use of the new "key_share_pqc" extension for both the ClientHello and ServerHello messages. Thus, the Resumption and PSK Message Flow diagram (which originates from Figure 3 of [RFC8446]) is derived for this situation and has been tested with the TLS Implementation mentioned in this document:
-
-
 
 <figure><artwork>
 
@@ -571,11 +542,11 @@ Subsequent Handshake
                               <---------       NewSessionTicket
 
 
-Figure 2: A Classic McEliece algorithm used with Resumption PSK.
-
 </artwork></figure>
+{: title="Resumption with &quot;key_share_pqc&quot; extension"}
 
-# Hello Retry Request using New Key Share Extension
+
+### Hello Retry Request using New Key Share Extension
 
 In a Hello Retry Request scenario, the first ClientHello message will have two algorithms listed in its "supported_groups" extension, where the numerical identifier (NID) for the algorithm that is no longer recognized by the server as an acceptable algorithm will first be listed in this extension, followed by the NID for a Classic McEliece algorithm. In this same ClientHello message is where "02" will be listed in the "psk_key_exchange_modes" extension, and the original "key_share" extension (value 51) is also shown with its public key for the unacceptable algorithm.
 
@@ -605,9 +576,8 @@ Therefore, this Hello Retry Request scenario is reflected in Figure 3 below, whi
                                 <--------         NewSessionTicket
                                 <--------         NewSessionTicket
 
-Figure 3: A Classic McEliece algorithm used in a Hello Retry Request scenario.
-
 </artwork></figure>
+{: title="Handshake with HelloRetryRequest with &quot;key_share_pqc&quot; extension"}
 
 Note: When the client processes the HelloRetryRequest message, it must mark the new "key_share_pqc" extension as an unsolicited extension, which would be an additional exception to the rule noted in [RFC8446] regarding extension responses MUST NOT be sent if the corresponding extension requests were not sent by a remote endpoint (see section 4.2 in [RFC8446]).
 
@@ -623,27 +593,241 @@ struct {
 
 When a Hello Retry Request involves a PSK in use with a Classic McEliece algorithm, both the first and second ClientHello messages (the second one being sent after a HelloRetryRequest message) will contain the exact same content except the first ClientHello will have the original "key_share" extension and the second ClientHello will have the new "key_share_pqc" extension. Another exception includes different binders in both ClientHello messages' pre-shared key extensions. This pre-shared key extension appears as the last extension in both ClientHello messages as well in the ServerHello message.
 
-# Other Use Case (RLCE Algorithm)
+### Other Use Case (RLCE Algorithm)
 
 The Random Linear Code-based Encryption (RLCE) algorithm group (see [RLCE17]) is another code-based cryptographic scheme (NIST Round 1 [NIST1]). "rlcel5" is a RLCE algorithm from this group (where the public key size is 1,232,001 Bytes) that can be used in the new key share extension, and can be demonstrated for use for TLS key exchange in the TLS Implementation mentioned in this document.
 
-# Hybrid Combination "x25519classicmceliece348864"
-
-"x25519classicmceliece348864" is a hybrid mechanism introduced in this document that combines both classicmceliece348864 and x25519 [curve25519], [RFC7748] in TLS key exchanges. The experiment TLS implementation presented in this document, which uses the fork [JWYWPROV] of the oqs-provider [OQSPROV], is one example of using x25519classicmceliece348864 in a hybrid key exchange; when x25519classicmceliece348864 is chosen in this circumstance, it uses the "concatenating" method mentioned in [HYBRIDTLS] in the new key_share_pqc extension. In the ClientHello message, this new key share extension contains both the Classic McEliece public key and X25519 key concatenated together. In the ServerHello message, this new key share extension then contains the classicmceliece348864 ciphertext and X25519 key concatenated together.
-
-# TLS Implementation
+### TLS Implementation
 
 A TLS implementation exists that tests the use of a new key share extension for both the ClientHello and ServerHello messages that is implemented for OpenSSL, and also where the mentioned Classic McEliece algorithms can be chosen for key exchange when initiating TLS connections. It can be accessed here: [JWYW25].
 
-# Summary of Changes from RFC 8446
+### Summary of Changes from RFC 8446
 
 A new structure is introduced of KeyShareEntryPQC along with modifications of existing structures including KeyShareEntry, NamedGroup, Extension, ExtensionType, KeyShareClientHello, and KeyShareServerHello. Adding a new ExtensionType of "key_share_pqc" allows for the addition of this new structure of KeyShareEntryPQC, which is based on the existing KeyShareEntry, but "key_exchange" has been expanded and select statements are added to both structures which depend on the KeyShareEntry.group or KeyShareEntryPQC.group being called in a TLS connection for key exchange. This new KeyShareEntryPQC will now also appear in existing structures of KeyShareClientHello and KeyShareServerHello. Thus, the "extension_data" is expanded in the existing Extension structure.
+
+## Post-handshake Key Exchange with Extended Key Update
+
+Extended Key Update [I-D.ietf-tls-extended-key-update] is a TLS 1.3 extension that allows to perform post-handshake key exchange
+in order to update session keys. This mechanism defines new TLS 1.3 handshake message type - ExtendedKeyUpdate. 
+Since TLS 1.3 handshake messages can be up to 2^24 bytes long, this allows to transfer large key shares using this message.
+
+Currently, the functionality of Extended Key Update is limited to only allow 
+using exactly the same key exchange mechanism as was negotiated and used during the handshake. However, the mechanism can be
+extended to also allow performing a different key exchange mechanism, that could be additionally negotiated during the handshake.
+In this case a modified Extended Key Update must be run immediately after the initial handshake and before 
+any application data sent over the connection. Thus, the resulting key exchange will always be non-composite hybrid key exchange, similar to what 
+IKEv2 does (see [RFC9370]).
+
+<figure><artwork>
+
+        Client                                           Server
+
+ Key  ^ ClientHello
+ Exch | + key_share
+      | + signature_algorithms
+      v + additional_key_exchange
+                              -------->
+                                                   ServerHello  ^ Key
+                                                   + key_share  | Exch
+                                                                v
+                                         {EncryptedExtensions   ^ Server
+                                    + additional_key_exchange}  | Params
+                                          {CertificateRequest}  v
+                                                 {Certificate}  ^
+                                           {CertificateVerify}  | Auth
+                                                    {Finished}  v
+                                <--------
+      ^ {Certificate}
+ Auth | {CertificateVerify}
+      v {Finished}              -------->
+  [EKU(key_update_request       -------->
+        (with key_share))]
+                                <-------- [EKU(key_update_response
+                                            (with key_share))]
+                                         # Server derives new secrets
+                                         # and updates SEND keys here
+ # Client derives new secrets
+ # and updates RECEIVE keys here
+         [EKU(new_key_update)]  -------->
+ # Client updates SEND keys here
+                                     # Server updates RECEIVE keys here
+
+        [Application Data]      <------->        [Application Data]
+
+</artwork></figure>
+{: title="Additional Key Exchange with Extended Key Update"}
+
+
+
+## New AuxHandshakeData Handshake Message
+
+If there is a need to send large pieces of data that do not fit into
+the existing TLS 1.3 handshake messages during handshare (e.g. in
+case PQ KEM with large public keys, like Classic NcEliece) then the
+client indicates this with new extension of type aux_data (Figure 7)
+in the ClientHello message.  This extension contains no data.
+
+If the server supports this extension, it replies with the
+HelloRetryRequest that also includes the aux_data extension.
+
+Once HelloRetryRequest has been received, the client repeats
+ClienHello and immediately after that sends a new message
+AuxHandshakeData (Figure 5)wich actually contains large data.  The
+server then responds with ServerHello that also is immediately
+followed by AuxHandshakeData message, preceeding all other other
+handshake messages (e.g. EncryptedExtensions, etc.).
+
+The data in the AuxHandshakeData message is organized as an array of
+AuxHandshakeDataEntry (Figure 4)structures.  When large piece of data
+should be used in the protocol, it is referenced from the
+corresponding item in the ClientHello or ServerHello by its index in
+the AuxHandshakeData message.
+
+For example, with large public keys for some PQ KEMs (like Classic
+McEliece) the key_share representation would be
+LargeKeyShareRepresentation (Figure 6), which contains type of
+representation and, depending on that type, either the key share
+itself (e.g. for Classic McEliece ciphertext, which is small) or the
+index of AuxHandshakeDataEntry data elements in the AuxHandshakeData
+message, which will contain the large key share (e.g. Classic
+McEliece public key).
+
+
+<figure><artwork>
+
+           Client                                               Server
+
+           ClientHello
+           + key_share
+           + aux_data             -------->
+                                                     HelloRetryRequest
+                                                           + key_share
+                                  <--------                 + aux_data
+           ClientHello
+           + key_share
+           + aux_data
+           AuxHandshakeData*      -------->
+                                                           ServerHello
+                                                           + key_share
+                                                            + aux_data
+                                                     AuxHandshakeData*
+                                                 {EncryptedExtensions}
+                                                 {CertificateRequest*}
+                                                        {Certificate*}
+                                                  {CertificateVerify*}
+                                                            {Finished}
+                                   <--------       [Application Data*]
+           {Certificate*}
+           {CertificateVerify*}
+           {Finished}              -------->
+           [Application Data]      <------->        [Application Data]
+
+</artwork></figure>
+{: title="Using the AuxHandshakeData Message in TLS Handshake"}
+
+
+<figure><artwork>
+
+         enum {
+             ...
+             aux_handshake_data(TBA),
+             (65535)
+         } HandshakeType;
+
+         struct {
+             HandshakeType msg_type;    /* handshake type */
+             uint24 length;             /* bytes in message */
+             select (Handshake.msg_type) {
+                 ...
+                 case aux_handshake_data:    AuxHandshakeData;
+             };
+         } Handshake;
+
+</artwork></figure>
+{: title="Definition of AuxHandshakeData"}
+
+<figure><artwork>
+
+           struct {
+               opaque  data<0..2^24-1>;
+           } AuxHandshakeDataEntry;
+
+           struct {
+               AuxHandshakeDataEntry   aux_data<0..2^24-1>;
+           } AuxHandshakeData;
+
+       struct {
+           uint8 form;
+           select (LargeKeyShareRepresentation.type) {
+               case 0:     uint16      aux_data_entry_index;
+               default:    opaque      key_exchange<0..2^16-1>;
+           };
+       } LargeKeyShareRepresentation;
+
+       enum {
+               ...
+               aux_data(TBD),
+               (65535)
+           } ExtensionType;
+
+       struct {
+       } AuxData;
+
+</artwork></figure>
+{: title="Format of AuxHandshakeData"}
+
+# Analyzing of the Proposed Solutions
+
+This document proposes three possible solutions for transferring large amounts of data during the TLS 1.3 handshake.
+
+1. New Key Share Extension
+
+    This is a straightforward solution to the problem, it changes the format of the ClientHello and the ServerHello messages in a non-backward compatible way. 
+
+    Advantages:
+
+    * It is the most efficient solution in terms of round trips - the number of round trips needed to establish the TLS connection does not increase.
+
+    Disadvantages:
+
+    * It can only be used in environments when clients know beforehand that servers they contact support this extension. 
+    * It deals only with key shares, thus it is not a generic solution to transferring large data in handshake.
+    * Since the format of the ClientHello is changed, it is unclear how this extension will interact with Encrypted ClientHello extension.
+    * It is not clear how middleboxes will handle modified ClientHello and ServerHello
+
+2. Modified Extended Key Update
+
+    Advantages:
+
+    * This solution keeps the current TLS 1.3 handshake intact, thus making it friendly to middleboxes.
+
+    Disadvantages:
+
+    * The number of round trips needed before application data can be sent increases.
+    * It complicates the TLS state machine - application data should not be sent once the initial handshake is complete, instead it can only be sent after the modified Extended Key Update immediately following the initial handshake completes.
+    * It deals only with key shares, thus it is not a generic solution to transferring large data in handshake.
+    * It is unclear how this would interact with regular Extended Key Update extension^ either only initial key exchange algorithm is used for rekey using Extended Key Update, or this extension neede to be modified to be able to perform several successive key exchanges (similar to [RFC9370]).
+
+3. New AuxHandshakeData Handshake Message
+
+    Advantages:
+
+    * This solution keeps the current ClientHello and ServerHello messages intact, but adds a new handshake message following them. It seems that this is more friendly to middleboxes than modifying the format of CH and SH, but this is not for sure.
+    * This is a generic solution, allowing to transfer large data of any kind in TLS handshake.
+    * Since the ClientHello format remains the same, it seems that this solution can be used with ECH (requires more investigations).
+
+    Disadvantages:
+
+    * The solution relies on HelloRetryRequest, thus the number of round trips needed to complete handshake increases.
 
 
 # Security Considerations
 
-There appears to be no security considerations at this time.
+## Security Considerations for New Key Share Extension
 
+The new "key_share_pqc" extension MUST NOT be used with 0-RTT, as this subjects the server to replay attacks of multiple large ClientHello messages (see [RFC8446] and an example of a replay attack of several ClientHello messages in [HN23]). If this extension were to be used with 0-RTT, the server may receive duplicated ClientHello messages where each of them contain a large public key of a Classic McEliece algorithm in each ClientHello's "key_share_pqc" extension, which will not only cause resource exhaustion on the server (see Section 8.2 in [RFC8446]), but memory utilization will rise quickly than noted in [MEA23] and will cause the client-hello recording defense mechanism (see Section 8.2 in [RFC8446] and [MEA23]) to be used as a Denial-of-Service attack on the server. Therefore, 0-RTT and the use of the "early_data" extension MUST NOT be used with the "key_share_pqc" extension.
+
+<!--
 # IANA Considerations
 
 Probable request for the new key share proposed in this document "key_share_pqc" to have a value in the registry specified for TLS ExtensionType Values (see [TLSE]):
@@ -695,8 +879,7 @@ Value: TBD
 Description: rlcel5
 
 Value: TBD
-
-
+-->
 
 # Acknowledgements
 {:numbered="false"}
@@ -704,5 +887,7 @@ Value: TBD
 Thank you D. J. Bernstein and Simon Josefsson as they advised to have at least one reference for the description of Classic McEliece. Thank you also to Eliot Lear for his feedback on other fields regarding the next algorithm needed.
 
 Thank you as well to Martin Thomson and David Schinazi, as their Internet Draft template was used to generate this document, before the authors' information was added. The authors also want to thank the contributors of the kramdown-rfc GitHub repository, as their examples helped with the format of the figures, references, and authors' information presented in this document. Thank you also to Joyce Reynolds and Robert Braden, as their Internet Draft [JR04] was helpful as a guide on how to write the citations in this document (i.e., using citation brackets with author's initials, year, etc.).
+
+Using Extended Key Update mechanism for transferring large key shares was proposed by Johm Mattsson.
 
 --- back
