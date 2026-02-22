@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-19T02:51:06.398687+00:00",
+  "timestamp": "2026-02-22T02:52:44.148999+00:00",
   "repo": "jwagrunner/internet-draft",
   "labels": [
     {
@@ -56,24 +56,26 @@
       "id": "PR_kwDON6IdUc7DSf87",
       "title": "Update the draft with more possible solutions",
       "url": "https://github.com/jwagrunner/internet-draft/pull/1",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "smyslov",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-02-12T14:01:06Z",
-      "updatedAt": "2026-02-12T14:01:07Z",
+      "updatedAt": "2026-02-19T14:26:45Z",
       "baseRepository": "jwagrunner/internet-draft",
       "baseRefName": "main",
       "baseRefOid": "fe6ffe9cda91f5ca953d61c90fcd3e4e935833a6",
       "headRepository": "smyslov/tls13-mceliece",
       "headRefName": "main",
       "headRefOid": "7e751aa1717d284b9839c5470f1acda2577de000",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-02-19T14:26:45Z",
+      "mergedAt": "2026-02-19T14:26:45Z",
+      "mergedBy": "jwagrunner",
+      "mergeCommit": {
+        "oid": "cc933eb5f7a46d3f9ee3e2357ba8bdfe994dc976"
+      },
       "comments": [],
       "reviews": []
     }
